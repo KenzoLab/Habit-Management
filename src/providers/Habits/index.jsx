@@ -29,12 +29,23 @@ const HabitProvider = ({ children }) => {
       .catch((error) => setErrorMessage(error.message));
   };
 
+  const deleteHabitFunction = (id) => {
+    api
+      .delete(`/habits/${id}/`, AuthorizationObj)
+      .then(
+        (response) =>
+          console.log(response.data) /* toast delete habit success */,
+      )
+      .catch((error) => setErrorMessage(error.message));
+  };
+
   return (
     <HabitContext.Provider
       value={{
         createHabitFunction,
         listHabitsFunction,
         listHabits,
+        deleteHabitFunction,
         errorMessage,
       }}>
       {children}
