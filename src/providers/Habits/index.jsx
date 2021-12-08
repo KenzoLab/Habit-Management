@@ -4,13 +4,22 @@ import api from '../../services/api';
 const HabitContext = createContext({});
 
 const HabitProvider = ({ children }) => {
+  const [listHabits, setListHabits] = useState([]);
   const [errorMessage, setErrorMessage] = useState('');
+
   const token = localStorage.getItem('@Habit:token');
   const AuthorizationObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const createHabit = (formData) => {
+  const listHabitsFunction = () => {
+    api
+      .get('/habits/personal/', AuthorizationObj)
+      .then((response) => setListHabits([...response.data]))
+      .catch((error) => console.log(error.message));
+  };
+
+  const createHabitFunction = (formData) => {
     api
       .post('/habits/', formData, AuthorizationObj)
       .then(
@@ -21,7 +30,13 @@ const HabitProvider = ({ children }) => {
   };
 
   return (
-    <HabitContext.Provider value={{ createHabit, errorMessage }}>
+    <HabitContext.Provider
+      value={{
+        createHabitFunction,
+        listHabitsFunction,
+        listHabits,
+        errorMessage,
+      }}>
       {children}
     </HabitContext.Provider>
   );
