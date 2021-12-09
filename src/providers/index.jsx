@@ -1,10 +1,13 @@
 ﻿import { AuthProvider } from './AuthProvider';
 import { HabitProvider } from './Habits';
+import { GroupsProvider } from './Groups';
 
 const Providers = ({ children }) => {
   return (
     <AuthProvider>
-      <HabitProvider>{children}</HabitProvider>
+      <HabitProvider>
+        <GroupsProvider>{children}</GroupsProvider>
+      </HabitProvider>
     </AuthProvider>
   );
 };
