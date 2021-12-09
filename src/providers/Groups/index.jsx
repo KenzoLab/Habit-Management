@@ -5,8 +5,9 @@ const GroupsContext = createContext({});
 
 const GroupsProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState("");
-  const [lastCreatedGroup, setLastCreatedGroup] = useState({});
   const [allGroupsList, setAllGroupsList] = useState([]);
+  const [lastCreatedGroup, setLastCreatedGroup] = useState({});
+  const [updatedGroup, setUpdatedGroup] = useState({});
 
   const token = localStorage.getItem("@Habit:token");
   const AuthorizationObj = {
@@ -14,27 +15,39 @@ const GroupsProvider = ({ children }) => {
   };
 
   const listGroupsFunction = async () => {
+    let counter = 0;
+    let array = [];
+    let response = {};
     try {
-      const response = await api.get("/groups/", AuthorizationObj);
-      setAllGroupsList([...response.data.results]);
+      do {
+        counter++;
+        response = await api.get(`/groups/?page=${counter}`, AuthorizationObj);
+        const currentPage = response.data.results;
+        array = [...array, ...currentPage];
+      } while (response.data.next);
+      setAllGroupsList([...array]);
     } catch (error) {
       setErrorMessage(error);
     }
   };
 
   const createGroupFunction = async (formData) => {
-    console.log(formData);
     try {
       const response = await api.post("/groups/", formData, AuthorizationObj);
       setLastCreatedGroup(response.data);
     } catch (error) {
       setErrorMessage(error);
     }
-    // api
-    //   .post("/groups/", formData, AuthorizationObj)
-    //   .then((response) => console.log(response.data))
-    //   .catch((error) => console.log(error));
   };
+
+  // const updateGroupFunction = (groupId, formData) => {
+  //   const response = await api.patch(
+  //     `/groups/${groupId}`,
+  //     formData,
+  //     AuthorizationObj,
+  //   );
+  //   setUpdatedGroup(response.data);
+  // };
 
   return (
     <GroupsContext.Provider
@@ -44,6 +57,8 @@ const GroupsProvider = ({ children }) => {
         allGroupsList,
         createGroupFunction,
         lastCreatedGroup,
+        // updateGroupFunction,
+        // updatedGroup,
       }}>
       {children}
     </GroupsContext.Provider>
