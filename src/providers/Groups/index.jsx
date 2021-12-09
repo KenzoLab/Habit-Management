@@ -40,14 +40,19 @@ const GroupsProvider = ({ children }) => {
     }
   };
 
-  // const updateGroupFunction = (groupId, formData) => {
-  //   const response = await api.patch(
-  //     `/groups/${groupId}`,
-  //     formData,
-  //     AuthorizationObj,
-  //   );
-  //   setUpdatedGroup(response.data);
-  // };
+  const updateGroupFunction = async (groupId, formData) => {
+    // To update group the logged user must be creator of the group
+    try {
+      const response = await api.patch(
+        `/groups/${groupId}/`,
+        formData,
+        AuthorizationObj,
+      );
+      setUpdatedGroup(response.data);
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
 
   return (
     <GroupsContext.Provider
@@ -57,8 +62,8 @@ const GroupsProvider = ({ children }) => {
         allGroupsList,
         createGroupFunction,
         lastCreatedGroup,
-        // updateGroupFunction,
-        // updatedGroup,
+        updateGroupFunction,
+        updatedGroup,
       }}>
       {children}
     </GroupsContext.Provider>
