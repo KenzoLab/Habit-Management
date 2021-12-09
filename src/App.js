@@ -1,7 +1,6 @@
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Signin from "./components/Signin";
 
 function App() {
   return (
@@ -17,7 +16,8 @@ function App() {
         draggable
         pauseOnHover
       />
-      <Signin />
+      <GlobalStyles />
+      <Routes/>
     </div>
   );
 }

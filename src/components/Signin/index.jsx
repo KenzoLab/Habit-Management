@@ -1,9 +1,10 @@
 import { TextField, Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import habit from "../../assets/habit.png";
 const Signin = () => {
   return (
     <>
-      <img src="../assets/habit.png" alt="logo"></img>
+      <img src={habit} alt="logo"></img>
       <h1>Welcome</h1>
 
       <TextField
@@ -11,6 +12,9 @@ const Signin = () => {
         id="outlined-basic"
         label="Email"
         variant="outlined"
+        sx={{
+          margin: 200,
+        }}
       />
 
       <TextField
