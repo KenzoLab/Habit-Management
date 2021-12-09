@@ -5,6 +5,8 @@ const HabitContext = createContext({});
 
 const HabitProvider = ({ children }) => {
   const [listHabits, setListHabits] = useState([]);
+  const [lastHabitCreated, setLastHabitCreated] = useState({});
+  const [updatedHabit, setUpdatedHabit] = useState({});
   const [errorMessage, setErrorMessage] = useState('');
 
   const token = localStorage.getItem('@Habit:token');
@@ -24,17 +26,27 @@ const HabitProvider = ({ children }) => {
       .post('/habits/', formData, AuthorizationObj)
       .then(
         (response) =>
-          console.log(response.data) /* toast register habit success */,
+          setLastHabitCreated(response.data) /* toast register habit success */,
       )
       .catch((error) => setErrorMessage(error.message));
   };
 
-  const deleteHabitFunction = (id) => {
+  const deleteHabitFunction = (habitId) => {
     api
-      .delete(`/habits/${id}/`, AuthorizationObj)
+      .delete(`/habits/${habitId}/`, AuthorizationObj)
       .then(
         (response) =>
           console.log(response.data) /* toast delete habit success */,
+      )
+      .catch((error) => setErrorMessage(error.message));
+  };
+
+  const updateHabitFunction = (obj, habitId) => {
+    api
+      .patch(`/habits/${habitId}/`, obj, AuthorizationObj)
+      .then(
+        (response) =>
+          setUpdatedHabit(response.data) /* toast update habit success */,
       )
       .catch((error) => setErrorMessage(error.message));
   };
@@ -43,9 +55,12 @@ const HabitProvider = ({ children }) => {
     <HabitContext.Provider
       value={{
         createHabitFunction,
+        lastHabitCreated,
         listHabitsFunction,
         listHabits,
         deleteHabitFunction,
+        updateHabitFunction,
+        updatedHabit,
         errorMessage,
       }}>
       {children}
