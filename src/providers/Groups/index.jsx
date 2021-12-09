@@ -8,6 +8,7 @@ const GroupsProvider = ({ children }) => {
   const [allGroupsList, setAllGroupsList] = useState([]);
   const [lastCreatedGroup, setLastCreatedGroup] = useState({});
   const [updatedGroup, setUpdatedGroup] = useState({});
+  const [subscriptions, setSubscriptions] = useState([]);
 
   const token = localStorage.getItem("@Habit:token");
   const AuthorizationObj = {
@@ -54,6 +55,18 @@ const GroupsProvider = ({ children }) => {
     }
   };
 
+  const searchSubscriptionsFunction = async () => {
+    try {
+      const response = await api.get(
+        "/groups/subscriptions/",
+        AuthorizationObj,
+      );
+      setSubscriptions(response.data);
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
   return (
     <GroupsContext.Provider
       value={{
@@ -64,6 +77,8 @@ const GroupsProvider = ({ children }) => {
         lastCreatedGroup,
         updateGroupFunction,
         updatedGroup,
+        searchSubscriptionsFunction,
+        subscriptions,
       }}>
       {children}
     </GroupsContext.Provider>
