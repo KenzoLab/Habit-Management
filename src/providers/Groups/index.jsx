@@ -67,6 +67,30 @@ const GroupsProvider = ({ children }) => {
     }
   };
 
+  const subscribeFunction = async (groupId) => {
+    try {
+      const response = await api.post(
+        `/groups/${groupId}/subscribe/`,
+        "",
+        AuthorizationObj,
+      );
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
+  const unsubscribeFunction = async (groupId) => {
+    try {
+      const response = await api.delete(
+        `/groups/${groupId}/unsubscribe/`,
+        AuthorizationObj,
+      );
+      console.log("deu certo");
+    } catch (error) {
+      setErrorMessage(error);
+    }
+  };
+
   return (
     <GroupsContext.Provider
       value={{
@@ -79,6 +103,8 @@ const GroupsProvider = ({ children }) => {
         updatedGroup,
         searchSubscriptionsFunction,
         subscriptions,
+        subscribeFunction,
+        unsubscribeFunction,
       }}>
       {children}
     </GroupsContext.Provider>
