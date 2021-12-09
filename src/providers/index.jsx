@@ -1,7 +1,12 @@
-﻿import { AuthProvider } from './AuthProvider';
+﻿import { AuthProvider } from "./AuthProvider";
+import { SignUpProvider } from "./SignUp";
 
 const Providers = ({ children }) => {
-  return <AuthProvider>{children}</AuthProvider>;
+  return (
+    <AuthProvider>
+      <SignUpProvider>{children}</SignUpProvider>
+    </AuthProvider>
+  );
 };
 
 export default Providers;
