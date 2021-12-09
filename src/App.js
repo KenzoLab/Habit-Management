@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import "./App.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,6 +20,17 @@ function App() {
       />
       <Signin />
     </div>
+=======
+import Routes from './routes';
+import GlobalStyles from './styles/global';
+
+function App() {
+  return (
+    <>
+      <GlobalStyles />
+      <Routes />
+    </>
+>>>>>>> 07bada63c5c92a58f1fdc4b98017932f6fd56f90
   );
 }
 
