@@ -12,7 +12,7 @@ export const SignUpProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState([]); //VERIFICAR O QUE ESTÁ CHEGANDO NESTE STATE E TRATAR
 
   const postSignUp = (data) => {
     api
