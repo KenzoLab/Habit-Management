@@ -1,21 +1,19 @@
-﻿import { createContext, useContext, useState } from 'react';
-import api from '../../services/api';
+﻿import { createContext, useContext, useState } from "react";
+import api from "../../services/api";
 
 const GroupsContext = createContext({});
 
 const GroupsProvider = ({ children }) => {
-  const [allGroupsList, setAllGroupsList] = useState({});
+  const [allGroupsList, setAllGroupsList] = useState([]);
 
-  const token = localStorage.getItem('@Habit:token');
+  const token = localStorage.getItem("@Habit:token");
   const AuthorizationObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const listGroupsFunction = () => {
-    api
-      .get('/groups/', AuthorizationObj)
-      .then((response) => console.log(response.data))
-      .car((error) => console.log(error));
+  const listGroupsFunction = async () => {
+    const response = await api.get("/groups/", AuthorizationObj);
+    setAllGroupsList([...response.data.results]);
   };
 
   return (
