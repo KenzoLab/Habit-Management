@@ -8,69 +8,77 @@ export const Container = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #f7f7f4;
-  img {
-    background-image: url(${habit});
-    width: 263px;
-    height: 135px;
-    margin: 30px 0px 20px 0px;
-    border: none;
+
+
+  .Image-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
+
+  img {
+    content: url(${habit});
+    width: 180px;
+    margin: 30px 0px 20px 0px;
+  }
+
   .Welcome-box {
     display: flex;
     align-items: center;
     flex-direction: column;
   }
+
   h1 {
     font-size: 40px;
-    color: #081140;
-    font-family: "Fira Sans", sans-serif;
+    color: var(--darkBlue);
+    font-family: var(--font-fira);
   }
-  hr {
-    color: #818ed0;
-    width: 50%;
-    height: 0px;
-    border-radius: 4px;
-    margin: 20px 0px;
-    align-self: center;
-  }
+
   span {
     margin-top: 15px;
     font-size: 14px;
   }
+
   a {
-    color: #38b6ff;
+    color: var(--blue);
     cursor: pointer;
     text-decoration: none;
   }
+
   p {
     margin: 0;
     padding: 0;
     font-size: 12px;
-    color: #dc1f1f;
+    color: var(--red);
   }
+
   form {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
+
   @media (min-width: 1024px) {
+
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+
     form {
       display: flex;
       align-items: center;
       justify-content: center;
-      height: 280px;
+      height: 500px;
     }
+
     h1 {
-      font-family: "Fira Sans", sans-serif;
+      font-family: var(--font-fira)
       position: relative;
-      bottom: 70px;
       margin: 0;
+      margin-bottom: 50px;
     }
+
     .Image-box {
       width: 70vw;
       width: 500px;
@@ -78,14 +86,17 @@ export const Container = styled.div`
       align-items: center;
       justify-content: center;
     }
+
     img {
-      background-image: url(${gif});
+      content: url(${gif});
       width: 500px;
       height: 500px;
     }
+
     .Welcome-box {
       width: 40vw;
-      height: 70vh;
+      height: 640px;
+      margin-left: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -99,20 +110,20 @@ export const Button = styled.button`
   border: 1px solid transparent;
   border-radius: 4px;
   height: 40px;
-  background-color: #38b6ff;
-  color: aliceblue;
+  background-color: var(--blue);
+  color: var(--whiteSmoke);
   font-weight: bold;
   font-size: 14px;
-  cursor: pointer;
   margin: 10px 0px;
+
   &:hover {
-    background-color: #72c1f1;
+    cursor: pointer;
+    background-color: var(--lightBlue);
   }
+
   @media (min-width: 1024px) {
     width: 256px;
     height: 40px;
     margin-top: 5px;
   }
 `;
-
-export const Input = styled.div``;

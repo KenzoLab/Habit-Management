@@ -1,11 +1,14 @@
-import Routes from './routes';
-import GlobalStyles from './styles/global';
+import Routes from "./routes";
+import GlobalStyles from "./styles/global";
+
+import SignUp from "./pages/Signup";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      <Routes />
+      {/* <Routes /> */}
+      <SignUp />
     </>
   );
 }
