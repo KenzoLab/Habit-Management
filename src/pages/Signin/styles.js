@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import habit from "../../assets/habit-mobile.png";
-import gif from "../../assets/AnimaGif.gif";
 
 export const Container = styled.div`
   display: flex;
@@ -10,10 +8,14 @@ export const Container = styled.div`
   height: 100vh;
   background-color: #f7f7f4;
 
+  .Image-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   img {
-    background-image: url(${habit});
-    width: 263px;
-    height: 135px;
+    width: 180px;
     margin: 30px 0px 20px 0px;
   }
 
@@ -82,23 +84,15 @@ export const Container = styled.div`
       margin: 0;
     }
 
-    .Image-box {
-      width: 70vw;
-      width: 500px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
     img {
-      background-image: url(${gif});
       width: 500px;
       height: 500px;
     }
 
     .Welcome-box {
       width: 40vw;
-      height: 70vh;
+      height: 540px;
+      margin-left: 50px;
       display: flex;
       align-items: center;
       justify-content: center;

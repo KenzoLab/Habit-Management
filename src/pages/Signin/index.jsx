@@ -1,9 +1,12 @@
 import Input from "../../components/Input";
 import { Link } from "react-router-dom";
 import { Container, Button } from "./styles";
+import habit from "../../assets/habit-mobile.png";
+import gif from "../../assets/AnimaGif.gif";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import MediaQuery from "react-responsive";
 
 const Signin = () => {
   const formSchema = yup.object().shape({
@@ -30,10 +33,17 @@ const Signin = () => {
 
   return (
     <Container>
-      <div className="Image-box">
-        <img></img>
-      </div>
+      <MediaQuery maxWidth={1023}>
+        <div className="Image-box">
+          <img src={habit} alt="logo"></img>
+        </div>
+      </MediaQuery>
 
+      <MediaQuery minWidth={1024}>
+        <div>
+          <img src={gif} alt="logo"></img>
+        </div>
+      </MediaQuery>
       <div className="Welcome-box">
         <h1>Welcome</h1>
 
