@@ -61,6 +61,7 @@ const Signin = () => {
             errors={errors.password?.message}
             register={register}
             data="password"
+            type="password"
             placeholder="Enter your password"
           />
 
