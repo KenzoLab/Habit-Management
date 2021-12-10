@@ -9,6 +9,8 @@ export default createGlobalStyle`
   }
 
   :root {
+    --font-fira: 'Fira Sans', sans-serif;
+    --font-inter: 'Inter', sans-serif;
     --darkBlue: #081140;
     --blue: #52B5F2;
     --lightBlue: #72C1F1;
