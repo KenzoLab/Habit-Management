@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import habit from "../../assets/habit-mobile.png";
+import gif from "../../assets/AnimaGif.gif";
 
 export const Container = styled.div`
   display: flex;
@@ -9,7 +11,9 @@ export const Container = styled.div`
   background-color: #f7f7f4;
 
   img {
-    width: 180px;
+    background-image: url(${habit});
+    width: 263px;
+    height: 135px;
     margin: 30px 0px 20px 0px;
   }
 
@@ -68,6 +72,7 @@ export const Container = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 280px;
     }
 
     h1 {
@@ -86,7 +91,9 @@ export const Container = styled.div`
     }
 
     img {
+      background-image: url(${gif});
       width: 500px;
+      height: 500px;
     }
 
     .Welcome-box {
@@ -96,9 +103,6 @@ export const Container = styled.div`
       align-items: center;
       justify-content: center;
       flex-direction: column;
-    }
-    .Inputs {
-      margin-bottom: 25px;
     }
   }
 `;

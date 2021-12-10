@@ -1,8 +1,5 @@
-import { TextField } from "@mui/material";
 import Input from "../../components/Input";
 import { Link } from "react-router-dom";
-import habit from "../../assets/habit-mobile.png";
-import gif from "../../assets/AnimaGif.gif";
 import { Container, Button } from "./styles";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
@@ -10,7 +7,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 
 const Signin = () => {
   const formSchema = yup.object().shape({
-    email: yup.string().required("Enter your email*").email("Email inválido"),
+    username: yup.string().required("Enter your username*"),
     password: yup
       .string()
       .required("Register a password*")
@@ -19,6 +16,7 @@ const Signin = () => {
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -27,34 +25,36 @@ const Signin = () => {
 
   const onSubmitFunction = data => {
     console.log(data);
+    reset();
   };
 
   return (
     <Container>
       <div className="Image-box">
-        <img src={gif} alt="logo" loop="false" />
+        <img></img>
       </div>
+
       <div className="Welcome-box">
         <h1>Welcome</h1>
 
         <form onSubmit={handleSubmit(onSubmitFunction)}>
           <Input
-            className="Inputs"
-            label="Email:"
-            errors={errors.email?.message}
-            {...register("email")}
-            placeholder="Enter your email"
+            label="Username:"
+            errors={errors.username ? errors.username.message : " "}
+            register={register}
+            data="username"
+            placeholder="Enter your username"
           />
 
           <Input
-            className="Inputs"
             label="Password:"
             errors={errors.password?.message}
-            {...register("password")}
+            register={register}
+            data="password"
             placeholder="Enter your password"
           />
 
-          <Button>Sign In</Button>
+          <Button type="submit">Sign In</Button>
         </form>
 
         <hr className="line" />
