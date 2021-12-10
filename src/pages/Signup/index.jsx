@@ -1,14 +1,16 @@
 ﻿import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useHistory, Redirect, Link } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
+
+import { useSignUp } from "../../providers/SignUp";
 
 import Input from "../../components/Input";
 import { Container, Button } from "./styles";
 
 const SignUp = () => {
-  const history = useHistory();
+  const { postSignUp } = useSignUp();
 
   const schema = yup.object().shape({
     username: yup.string().required("Campo obrigatório"),
@@ -32,7 +34,8 @@ const SignUp = () => {
   });
 
   const handleRegisterSubmit = ({ username, email, password }) => {
-    console.log(username, email, password);
+    postSignUp({ username, email, password });
+    <Redirect to="/" />;
   };
 
   return (
@@ -49,13 +52,14 @@ const SignUp = () => {
       </MediaQuery>
 
       <div className="Welcome-box">
-        <h1>Signup</h1>
+        <h1>Sign Up</h1>
 
         <form onSubmit={handleSubmit(handleRegisterSubmit)}>
           <Input
             label="Username:"
             errors={errors.username ? errors.username.message : " "}
             register={register}
+            autoComplete="user"
             data="username"
             type="text"
           />
@@ -72,6 +76,7 @@ const SignUp = () => {
             label="Password:"
             errors={errors.password ? errors.password.message : " "}
             register={register}
+            autoComplete="password"
             data="password"
             type="password"
           />
@@ -82,6 +87,7 @@ const SignUp = () => {
               errors.confirm_password ? errors.confirm_password.message : " "
             }
             register={register}
+            autoComplete="confirm-password"
             data="confirm_password"
             type="password"
           />

@@ -1,14 +1,25 @@
 import Routes from "./routes";
 import GlobalStyles from "./styles/global";
 
-import SignUp from "./pages/Signup";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <>
       <GlobalStyles />
-      {/* <Routes /> */}
-      <SignUp />
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
+      <Routes />
     </>
   );
 }

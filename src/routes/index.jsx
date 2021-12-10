@@ -1,20 +1,32 @@
-﻿import { Switch, Route } from 'react-router-dom';
-import Signin from '../pages/Signin';
-import SignUp from './../pages/Signup';
-import Dashboard from '../pages/Dashboard';
-import Groups from '../pages/Groups';
-import Activities from '../pages/Activities';
-import Goals from '../pages/Goals';
+﻿import { Switch, Route } from "react-router-dom";
+import Signin from "../pages/Signin";
+import SignUp from "./../pages/Signup";
+import Dashboard from "../pages/Dashboard";
+import Groups from "../pages/Groups";
+import Activities from "../pages/Activities";
+import Goals from "../pages/Goals";
 
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={Signin} />
-      <Route path="/signup" component={SignUp} />
-      <Route path="/dashboard" component={Dashboard} />
-      <Route path="/groups" component={Groups} />
-      <Route path="/activities" component={Activities} />
-      <Route path="/goals" component={Goals} />
+      <Route exact path="/">
+        <Signin />
+      </Route>
+      <Route path="/signup">
+        <SignUp />
+      </Route>
+      <Route path="/dashboard">
+        <Dashboard />
+      </Route>
+      <Route path="/groups">
+        <Groups />
+      </Route>
+      <Route path="/activities">
+        <Activities />
+      </Route>
+      <Route path="/goals">
+        <Goals />
+      </Route>
     </Switch>
   );
 };

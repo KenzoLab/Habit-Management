@@ -7,13 +7,12 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
-
 
   .Image-box {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-bottom: 50px;
   }
 
   img {
@@ -32,6 +31,7 @@ export const Container = styled.div`
     font-size: 40px;
     color: var(--darkBlue);
     font-family: var(--font-fira);
+    margin-bottom: 40px;
   }
 
   span {
@@ -64,6 +64,7 @@ export const Container = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 
     form {
       display: flex;
