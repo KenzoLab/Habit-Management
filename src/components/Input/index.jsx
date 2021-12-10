@@ -1,10 +1,10 @@
 import { Container } from "./styles";
-function Input({ label, errors, ...rest }) {
+function Input({ label, errors, register, data, ...rest }) {
   return (
     <Container>
       <label>{label}</label>
-      <input {...rest}></input>
-      <p>{errors}</p>
+      <input type={data} {...register(`${data}`)} {...rest}></input>
+      <p className="error">{errors}</p>
     </Container>
   );
 }

@@ -6,6 +6,8 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 300px;
+  margin-bottom: 15px;
+  height: 95px;
 
   label {
     color: #081140;
@@ -29,5 +31,9 @@ export const Container = styled.div`
     &:focus {
       outline: none;
     }
+  }
+  .error {
+    margin: 7px;
+    height: 12px;
   }
 `;
