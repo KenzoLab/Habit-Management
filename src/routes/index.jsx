@@ -9,8 +9,8 @@ import Goals from '../pages/Goals';
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={SignUp} />
-      <Route path="/signup" component={Signin} />
+      <Route exact path="/" component={Signin} />
+      <Route path="/signup" component={SignUp} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/groups" component={Groups} />
       <Route path="/activities" component={Activities} />

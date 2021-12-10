@@ -2,18 +2,8 @@
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useHistory, Redirect, Link } from "react-router-dom";
-import { toast } from "react-hot-toast";
-import {
-  Container,
-  Section,
-  Header,
-  Form,
-  DivChild,
-  Input,
-  Label,
-  Paragr,
-} from "./styles";
-import logo from "../../assets/logoSemSlogan-removebg-preview.png";
+import Input from "../../components/Input";
+import { Container, Button } from "./styles";
 import { api } from "../../services/api.js";
 
 const SignUp = () => {
@@ -47,116 +37,54 @@ const SignUp = () => {
 
   return (
     <Container>
-      <Header>
-        <img src={logo} alt="" />
-      </Header>
-      <Section>
+      <div className="Image-box">
+        <img></img>
+      </div>
+
+      <div className="Welcome-box">
         <h1>Signup</h1>
-        <Form onSubmit={handleSubmit(handleRegisterSubmit)}>
-          {/*<DivChild>
-            <div className="abs">
-              <Input
-                id="username"
-                type="text"
-                pattern="[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$"
-                autoComplete="username"
-                placeholder=" "
-                required=""
-                {...register("username")}
-              ></Input>
-              <Label>Name:</Label>
-            </div>
-            <Paragr>{errors.username?.message}</Paragr>
-          </DivChild>*/}
 
-          <h2>Name:</h2>
-          <input
-            className="input"
-            placeholder="Name"
-            {...register("username")}
+        <form onSubmit={handleSubmit(handleRegisterSubmit)}>
+
+          <Input
+            label="Username:"
+            errors={errors.username ? errors.username.message : " "}
+            register={register}
+            data="username"
           />
-          <p className="error-message">{errors.username?.message}</p>
 
-          {/*<DivChild>
-            <div className="abs">
-              <Input
-                id="Email"
-                type="text"
-                autoComplete="email"
-                placeholder=" "
-                required=""
-                {...register("email")}
-              ></Input>
-              <Label>Email:</Label>
-            </div>
-            <Paragr>{errors.email?.message}</Paragr>
-          </DivChild>*/}
-
-          <h2>Email:</h2>
-          <input className="input" placeholder="Email" {...register("email")} />
-          <p className="error-message">{errors.email?.message}</p>
-
-          <h2>Password:</h2>
-          <input
-            className="input"
-            type="password"
-            placeholder="Password"
-            {...register("password")}
+          <Input
+          label="Email:"
+          errors={errors.email ? errors.email.message : " "}
+          register={register}
+          data="email"
           />
-          <p className="error-message">{errors.password?.message}</p>
 
-          {/*<DivChild>
-            <div className="abs">
-              <Input
-                id="password"
-                type="text"
-                autoComplete="password"
-                placeholder=" "
-                required=""
-                type="password"
-                {...register("password")}
-              ></Input>
-              <Label>Password:</Label>
-            </div>
-            <Paragr>{errors.password?.message}</Paragr>
-          </DivChild>*/}
-
-          <h2>Confirm password:</h2>
-          <input
-            className="input"
-            type="password"
-            placeholder="Confirm password"
-            {...register("confirm_password")}
+          <Input
+            label="Password:"
+            errors={errors.password ? errors.password.message : " "}
+            register={register}
+            data="password"
           />
-          <p className="error-message">{errors.confirm_password?.message}</p>
 
-          {/*<DivChild>
-            <div className="abs">
-              <Input
-                id="confirm_password"
-                type="text"
-                autoComplete="confirm_password"
-                placeholder=" "
-                required=""
-                type="password"
-                {...register("confirm_password")}
-              ></Input>
-              <Label>Confirm password:</Label>
-            </div>
-            <Paragr>{errors.confirm_password?.message}</Paragr>
-          </DivChild>*/}
+          <Input
+            label="Confirm password:"
+            errors={errors.confirm_password ? errors.confirm_password.message : " "}
+            register={register}
+            data="confirm_password"
+          />
 
-          <button type="submit">Sign Up</button>
-        </Form>
+          <Button type="submit">Sign Up</Button>
+        </form>
 
-        <p className="message">
+        <span>
           If you have already registered, login{" "}
           <Link to="/" id="link">
             here
           </Link>
           !
-        </p>
-      </Section>
+        </span>
+      </div>
     </Container>
   );
 };
