@@ -1,14 +1,18 @@
-import Input from "../../components/Input";
-import { Link } from "react-router-dom";
-import { Container, Button } from "./styles";
-import habit from "../../assets/habit-mobile.png";
-import gif from "../../assets/AnimaGif.gif";
+import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MediaQuery from "react-responsive";
 
+import habit from "../../assets/habit-mobile.png";
+import gif from "../../assets/AnimaGif.gif";
+import Input from "../../components/Input";
+import { Container, Button } from "./styles";
+import { useAuth } from "../../providers/AuthProvider";
+
 const Signin = () => {
+  const { signInFunction, userId } = useAuth();
+  const history = useHistory();
   const formSchema = yup.object().shape({
     username: yup.string().required("Enter your username*"),
     password: yup
@@ -26,8 +30,9 @@ const Signin = () => {
     resolver: yupResolver(formSchema),
   });
 
-  const onSubmitFunction = data => {
-    console.log(data);
+  const onSubmitFunction = (data) => {
+    signInFunction(data);
+    history.push(`/dashboard/${userId}`);
     reset();
   };
 
