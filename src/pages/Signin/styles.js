@@ -6,7 +6,7 @@ export const Container = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: #f7f7f4;
+  background-color: var(--whiteSmoke);
 
   .Image-box {
     display: flex;
@@ -27,12 +27,14 @@ export const Container = styled.div`
 
   h1 {
     font-size: 40px;
-    color: #081140;
-    font-family: "Fira Sans", sans-serif;
+    color: var(--darkBlue);
+    font-family: var(--font-fira);
+    margin-bottom: 30px;
+    margin-top: 20px;
   }
 
   hr {
-    color: #818ed0;
+    color: var(--lightPurple);
     width: 50%;
     height: 0px;
     border-radius: 4px;
@@ -46,7 +48,7 @@ export const Container = styled.div`
   }
 
   a {
-    color: #38b6ff;
+    color: var(--blue);
     cursor: pointer;
     text-decoration: none;
   }
@@ -55,7 +57,7 @@ export const Container = styled.div`
     margin: 0;
     padding: 0;
     font-size: 12px;
-    color: #dc1f1f;
+    color: var(--red);
   }
 
   form {
@@ -78,10 +80,10 @@ export const Container = styled.div`
     }
 
     h1 {
-      font-family: "Fira Sans", sans-serif;
-      position: relative;
+      /* font-family: var(--font-fira); */
+      /* position: relative;
       bottom: 70px;
-      margin: 0;
+      margin: 0; */
     }
 
     img {
@@ -106,14 +108,14 @@ export const Button = styled.button`
   border: 1px solid transparent;
   border-radius: 4px;
   height: 40px;
-  background-color: #38b6ff;
-  color: aliceblue;
+  background-color: var(--blue);
+  color: var(--aliceBlue);
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
   margin: 10px 0px;
   &:hover {
-    background-color: #72c1f1;
+    background-color: var(--lightBlue);
   }
 
   @media (min-width: 1024px) {
@@ -122,5 +124,3 @@ export const Button = styled.button`
     margin-top: 5px;
   }
 `;
-
-export const Input = styled.div``;
