@@ -73,6 +73,7 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
+    /* gap: 100px; */
 
     .animation {
       animation-name: slide;
@@ -112,8 +113,8 @@ export const Container = styled.div`
 
     .Welcome-box {
       width: 40vw;
+      max-width: 500px;
       height: 540px;
-      /* margin-left: 50px; */
       display: flex;
       align-items: center;
       justify-content: center;
