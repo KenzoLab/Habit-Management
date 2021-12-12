@@ -1,12 +1,12 @@
 import styled from "styled-components";
-import habit from "../../assets/habit-mobile.png";
-import gif from "../../assets/AnimaGif.gif";
 
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 100vw;
+  height: 100vh;
+  background-color: var(--whiteSmoke);
 
   .Image-box {
     display: flex;
@@ -16,7 +16,6 @@ export const Container = styled.div`
   }
 
   img {
-    content: url(${habit});
     width: 180px;
     margin: 30px 0px 20px 0px;
   }
@@ -31,11 +30,21 @@ export const Container = styled.div`
     font-size: 40px;
     color: var(--darkBlue);
     font-family: var(--font-fira);
-    margin-bottom: 40px;
+    margin-bottom: 30px;
+  }
+
+  hr {
+    color: var(--lightPurple);
+    width: 200px;
+    height: 0px;
+    border-radius: 4px;
+    margin: 20px 0px;
+    align-self: center;
   }
 
   span {
-    margin-top: 15px;
+    margin-top: 10px;
+    margin-bottom: 20px;
     font-size: 14px;
   }
 
@@ -59,12 +68,24 @@ export const Container = styled.div`
   }
 
   @media (min-width: 1024px) {
-
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     align-items: center;
     justify-content: center;
     height: 100vh;
+
+    .animation {
+      animation-name: slide;
+      animation-duration: 0.7s;
+      animation-fill-mode: forwards;
+    }
+
+    @keyframes slide {
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
 
     form {
       display: flex;
@@ -89,7 +110,6 @@ export const Container = styled.div`
     }
 
     img {
-      content: url(${gif});
       width: 500px;
       height: 500px;
     }
@@ -97,11 +117,13 @@ export const Container = styled.div`
     .Welcome-box {
       width: 40vw;
       height: 640px;
-      margin-left: 50px;
+      /* margin-left: 50px; */
       display: flex;
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      opacity: 0;
+      transform: translateX(-100px);
     }
   }
 `;

@@ -1,13 +1,15 @@
-﻿import { useForm } from "react-hook-form";
+﻿import { Redirect, Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { Redirect, Link } from "react-router-dom";
 import MediaQuery from "react-responsive";
+import { toast } from "react-toastify";
 
-import { useSignUp } from "../../providers/SignUp";
-
+import habit from "../../assets/habit-mobile.png";
+import gif from "../../assets/AnimaGif.gif";
 import Input from "../../components/Input";
 import { Container, Button } from "./styles";
+import { useSignUp } from "../../providers/SignUp";
 
 const SignUp = () => {
   const { postSignUp } = useSignUp();
@@ -42,16 +44,17 @@ const SignUp = () => {
     <Container>
       <MediaQuery maxWidth={1023}>
         <div className="Image-box">
-          <img alt="logo"></img>
-        </div>
-      </MediaQuery>
-      <MediaQuery minWidth={1024}>
-        <div className="Image-box">
-          <img alt="logo"></img>
+          <img src={habit} alt="logo"></img>
         </div>
       </MediaQuery>
 
-      <div className="Welcome-box">
+      <MediaQuery minWidth={1024}>
+        <div>
+          <img src={gif} alt="logo"></img>
+        </div>
+      </MediaQuery>
+
+      <div className="Welcome-box animation">
         <h1>Sign Up</h1>
 
         <form onSubmit={handleSubmit(handleRegisterSubmit)}>
@@ -62,6 +65,7 @@ const SignUp = () => {
             autoComplete="user"
             data="username"
             type="text"
+            placeholder="Enter your username"
           />
 
           <Input
@@ -70,6 +74,7 @@ const SignUp = () => {
             register={register}
             data="email"
             type="text"
+            placeholder="Enter your email"
           />
 
           <Input
@@ -79,6 +84,7 @@ const SignUp = () => {
             autoComplete="password"
             data="password"
             type="password"
+            placeholder="Enter your password"
           />
 
           <Input
@@ -90,10 +96,13 @@ const SignUp = () => {
             autoComplete="confirm-password"
             data="confirm_password"
             type="password"
+            placeholder="Confirm your password"
           />
 
           <Button type="submit">Sign Up</Button>
         </form>
+
+        <hr className="line" />
 
         <span>
           If you have already registered, login{" "}
