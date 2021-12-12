@@ -8,10 +8,11 @@ export const Container = styled.div`
   width: 300px;
   margin-bottom: 15px;
   height: 95px;
+
   label {
-    color: #081140;
+    color: var(--darkBlue);
     margin-bottom: 5px;
-    font-family: "Fira Sans", sans-serif;
+    font-family: var(--font-fira);
     font-size: 15px;
     width: 256px;
     text-align: left;
@@ -22,9 +23,10 @@ export const Container = styled.div`
     padding-left: 5px;
     border: 1px solid transparent;
     border-radius: 5px;
-    background-color: #efefed;
-    color: #9398a2;
+    background-color: var(--lightGray);
+    color: var(--gray);
     font-size: 14px;
+
     &:focus {
       outline: none;
     }

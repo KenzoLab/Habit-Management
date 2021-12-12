@@ -1,7 +1,6 @@
 ﻿import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
-
   *{
     margin: 0;
     padding: 0;
@@ -13,19 +12,23 @@ export default createGlobalStyle`
     --font-fira: 'Fira Sans', sans-serif;
     --font-inter: 'Inter', sans-serif;
     --darkBlue: #081140;
-    --blue: #52B5F2;
-    --lightBlue: #72C1F1;
+    --blue: #38B6FF ; // BLUE OF LOGO
+    --lightBlue: #72C1F1; // HOVER BUTTONS
+    --extraLightBlue: #C0E5FF; // OPACITY 73%
+    --aliceBlue: #F0F8FF;
     --darkGreen: #124F72;
     --green: #11995E;
-    --gray: #9398A2;
-    --lightGray: #DEDEDE;
+    --gray: #9398A2; 
+    --lightGray: #dedede4d;
     --yellow: #FABD59;
     --lightYellow: #FFCF81;
     --black: #000000;
-    --whiteSmoke: #FBFBF8;
+    --whiteSmoke: #FBFBF8; 
     --white: #FFFFFF;
     --red: #DC1F1F;
-  }
+    --lightPurple: #818ed0;
+
+  } 
 
   body {
     background: var(--whiteSmoke);
@@ -33,7 +36,7 @@ export default createGlobalStyle`
   }
 
   body, input, button, p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter); 
     font-size: 1rem;
   }
 
