@@ -12,7 +12,7 @@ import { Container, Button } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
 
 const Signin = () => {
-  const { signInFunction, userId, isAuth, token } = useAuth();
+  const { signInFunction } = useAuth();
 
   const formSchema = yup.object().shape({
     username: yup.string().required("Enter your username*"),
@@ -21,7 +21,6 @@ const Signin = () => {
 
   const {
     register,
-    reset,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -32,12 +31,7 @@ const Signin = () => {
 
   const onSubmitFunction = (data) => {
     signInFunction(data, toastError);
-    reset();
   };
-
-  if (isAuth) {
-    return <Redirect to={"/dashboard"} />;
-  }
 
   return (
     <Container>
