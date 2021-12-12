@@ -1,9 +1,8 @@
-﻿import { Redirect, Link } from "react-router-dom";
+﻿import { Link, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import MediaQuery from "react-responsive";
-import { toast } from "react-toastify";
 
 import habit from "../../assets/habit-mobile.png";
 import gif from "../../assets/AnimaGif.gif";
@@ -13,18 +12,19 @@ import { useSignUp } from "../../providers/SignUp";
 
 const SignUp = () => {
   const { postSignUp } = useSignUp();
+  const history = useHistory();
 
   const schema = yup.object().shape({
-    username: yup.string().required("Campo obrigatório"),
-    email: yup.string().email("Email inválido").required("Campo obrigatório"),
+    username: yup.string().required("Required field"),
+    email: yup.string().email("Invalid email").required("Required field"),
     password: yup
       .string()
-      .required("Campo obrigatório")
-      .min(6, "A senha deve conter pelo menos 6 caracteres"),
+      .required("Required field")
+      .min(6, "The password must contain at least 6 digits"),
     confirm_password: yup
       .string()
-      .required("Campo obrigatório")
-      .oneOf([yup.ref("password"), null], "As senhas devem ser iguais"),
+      .required("Required field")
+      .oneOf([yup.ref("password"), null], "The passwords must be the same"),
   });
 
   const {
@@ -37,7 +37,7 @@ const SignUp = () => {
 
   const handleRegisterSubmit = ({ username, email, password }) => {
     postSignUp({ username, email, password });
-    <Redirect to="/" />;
+    history.push("/");
   };
 
   return (
@@ -105,11 +105,7 @@ const SignUp = () => {
         <hr className="line" />
 
         <span>
-          If you have already registered, login{" "}
-          <Link to="/" id="link">
-            here
-          </Link>
-          !
+          If you have already registered, login <Link to="/">here</Link>!
         </span>
       </div>
     </Container>
