@@ -73,7 +73,6 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
-    gap: 50px;
 
     .animation {
       animation-name: slide;
