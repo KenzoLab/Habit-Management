@@ -5,15 +5,13 @@ import jwt_decode from "jwt-decode";
 const AuthContext = createContext({});
 
 const AuthProvider = ({ children }) => {
-  const [errorMessage, setErrorMessage] = useState("");
   const [isAuth, setIsAuth] = useState(() => {
     const token = localStorage.getItem("@Habit:token");
     return token ? true : false;
   });
 
   const [userId, setUserId] = useState(() => {
-    const id = localStorage.getItem("@Habit:userId");
-    console.log(id);
+    const id = JSON.parse(localStorage.getItem("@Habit:userId"));
     return id ? id : null;
   });
 
@@ -22,7 +20,7 @@ const AuthProvider = ({ children }) => {
     return token ? token : "";
   });
 
-  const signInFunction = (formData) => {
+  const signInFunction = (formData, toastError) => {
     api
       .post("/sessions/", formData)
       .then((response) => {
@@ -31,15 +29,17 @@ const AuthProvider = ({ children }) => {
         const { user_id } = tokenDecodificado;
 
         localStorage.setItem("@Habit:token", token);
-        localStorage.setItem("@Habit:userId", user_id);
+        localStorage.setItem(
+          "@Habit:userId",
+          JSON.stringify({ userId: user_id }),
+        );
 
         setToken(token);
         setUserId(user_id);
         setIsAuth(true);
       })
-      .catch((error) => setErrorMessage(error.message));
+      .catch((error) => toastError("Invalid email or password"));
   };
-
   return (
     <AuthContext.Provider
       value={{
@@ -48,7 +48,6 @@ const AuthProvider = ({ children }) => {
         signInFunction,
         isAuth,
         setIsAuth,
-        errorMessage,
       }}>
       {children}
     </AuthContext.Provider>
