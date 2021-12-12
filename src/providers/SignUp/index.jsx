@@ -1,6 +1,8 @@
 import { createContext, useState } from "react";
 import { useContext } from "react";
 
+import { toast } from "react-toastify";
+
 import api from "../../services/api";
 
 export const SignUpContext = createContext();
@@ -12,15 +14,18 @@ export const SignUpProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const [message, setMessage] = useState([]); //VERIFICAR O QUE ESTÁ CHEGANDO NESTE STATE E TRATAR
+  const [message, setMessage] = useState([]);
 
   const postSignUp = (data) => {
     api
       .post("/users/", data)
-      .then((response) => {
-        setMessage(response);
+      .then(() => {
+        toast.success("Cadastro realizado com sucesso!");
       })
-      .catch((err) => setMessage(err));
+      .catch((err) => {
+        toast.error("Erro ao cadastrar! Confira os dados informados.");
+        setMessage(err);
+      });
   };
 
   const patchUpdateUser = (idUser, dataUpdate) => {
