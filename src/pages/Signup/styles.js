@@ -69,7 +69,7 @@ export const Container = styled.div`
 
   @media (min-width: 1024px) {
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -123,7 +123,7 @@ export const Container = styled.div`
       justify-content: center;
       flex-direction: column;
       opacity: 0;
-      transform: translateX(-100px);
+      transform: translateX(100px);
     }
   }
 `;
