@@ -1,4 +1,4 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, Redirect, useHistory } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -9,16 +9,15 @@ import gif from "../../assets/AnimaGif.gif";
 import Input from "../../components/Input";
 import { Container, Button } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
+import { toast } from "react-toastify";
 
 const Signin = () => {
-  const { signInFunction, userId } = useAuth();
+  const { signInFunction, userId, isAuth, token } = useAuth();
   const history = useHistory();
+
   const formSchema = yup.object().shape({
     username: yup.string().required("Enter your username*"),
-    password: yup
-      .string()
-      .required("Register a password*")
-      .min(6, "Senha fraca"),
+    password: yup.string().required("Enter your password*"),
   });
 
   const {
@@ -30,11 +29,16 @@ const Signin = () => {
     resolver: yupResolver(formSchema),
   });
 
+  const toastError = (message) => toast.error(message);
+
   const onSubmitFunction = (data) => {
-    signInFunction(data);
-    history.push(`/dashboard/${userId}`);
+    signInFunction(data, toastError);
     reset();
   };
+
+  if (isAuth) {
+    return <Redirect to={"/dashboard"} />;
+  }
 
   return (
     <Container>
