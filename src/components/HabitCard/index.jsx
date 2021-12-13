@@ -1,10 +1,18 @@
 ﻿import CardFrame from "../CardFrame";
-import { Content } from "./styles";
+import { ContentContainer } from "./styles";
 
-const HabitCard = () => {
+const HabitCard = ({ title, category, description, difficult }) => {
   return (
     <CardFrame>
-      <Content className="content">Teste</Content>
+      <ContentContainer>
+        <div className="content__text">
+          <h4 className="content__title">{title}</h4>
+          <p className="content__description">{description}</p>
+          <span className="content__category">{category}</span>
+          <span className="content__difficult">{difficult}</span>
+        </div>
+        <div className="delete__button">X</div>
+      </ContentContainer>
     </CardFrame>
   );
 };
