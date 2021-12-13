@@ -1,59 +1,70 @@
-<h2> Entrega: Projeto Gestão de Hábitos </h2>
+# Getting Started with Create React App
 
-<h4>Visão Geral</h4>
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-<p>   Vocês trabalharão em equipes para desenvolver uma plataforma de gestão de hábitos. O objetivo da plataforma é que o usuário faça cadastro e consiga gerir seus hábitos, e participar de grupos com outras pessoas com a mesma categoria de hábitos e metas. Vocês terão uma API de backend que poderão usar para moldar o frontend da aplicação. A API incluirá endpoints relacionados a autenticação, hábitos, e aos grupos de pessoas, com suas respectivas atividades e metas.</p>
+## Available Scripts
 
-<h4>Documentação da API</h4>
+In the project directory, you can run:
 
-No final do projeto você vai poder fornecer e receber feedback sobre as atividades desenvolvidas. Uma porção da nota dessa atividade irá depender do feedback dado pelos outros colegas do grupo. Provavelmente, o feedback será positivo se você:
+### `yarn start`
 
-<ul>
-<li>Ter compromisso com o time e com a entrega das atividades;</li>
-<li>Atualizar o time diariamente sobre suas atividades;</li>
-<li>Comunicar qualquer contratempo com antecedência;</li>
-<li>Participar em todas as atividades planejadas;</li>
-<li>Comunicar seus pontos fortes / fracos no momento de decisões;</li>
-<li>Falar sobre suas preocupações e dúvidas e pedir esclarecimentos;</li>
-<li>Não deixar a equipe cometer erros, mas discutir se for necessário sacrificar alguma parte;</li>
-<li>Convidar colegas a compartilharem suas ideias;</li>
-<li>Saber ouvir as preocupações dos colegas;</li>
-<li>Aceitar decisões do grupo, mesmo que isso leve o projeto para uma direção inesperada;</li>
-<li>Procurar ajuda caso fique travado;</li>
-<li>Dar feedbacks positivos quando for feito um bom trabalho;</li>
-<li>Pedir desculpa quando fizer algo errado;</li>
-  <li>Em caso de erros ou contratempos, reunir a equipe para procurar uma solução em conjunto.</li>
-</ul>
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-<p>Vocês também seguirão o processo Scrum e, apesar de cada um ser um desenvolvedor e colaborador individual, sua equipe deve considerar ter os papéis de Dono do Produto (Product Owner), Mestre de Scrum (Scrum Master), Líder Técnico (Teach Leader) e Assegurador de Qualidade (Quality Assurance).</p>
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
+### `yarn test`
 
-<h4>Objetivos de aprendizado</h4>
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-<ul>
-<li>Praticar a construção de aplicações a nível de mercado com React.</li>
-<li>Praticar a estruturação e a arquitetura em sistemas front-end.</li>
-<li>Praticar a leitura e a compreensão de uma API de backend.</li>
-<li>Praticar o uso de bibliotecas de componentes.</li>
-<li>Praticar os processos Scrum e suas cerimônias.</li>
-<li>Praticar a comunicação e o trabalho em equipe.</li>
-</ul>
+### `yarn build`
 
-<h4>Início</h4>
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-<ol>
-<li>Faça um levantamento das principais features/funcionalidades de sua aplicação;</li>
-<li>Quebre as funcionalidades em atividades menores para que possamos ter um acompanhamento melhor de seu progresso;</li>
-<li>Planeje, com seu grupo, os prazos de entrega de cada funcionalidade. Valide a meta com a equipe de ensino;</li>
-<li>Crie o layout de sua aplicação e valide com a equipe de ensino. Obs I: Pode se utilizar de ferramentas de UI como o Figma, Adobe Xd, etc. Obs II - Pode-se basear em layouts de grandes aplicações como Facebook, Twitter, etc.;</li>
-<li>Desmembre os elementos compostos em cada páginas em componentes;</li>
-<li>Discuta os endpoints de API que você encontrar, como vocês irão compartilhar seu state, e quais componentes precisarão acessar o store;</li>
-<li>Discuta e pesquise quais bibliotecas seriam necessárias para atender as funcionalidades de sua aplicação.</li>
-</ol>
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-<h4>Apresentação da aplicação</h4>
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-<ol> 
-<li>Haverá uma cerimônia de apresentação/entrega da aplicação desenvolvida pelo grupo. Normalmente a pessoa que é designada a mostrar a aplicação é o PO, mas caso o membro não se sinta confortável em apresentar, essa responsabilidade pode ser transferida para outro;</li>
-<li>A aplicação deverá ser hospedada no Vercel;</li>
-<li>A apresentação é aberta para qualquer pessoa assistir.</li>
+### `yarn eject`
+
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `yarn build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
