@@ -22,11 +22,11 @@ export const SignUpProvider = ({ children }) => {
     api
       .post("/users/", data)
       .then(() => {
-        toast.success("Cadastro realizado com sucesso!");
+        toast.success("Registration successfully completed!");
         history.push("/");
       })
       .catch((err) => {
-        toast.error("Erro ao cadastrar! Confira os dados informados.");
+        toast.error("Error registering! Check the data informed.");
         setMessage(err);
       });
   };
