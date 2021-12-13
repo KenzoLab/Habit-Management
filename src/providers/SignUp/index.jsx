@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useContext } from "react";
-
+import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import api from "../../services/api";
@@ -8,6 +8,8 @@ import api from "../../services/api";
 export const SignUpContext = createContext();
 
 export const SignUpProvider = ({ children }) => {
+  const history = useHistory();
+
   const token = localStorage.getItem("@Habit:token");
 
   const AuthObj = {
@@ -20,10 +22,11 @@ export const SignUpProvider = ({ children }) => {
     api
       .post("/users/", data)
       .then(() => {
-        toast.success("Cadastro realizado com sucesso!");
+        toast.success("Registration successfully completed!");
+        history.push("/");
       })
       .catch((err) => {
-        toast.error("Erro ao cadastrar! Confira os dados informados.");
+        toast.error("Error registering! Check the data informed.");
         setMessage(err);
       });
   };
