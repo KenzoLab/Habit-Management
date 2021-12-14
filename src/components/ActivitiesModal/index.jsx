@@ -12,7 +12,6 @@ import {
   ContInput,
   ContItem,
   ContInfosItem,
-  ContTitlesItem,
   Head,
   ButtonSub,
   BtnCloseDelete,
@@ -26,9 +25,6 @@ const ModalActivities = ({ open, handle }) => {
       .required("Título obrigatório!")
       .min(8, "Mínimo de 8 caracteres.")
       .max(30, "Mínimo de 20 caracteres."),
-    category: yup.string().required("Preencha a categoria!"),
-    difficulty: yup.string().required("Preencha a dificuldade!"),
-    frequency: yup.string().required("Preencha a frequência!"),
   });
 
   const {
@@ -72,15 +68,7 @@ const ModalActivities = ({ open, handle }) => {
               {/* Receber habits e fazer um map */}
               <ContItem>
                 <ContInfosItem>
-                  <h4>Habit's Title...</h4>
-                  <ContTitlesItem>
-                    <h5>Category</h5>
-                    <h6>Hard</h6>
-                  </ContTitlesItem>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do...
-                  </p>
+                  <h4>Activity</h4>
                 </ContInfosItem>
                 <BtnCloseDelete>
                   <IoCloseOutline />
@@ -90,11 +78,12 @@ const ModalActivities = ({ open, handle }) => {
           </ContHabits>
           <ContForm>
             <Head>
-              <h6>Add Habit</h6>
               <BtnCloseDelete onClick={() => CloseModal()}>
                 <IoCloseOutline />
               </BtnCloseDelete>
             </Head>
+              <h3>Activities</h3>
+              <h6>Add Activity</h6>
             <ContInput>
               <Input
                 label="Title:"
@@ -102,33 +91,6 @@ const ModalActivities = ({ open, handle }) => {
                 register={register}
                 data="title"
                 placeholder="Enter a title"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Category:"
-                errors={errors.category ? errors.category.message : " "}
-                register={register}
-                data="category"
-                placeholder="Enter a category"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Difficulty:"
-                errors={errors.difficulty ? errors.difficulty.message : " "}
-                register={register}
-                data="difficulty"
-                placeholder="Enter a difficulty"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Frequency:"
-                errors={errors.frequency ? errors.frequency.message : " "}
-                register={register}
-                data="frequency"
-                placeholder="Enter a frequency"
               />
             </ContInput>
             <ButtonSub type="submit">Add</ButtonSub>
