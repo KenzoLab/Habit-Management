@@ -12,7 +12,6 @@ import {
   ContInput,
   ContItem,
   ContInfosItem,
-  ContTitlesItem,
   Head,
   ButtonSub,
   BtnCloseDelete,
@@ -26,9 +25,6 @@ const ModalActivities = ({ open, handle }) => {
       .required("Título obrigatório!")
       .min(8, "Mínimo de 8 caracteres.")
       .max(30, "Mínimo de 20 caracteres."),
-    category: yup.string().required("Preencha a categoria!"),
-    difficulty: yup.string().required("Preencha a dificuldade!"),
-    frequency: yup.string().required("Preencha a frequência!"),
   });
 
   const {
