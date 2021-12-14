@@ -72,15 +72,7 @@ const ModalActivities = ({ open, handle }) => {
               {/* Receber habits e fazer um map */}
               <ContItem>
                 <ContInfosItem>
-                  <h4>Habit's Title...</h4>
-                  <ContTitlesItem>
-                    <h5>Category</h5>
-                    <h6>Hard</h6>
-                  </ContTitlesItem>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do...
-                  </p>
+                  <h4>Activity</h4>
                 </ContInfosItem>
                 <BtnCloseDelete>
                   <IoCloseOutline />
@@ -90,11 +82,12 @@ const ModalActivities = ({ open, handle }) => {
           </ContHabits>
           <ContForm>
             <Head>
-              <h6>Add Habit</h6>
               <BtnCloseDelete onClick={() => CloseModal()}>
                 <IoCloseOutline />
               </BtnCloseDelete>
             </Head>
+              <h3>Activities</h3>
+              <h6>Add Habit</h6>
             <ContInput>
               <Input
                 label="Title:"
@@ -102,33 +95,6 @@ const ModalActivities = ({ open, handle }) => {
                 register={register}
                 data="title"
                 placeholder="Enter a title"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Category:"
-                errors={errors.category ? errors.category.message : " "}
-                register={register}
-                data="category"
-                placeholder="Enter a category"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Difficulty:"
-                errors={errors.difficulty ? errors.difficulty.message : " "}
-                register={register}
-                data="difficulty"
-                placeholder="Enter a difficulty"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Frequency:"
-                errors={errors.frequency ? errors.frequency.message : " "}
-                register={register}
-                data="frequency"
-                placeholder="Enter a frequency"
               />
             </ContInput>
             <ButtonSub type="submit">Add</ButtonSub>

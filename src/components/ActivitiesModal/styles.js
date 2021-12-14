@@ -84,8 +84,34 @@ export const ContForm = styled.form`
   align-items: center;
   box-sizing: border-box;
 
+  h3 {
+    font-family: var(--font-inter);
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: var(--darkBlue);
+  }
+
+  h6 {
+    font-family: var(--font-inter);
+    color: var(--darkBlue);
+    font-size: 25px;
+    font-style: medium;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+
   @media (min-width: 768px) {
     width: 50%;
+    
+    h3{
+      display: none;
+    }
   }
 `;
 
@@ -123,7 +149,7 @@ export const ButtonSub = styled.button`
   height: 40px;
   border: none;
   border-radius: 7px;
-  margin-bottom: 20px;
+  margin-bottom: 80px;
 
   &:hover {
     background-color: var(--lightBlue);
