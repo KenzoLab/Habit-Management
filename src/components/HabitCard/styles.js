@@ -44,14 +44,6 @@ export const ContentContainer = styled.div`
     align-self: center;
     color: var(--grey);
   }
-  .content__difficult {
-    grid-area: difficult;
-    font-size: 15px;
-    font-weight: 600;
-    align-self: center;
-    text-align: end;
-    color: var(--red);
-  }
 
   .delete__button {
     height: 36px;
@@ -78,13 +70,38 @@ export const ContentContainer = styled.div`
     }
     .content__title {
       align-self: center;
+      margin-bottom: 20px;
     }
     .content__category {
       justify-self: center;
       align-self: center;
+      margin-bottom: 20px;
     }
-    .content__difficult {
-      align-self: center;
+    .content__description {
+      max-height: 109px;
+      -webkit-line-clamp: 6;
     }
+  }
+`;
+
+export const Difficult = styled.span`
+  grid-area: difficult;
+  font-size: 15px;
+  font-weight: 600;
+  align-self: center;
+  text-align: end;
+
+  color: ${(props) => {
+    if (props.children.toLowerCase() === "easy") {
+      return "var(--green)";
+    } else if (props.children.toLowerCase() === "medium") {
+      return "var(--yellow)";
+    } else {
+      return "var(--red)";
+    }
+  }};
+  @media (min-width: 600px) {
+    align-self: center;
+    margin-bottom: 20px;
   }
 `;
