@@ -41,7 +41,7 @@ function HamburguerMenu() {
                   color: "#081140",
                 }}
               />
-              <Link>Dashboard</Link>
+              <Link to="/dashboard">Dashboard</Link>
             </li>
             <li>
               <PeopleOutlineIcon
@@ -52,21 +52,18 @@ function HamburguerMenu() {
                   color: "#081140",
                 }}
               />
-              <Link>Groups</Link>
+              <Link to="/groups">Groups</Link>
             </li>
             <li>
-              <Link>
-                {" "}
-                <BorderColorIcon
-                  sx={{
-                    width: 35,
-                    height: 35,
-                    mr: 3,
-                    color: "#081140",
-                  }}
-                />
-                Activities
-              </Link>
+              <BorderColorIcon
+                sx={{
+                  width: 35,
+                  height: 35,
+                  mr: 3,
+                  color: "#081140",
+                }}
+              />
+              <Link to="/activities">Activities</Link>
             </li>
             <li>
               <RadarOutlinedIcon
@@ -77,7 +74,7 @@ function HamburguerMenu() {
                   color: "#081140",
                 }}
               />
-              <Link>Goals</Link>
+              <Link to="/goals">Goals</Link>
             </li>
             <li>
               <LogoutIcon
@@ -88,7 +85,7 @@ function HamburguerMenu() {
                   color: "#081140",
                 }}
               />
-              <Link>Logout</Link>
+              <button className="logout-button">Logout</button>
             </li>
           </ul>
         </section>
