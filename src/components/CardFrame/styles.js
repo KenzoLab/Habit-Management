@@ -4,7 +4,13 @@ export const Container = styled.div`
   height: 234px;
   width: 90%;
   min-width: 300px;
-  max-width: 600px;
+  max-width: ${(props) => {
+    if (props.cardType === "activities" || props.cardType === "goals") {
+      return "350px";
+    } else {
+      return "600px";
+    }
+  }};
   border-radius: 15px;
   background-color: #fff;
   position: relative;
