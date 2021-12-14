@@ -8,7 +8,7 @@ export const Nav = styled.div`
   flex-direction: column;
   justify-content: counter-increment;
   background-color: #fbfbf8;
-  height: ${props => (props.toggleNav ? "100vh" : "")};
+  height: ${props => (props.toggleNav ? "100vh" : "18vh")};
   ul {
     display: flex;
     list-style: none;
@@ -25,7 +25,7 @@ export const Nav = styled.div`
   }
 
   .menu-list {
-    display: flex;
+    display: ${props => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
     padding: 25px;
@@ -46,6 +46,12 @@ export const Nav = styled.div`
           height: 50px;
           border-bottom: 1px solid #0000002b;
           margin-bottom: 10px;
+
+          button {
+            border: 1px solid transparent;
+            background-color: transparent;
+            color: #081140;
+          }
         }
 
         a {
@@ -103,7 +109,6 @@ export const Nav = styled.div`
 
 export const Header = styled.div`
   width: 100vw;
-  height: 13.4vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
