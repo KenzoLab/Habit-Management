@@ -4,7 +4,7 @@ import { ContentContainer } from "./styles";
 const HabitCard = ({ title, category, description, difficult }) => {
   return (
     <CardFrame>
-      <ContentContainer>
+      <ContentContainer cardType="habit">
         <div className="content__text">
           <h4 className="content__title">{title}</h4>
           <p className="content__description">{description}</p>
