@@ -1,12 +1,7 @@
 ﻿import { Container } from "./styles";
 
-const CardFrame = ({ children }) => {
-  return (
-    <Container>
-      {children}
-      <div className="back"></div>
-    </Container>
-  );
+const CardFrame = ({ children, cardType }) => {
+  return <Container cardType={cardType}>{children}</Container>;
 };
 
 export default CardFrame;
