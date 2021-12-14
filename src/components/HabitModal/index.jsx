@@ -82,9 +82,9 @@ const ModalHabits = ({ open, handle }) => {
   const CloseModal = () => {
     reset({
       title: "",
-      category: { value: undefined, label: undefined },
-      difficulty: { value: undefined, label: undefined },
-      frequency: { value: undefined, label: undefined },
+      category: { value: "", label: "Select an option" },
+      difficulty: { value: "", label: "Select an option" },
+      frequency: { value: "", label: "Select an option" },
     });
     handle();
   };
