@@ -1,5 +1,3 @@
-﻿import HabitCard from "../../components/HabitCard";
-
-const Dashboard = () => <HabitCard />;
+﻿const Dashboard = () => <h1>Dashboard </h1>;
 
 export default Dashboard;
