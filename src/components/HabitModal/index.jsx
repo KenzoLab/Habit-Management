@@ -17,23 +17,57 @@ import {
   ButtonSub,
   BtnCloseDelete,
 } from "./styles";
+
 import Input from "../../components/Input";
+import { InputSelect } from "../../components/Input";
 
 const ModalHabits = ({ open, handle }) => {
-  const schema = yup.object().shape({
-    title: yup
-      .string()
-      .required("Título obrigatório!")
-      .min(8, "Mínimo de 8 caracteres.")
-      .max(30, "Mínimo de 20 caracteres."),
-    category: yup.string().required("Preencha a categoria!"),
-    difficulty: yup.string().required("Preencha a dificuldade!"),
-    frequency: yup.string().required("Preencha a frequência!"),
-  });
+  const arrFrequency = [
+    { value: "Daily", label: "Daily" },
+    { value: "Weekly", label: "Weekly" },
+    { value: "Monthly", label: "Monthly" },
+  ];
+  const arrDifficulty = [
+    { value: "Easy", label: "Easy" },
+    { value: "Medium", label: "Medium" },
+    { value: "Hard", label: "Hard" },
+  ];
+  const arrCategory = [
+    { value: "Financial", label: "Financial" },
+    { value: "Health", label: "Health" },
+    { value: "Intellectual", label: "Intellectual" },
+    { value: "Mindset", label: "Mindset" },
+    { value: "Productivity", label: "Productivity" },
+    { value: "Relationships", label: "Relationships" },
+    { value: "Sports", label: "Sports" },
+  ];
+
+  const schema = yup
+    .object({
+      title: yup
+        .string()
+        .required("Título obrigatório!")
+        .min(8, "Mínimo de 8 caracteres.")
+        .max(30, "Mínimo de 20 caracteres."),
+      category: yup.object().shape({
+        label: yup.string().required("Selecione uma categoria!"),
+        value: yup.string().required("Selecione uma categoria!"),
+      }),
+      difficulty: yup.object().shape({
+        label: yup.string().required("Selecione uma dificuldade!"),
+        value: yup.string().required("Selecione uma dificuldade!"),
+      }),
+      frequency: yup.object().shape({
+        label: yup.string().required("Selecione uma frequência!"),
+        value: yup.string().required("Selecione uma frequência!"),
+      }),
+    })
+    .required();
 
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm({
@@ -48,9 +82,9 @@ const ModalHabits = ({ open, handle }) => {
   const CloseModal = () => {
     reset({
       title: "",
-      category: "",
-      difficulty: "",
-      frequency: "",
+      category: { value: undefined, label: undefined },
+      difficulty: { value: undefined, label: undefined },
+      frequency: { value: undefined, label: undefined },
     });
     handle();
   };
@@ -79,8 +113,7 @@ const ModalHabits = ({ open, handle }) => {
                     <h6>Hard</h6>
                   </ContTitlesItem>
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do...
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit...
                   </p>
                 </ContInfosItem>
                 <BtnCloseDelete>
@@ -106,30 +139,46 @@ const ModalHabits = ({ open, handle }) => {
               />
             </ContInput>
             <ContInput>
-              <Input
-                label="Category:"
-                errors={errors.category ? errors.category.message : " "}
+              <InputSelect
+                label="Choose a category:"
+                name="category"
+                control={control}
                 register={register}
                 data="category"
-                placeholder="Enter a category"
+                errors={
+                  errors?.category?.value ? errors.category.value.message : " "
+                }
+                options={arrCategory}
               />
             </ContInput>
             <ContInput>
-              <Input
-                label="Difficulty:"
-                errors={errors.difficulty ? errors.difficulty.message : " "}
+              <InputSelect
+                label="Choose a difficulty:"
+                name="difficulty"
+                control={control}
                 register={register}
                 data="difficulty"
-                placeholder="Enter a difficulty"
+                errors={
+                  errors?.difficulty?.value
+                    ? errors.difficulty.value.message
+                    : " "
+                }
+                options={arrDifficulty}
               />
             </ContInput>
             <ContInput>
-              <Input
-                label="Frequency:"
-                errors={errors.frequency ? errors.frequency.message : " "}
+              <InputSelect
+                label="Choose a frequency:"
+                name="frequency"
+                control={control}
                 register={register}
                 data="frequency"
-                placeholder="Enter a frequency"
+                errors={
+                  errors?.frequency?.value
+                    ? errors.frequency.value.message
+                    : " "
+                }
+                options={arrFrequency}
               />
             </ContInput>
             <ButtonSub type="submit">Add</ButtonSub>

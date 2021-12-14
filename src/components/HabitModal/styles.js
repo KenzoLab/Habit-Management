@@ -98,9 +98,11 @@ export const ContInput = styled.div`
   margin-bottom: 10px;
   height: 60px;
 
-  p {
+  .error {
     color: var(--red);
     font-size: 10px;
+    height: 12px;
+    margin-top: 2px;
   }
 
   input {
@@ -120,10 +122,11 @@ export const ButtonSub = styled.button`
   background-color: var(--blue);
   color: var(--whiteSmoke);
   width: 97%;
+  max-width: 264px;
   height: 40px;
   border: none;
   border-radius: 7px;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
 
   &:hover {
     background-color: var(--lightBlue);
@@ -200,7 +203,7 @@ export const ContInfosItem = styled.div`
   p {
     width: 60%;
     height: 65%;
-    font-size: 8.5px;
+    font-size: 8.2px;
     padding: 3px;
   }
 `;
