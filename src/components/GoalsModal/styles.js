@@ -77,6 +77,26 @@ export const Head = styled.div`
 
 export const ContForm = styled.form`
   width: 100%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+`;
+
+export const ContCurrent = styled.div`
+  width: 100%;
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
+`;
+
+export const ContRight = styled.div`
+  width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -189,7 +209,7 @@ export const ContInfosItem = styled.div`
   justify-content: space-between;
 
   h4 {
-    /* padding-left: 10px; */
+    margin-top: 5px;
     width: 100%;
     height: 35%;
     font-size: 16px;
@@ -207,9 +227,10 @@ export const ContInfosItem = styled.div`
 
 export const ContTitlesItem = styled.div`
   width: 30%;
-  height: 65%;
+  height: 55%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   h5 {
     font-size: 12px;

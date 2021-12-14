@@ -7,6 +7,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import {
   ContainerModal,
   ContForm,
+  ContRight,
+  ContCurrent,
   ContHabits,
   ContList,
   ContInput,
@@ -18,22 +20,31 @@ import {
   BtnCloseDelete,
 } from "./styles";
 import Input from "../../components/Input";
+import { InputSelect } from "../../components/Input";
 
 const ModalGoals = ({ open, handle }) => {
+  const arrDifficulty = [
+    { value: "Easy", label: "Easy" },
+    { value: "Medium", label: "Medium" },
+    { value: "Hard", label: "Hard" },
+  ];
+
   const schema = yup.object().shape({
     title: yup
       .string()
       .required("Título obrigatório!")
       .min(8, "Mínimo de 8 caracteres.")
       .max(30, "Mínimo de 20 caracteres."),
-    category: yup.string().required("Preencha a categoria!"),
-    difficulty: yup.string().required("Preencha a dificuldade!"),
-    frequency: yup.string().required("Preencha a frequência!"),
+    difficulty: yup.object().shape({
+      label: yup.string().required("Selecione uma dificuldade!"),
+      value: yup.string().required("Selecione uma dificuldade!"),
+    }),
   });
 
   const {
     register,
     handleSubmit,
+    control,
     reset,
     formState: { errors },
   } = useForm({
@@ -48,9 +59,7 @@ const ModalGoals = ({ open, handle }) => {
   const CloseModal = () => {
     reset({
       title: "",
-      category: "",
-      difficulty: "",
-      frequency: "",
+      difficulty: { value: "", label: "Select an option" },
     });
     handle();
   };
@@ -72,15 +81,12 @@ const ModalGoals = ({ open, handle }) => {
               {/* Receber habits e fazer um map */}
               <ContItem>
                 <ContInfosItem>
-                  <h4>Habit's Title...</h4>
+                  <h4>Goal Title...</h4>
                   <ContTitlesItem>
-                    <h5>Category</h5>
+                    <h5></h5>
                     <h6>Hard</h6>
                   </ContTitlesItem>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do...
-                  </p>
+                  <p></p>
                 </ContInfosItem>
                 <BtnCloseDelete>
                   <IoCloseOutline />
@@ -88,51 +94,47 @@ const ModalGoals = ({ open, handle }) => {
               </ContItem>
             </ContList>
           </ContHabits>
-          <ContForm>
-            <Head>
-              <h6>Add Habit</h6>
-              <BtnCloseDelete onClick={() => CloseModal()}>
-                <IoCloseOutline />
-              </BtnCloseDelete>
-            </Head>
-            <ContInput>
-              <Input
-                label="Title:"
-                errors={errors.title ? errors.title.message : " "}
-                register={register}
-                data="title"
-                placeholder="Enter a title"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Category:"
-                errors={errors.category ? errors.category.message : " "}
-                register={register}
-                data="category"
-                placeholder="Enter a category"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Difficulty:"
-                errors={errors.difficulty ? errors.difficulty.message : " "}
-                register={register}
-                data="difficulty"
-                placeholder="Enter a difficulty"
-              />
-            </ContInput>
-            <ContInput>
-              <Input
-                label="Frequency:"
-                errors={errors.frequency ? errors.frequency.message : " "}
-                register={register}
-                data="frequency"
-                placeholder="Enter a frequency"
-              />
-            </ContInput>
-            <ButtonSub type="submit">Add</ButtonSub>
-          </ContForm>
+          <ContRight>
+            <ContCurrent>
+              <Head>
+                <h6>Current</h6>
+                <BtnCloseDelete onClick={() => CloseModal()}>
+                  <IoCloseOutline />
+                </BtnCloseDelete>
+              </Head>
+              <p>14 goals / 5 concluded</p>
+            </ContCurrent>
+            <ContForm>
+              <Head>
+                <h6>Add Goal</h6>
+              </Head>
+              <ContInput>
+                <Input
+                  label="Title:"
+                  errors={errors.title ? errors.title.message : " "}
+                  register={register}
+                  data="title"
+                  placeholder="Enter a title"
+                />
+              </ContInput>
+              <ContInput>
+                <InputSelect
+                  label="Choose a difficulty:"
+                  name="difficulty"
+                  control={control}
+                  register={register}
+                  data="difficulty"
+                  errors={
+                    errors?.difficulty?.value
+                      ? errors.difficulty.value.message
+                      : " "
+                  }
+                  options={arrDifficulty}
+                />
+              </ContInput>
+              <ButtonSub type="submit">Add</ButtonSub>
+            </ContForm>
+          </ContRight>
         </ContainerModal>
       </Modal>
     </div>
