@@ -87,7 +87,7 @@ const ModalActivities = ({ open, handle }) => {
               </BtnCloseDelete>
             </Head>
               <h3>Activities</h3>
-              <h6>Add Habit</h6>
+              <h6>Add Activity</h6>
             <ContInput>
               <Input
                 label="Title:"
