@@ -3,6 +3,7 @@
 export const App = styled.section`
   display: flex;
   flex-direction: column;
+  background-color: var(--whiteSmoke);
 
   @media (min-width: 600px) {
     flex-direction: row;
@@ -15,33 +16,36 @@ export const Container = styled.section`
   background-color: #dedede;
   display: flex;
   flex-direction: column;
+  margin-top: 114px;
 
   @media (min-width: 600px) {
+    margin-top: 0;
     height: 100vh;
-    min-width: 68vw;
+    width: calc(100vw - 250px);
+    margin-left: 250px;
+    border-radius: 40px 0px 0px 40px;
   }
 `;
 
 export const Aside = styled.aside`
   width: 100vw;
-  height: 14vh;
-  display: flex;
+  height: 18vh;
+  /* display: flex;
   flex-direction: row;
   background-color: lightgray;
-  justify-content: space-between;
+  justify-content: space-between; */
 
   @media (min-width: 600px) {
-    width: 32vw;
-    max-width: 260px;
+    width: 250px;
     height: 100vh;
-    flex-direction: column;
-    justify-content: space-between;
+    /* max-width: 260px; */
+    /* flex-direction: column;
+    justify-content: space-between; */
   }
 `;
 
 export const Header = styled.header`
   height: 22vh;
-  background-color: #dedede;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;

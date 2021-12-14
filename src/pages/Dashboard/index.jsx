@@ -2,12 +2,12 @@
 import { App, Container, Aside, Header, Cards } from "./styles";
 
 function Dashboard() {
-  // return <HamburguerMenu />;
   const cards = ["zeze", "gugu", "dada", "ZEUS!"];
 
   return (
     <App>
-      <Aside>
+      <HamburguerMenu />
+      {/* <Aside>
         <header>
           <img alt="Logo" />
         </header>
@@ -27,7 +27,7 @@ function Dashboard() {
             </div>
           </div>
         </footer>
-      </Aside>
+      </Aside> */}
       <Container>
         <Header>
           <section className="header-top">

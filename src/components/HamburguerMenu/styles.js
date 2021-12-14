@@ -3,12 +3,18 @@
 export const Nav = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 1rem 0;
   align-items: center;
   flex-direction: column;
   justify-content: counter-increment;
   background-color: #fbfbf8;
-  height: ${props => (props.toggleNav ? "100vh" : "18vh")};
+  z-index: 9999;
+  position: absolute;
+  left: 0;
+  top: 0;
+
+  height: ${(props) => (props.toggleNav ? "100vh" : "18vh")};
+
   ul {
     display: flex;
     list-style: none;
@@ -21,11 +27,11 @@ export const Nav = styled.div`
   }
 
   button {
-    display: ${props => (props.toggleNav ? "block" : "block")};
+    display: ${(props) => (props.toggleNav ? "block" : "block")};
   }
 
   .menu-list {
-    display: ${props => (props.toggleNav ? "flex" : "none")};
+    display: ${(props) => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
     padding: 25px;
@@ -34,9 +40,9 @@ export const Nav = styled.div`
 
     section {
       width: 80vw;
-      display: ${props => (props.toggleNav ? "flex" : "none")};
+      display: ${(props) => (props.toggleNav ? "flex" : "none")};
       ul {
-        flex-direction: ${props => (props.toggleNav ? "column" : "")};
+        flex-direction: ${(props) => (props.toggleNav ? "column" : "")};
         width: 60vw;
         justify-content: center;
 
@@ -67,11 +73,13 @@ export const Nav = styled.div`
     }
   }
 
-  @media (min-width: 601px) {
+  @media (min-width: 600px) {
     width: 250px;
     height: 100vh;
+
     .menu-list {
       width: 250px;
+      display: flex;
 
       section {
         width: 250px;
@@ -142,7 +150,7 @@ export const Header = styled.div`
 
 export const Footer = styled.div`
   section {
-    display: ${props => (props.toggleNav ? "block" : "none")};
+    display: ${(props) => (props.toggleNav ? "block" : "none")};
     width: 80vw;
     align-items: center;
   }
