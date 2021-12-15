@@ -15,6 +15,7 @@ function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
+  console.log(token)
   const habitModel = {
     title: "Title",
     category: "Category",
