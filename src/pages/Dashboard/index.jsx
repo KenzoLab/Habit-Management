@@ -13,7 +13,7 @@ function Dashboard() {
             <h2>Groups</h2>
             <div className="header-search">
               <input
-                placeholder="search..."
+                placeholder="Search..."
                 //onChange={(evt) setSearch(evt.target.value)}
               />
               <button

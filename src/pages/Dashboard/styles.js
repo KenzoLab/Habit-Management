@@ -9,7 +9,7 @@ export const App = styled.section`
 export const Container = styled.section`
   width: 100vw;
   height: 86vh;
-  background-color: #dedede;
+  background-color: var(--greyBackground);
   display: flex;
   flex-direction: column;
   margin-top: 114px;
@@ -50,13 +50,16 @@ export const Header = styled.header`
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
+  padding-right: 60px;
+  padding-left: 50px;
 
   @media (max-width: 600px) {
     height: 12vh;
   }
 
   .header-search {
-    margin-right: 10%;
+    /* margin-right: 10%; */
+    display: flex;
     @media (max-width: 730px) {
       margin-right: 9px;
       input {
@@ -67,22 +70,32 @@ export const Header = styled.header`
         padding: 7px 14px;
       }
     }
-    input {
-      padding: 7px 0px 7px 12px;
-      font-size: 16px;
-      border-radius: 9px;
-      border: none;
-      margin-right: 12px;
-      @media (max-width: 900px) {
-        width: 154px;
-      }
+  }
+
+  input {
+    padding: 7px 0px 7px 12px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: none;
+    margin-right: 25px;
+    height: 50px;
+    background-color: var(--extraLightYellow);
+    /*margin-right: 12px;*/
+    @media (max-width: 900px) {
+      width: 154px;
     }
-    button {
-      padding: 7px 16px;
-      background-color: #72c1f1;
-      border-radius: 9px;
-      border: none;
-    }
+  }
+
+  button {
+    padding: 7px 16px;
+    background-color: var(--blue);
+    font-size: 24px;
+    font-weight: 600;
+    width: 173px;
+    height: 50px;
+    color: var(--whiteSmoke);
+    border-radius: 15px;
+    border: none;
   }
 
   .header-top {
@@ -98,18 +111,34 @@ export const Header = styled.header`
     }
 
     h2 {
-      font-size: 24px;
+      font-size: 52px;
+      color: var(--darkBlue);
+      text-align: start;
+      margin: 5px 8px 0px 45px;
+      @media (max-width: 730px) {
+        margin: 5px 8px 0px 29px;
+      }
+      /* margin: 0px 8px 0px 19px; */
+    }
+    /**
+    h2 {
+     font-size: 24px;
       font-weight: 600;
       margin: 5px 8px 0px 45px;
       color: black;
       @media (max-width: 730px) {
         margin: 5px 8px 0px 29px;
       }
-    }
+    } */
   }
+
+  /**
   .header-bottom {
-    width: 95%;
-    margin-left: 23px;
+       width: 95%;
+       margin-left: 23px;
+   */
+  .header-bottom {
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -121,30 +150,30 @@ export const Header = styled.header`
     }
 
     button {
-      padding: 7px 15px;
-      margin: 6px 10px;
+      padding: 15px;
+      margin: 6px 0;
       background: transparent;
-      color: #081140;
+      color: var(--blue);
       font-weight: bold;
-      font-size: 20px;
+      font-size: 30px;
       border: none;
-      border-radius: 7px;
+      border-radius: 15px;
       font-weight: 600;
 
-      @media (max-width: 600px) {
+      /* @media (max-width: 600px) {
         font-size: calc(12px + 1.5vmin);
         margin: 6px 7px;
-      }
+      } */
     }
 
     button:focus {
-      background: #72c1f1;
-      opacity: 70%;
+      background: var(--extraLightBlue);
+      /* opacity: 70%; */
     }
   }
 
   #blues {
-    background-color: #dedede;
+    /* background-color: var(--greyBackground); */
   }
 `;
 
@@ -163,7 +192,7 @@ export const Cards = styled.section`
 
   .card-border {
     padding-right: 10px;
-    background-color: #fabd59;
+    background-color: var(--yellow);
     border-radius: 10px;
     margin: 0px 20px;
   }
