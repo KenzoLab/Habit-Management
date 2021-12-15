@@ -1,5 +1,5 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
-import { App, Container, Aside, Header, Cards } from "./styles";
+import { App, Container, Footer, Header, Cards } from "./styles";
 
 function Dashboard() {
   const cards = ["zeze", "gugu", "dada", "ZEUS!"];
@@ -16,11 +16,11 @@ function Dashboard() {
                 placeholder="Search..."
                 //onChange={(evt) setSearch(evt.target.value)}
               />
-              <button
+              {/*<button
               //onClick={() => addGroup()}
               >
                 + add grupo
-              </button>
+              </button>*/}
             </div>
           </section>
 
@@ -88,6 +88,9 @@ function Dashboard() {
             </div>
           ))}
         </Cards>
+        <Footer>
+          <button id="toglebutton">+</button>
+        </Footer>
       </Container>
     </App>
   );

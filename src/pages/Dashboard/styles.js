@@ -8,13 +8,13 @@ export const App = styled.section`
 
 export const Container = styled.section`
   width: 100vw;
-  height: 86vh;
+  height: 82vh;
   background-color: var(--greyBackground);
   display: flex;
   flex-direction: column;
-  margin-top: 114px;
+  margin-top: 17vh;
 
-  @media (min-width: 600px) {
+  @media (min-width: 768px) {
     margin-top: 0;
     height: 100vh;
     width: calc(100vw - 200px);
@@ -35,7 +35,7 @@ export const Aside = styled.aside`
   background-color: lightgray;
   justify-content: space-between; */
 
-  @media (min-width: 601px) {
+  @media (min-width: 768px) {
     width: 250px;
     height: 100vh;
     /* max-width: 260px; */
@@ -48,13 +48,14 @@ export const Header = styled.header`
   height: 22vh;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-evenly;
   align-items: center;
   padding-right: 60px;
   padding-left: 50px;
 
-  @media (max-width: 600px) {
-    height: 12vh;
+  @media (max-width: 768px) {
+    padding: 0px;
+    height: 10vh;
   }
 
   .header-search {
@@ -102,68 +103,63 @@ export const Header = styled.header`
     width: 100%;
     height: 42%;
     margin-bottom: 4px;
+    margin-top: 13px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: flex-end;
 
-    @media (max-width: 600px) {
+    @media (max-width: 767px) {
       display: none;
     }
 
     h2 {
-      font-size: 52px;
-      color: var(--darkBlue);
-      text-align: start;
-      margin: 5px 8px 0px 45px;
-      @media (max-width: 730px) {
-        margin: 5px 8px 0px 29px;
-      }
-      /* margin: 0px 8px 0px 19px; */
-    }
-    /**
-    h2 {
-     font-size: 24px;
+      font-size: 44px;
       font-weight: 600;
       margin: 5px 8px 0px 45px;
       color: black;
       @media (max-width: 730px) {
         margin: 5px 8px 0px 29px;
       }
-    } */
+    }
   }
 
-  /**
-  .header-bottom {
-       width: 95%;
-       margin-left: 23px;
-   */
   .header-bottom {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
 
-    @media (max-width: 601px) {
+    @media (max-width: 768px) {
       align-items: center;
       justify-content: center;
       margin-left: 0px;
     }
 
     button {
-      padding: 15px;
+      //padding: 15px;
       margin: 6px 0;
       background: transparent;
       color: var(--blue);
       font-weight: bold;
-      font-size: 30px;
+      font-size: calc(12px + 1.3vmax);
       border: none;
       border-radius: 15px;
       font-weight: 600;
+      box-sizing: border-box;
 
-      /* @media (max-width: 600px) {
+      @media (max-width: 1024px) {
+        width: 140px;
+      }
+
+      @media (max-width: 768px) {
         font-size: calc(12px + 1.5vmin);
-        margin: 6px 7px;
-      } */
+      }
+
+      @media (max-width: 440px) {
+        padding: 15px 5px;
+        width: 90px;
+      }
     }
 
     button:focus {
@@ -178,9 +174,9 @@ export const Header = styled.header`
 `;
 
 export const Cards = styled.section`
-  margin: auto;
+  margin: 0 auto;
   width: 95%;
-  height: 82vh;
+  height: 65vh;
   overflow-y: auto;
   border-radius: 10px;
   font-size: 14px;
@@ -210,7 +206,7 @@ export const Cards = styled.section`
     background-color: #f2f0f0;
     border-radius: 10px;
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       margin: 20px 0px;
     }
   }
@@ -242,8 +238,23 @@ export const Cards = styled.section`
       border: none;
       color: blue;
 
-      @media (max-width: 600px) {
+      @media (max-width: 768px) {
       }
     }
+  }
+`;
+
+export const Footer = styled.footer`
+  margin-top: 2%;
+  margin-right: 10%;
+  align-self: flex-end;
+
+  #toglebutton {
+    padding: 9px 18px;
+    width: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: gray;
+    color: white;
   }
 `;
