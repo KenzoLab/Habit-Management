@@ -1,4 +1,4 @@
-﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import HamburguerMenu from "../../components/HamburguerMenu";
 import { App, Container, Aside, Header, Cards } from "./styles";
 
 function Dashboard() {
