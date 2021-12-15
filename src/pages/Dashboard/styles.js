@@ -152,6 +152,10 @@ export const Header = styled.header`
         width: 140px;
       }
 
+      @media (min-width: 1024px) {
+        font-size: 26px;
+      }
+
       @media (max-width: 768px) {
         font-size: calc(12px + 1.5vmin);
       }
@@ -174,12 +178,23 @@ export const Header = styled.header`
 `;
 
 export const Cards = styled.section`
+  margin: auto;
+  width: 100%;
+  height: 82vh;
+  /**
   margin: 0 auto;
   width: 95%;
   height: 65vh;
+   */
   overflow-y: auto;
-  border-radius: 10px;
-  font-size: 14px;
+  padding: 0 50px;
+  /* border-radius: 10px; */
+  /* font-size: 14px; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   h2 {
     font-size: 24px;
@@ -248,6 +263,7 @@ export const Footer = styled.footer`
   margin-top: 2%;
   margin-right: 10%;
   align-self: flex-end;
+  margin-bottom: 20px;
 
   #toglebutton {
     padding: 9px 18px;

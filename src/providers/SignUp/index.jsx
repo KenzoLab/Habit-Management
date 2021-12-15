@@ -1,26 +1,34 @@
 import { createContext, useState } from "react";
 import { useContext } from "react";
+import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import api from "../../services/api";
 
 export const SignUpContext = createContext();
 
 export const SignUpProvider = ({ children }) => {
+  const history = useHistory();
+
   const token = localStorage.getItem("@Habit:token");
 
   const AuthObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const [message, setMessage] = useState([]); //VERIFICAR O QUE ESTÁ CHEGANDO NESTE STATE E TRATAR
+  const [message, setMessage] = useState([]);
 
   const postSignUp = (data) => {
     api
       .post("/users/", data)
-      .then((response) => {
-        setMessage(response);
+      .then(() => {
+        toast.success("Registration successfully completed!");
+        history.push("/");
       })
-      .catch((err) => setMessage(err));
+      .catch((err) => {
+        toast.error("Error registering! Check the data informed.");
+        setMessage(err);
+      });
   };
 
   const patchUpdateUser = (idUser, dataUpdate) => {

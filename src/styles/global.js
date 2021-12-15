@@ -32,12 +32,12 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--white);
+    background: var(--whiteSmoke);
     color: var(--gray);
   }
 
   body, input, button, p {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter); 
     font-size: 1rem;
   }
 
