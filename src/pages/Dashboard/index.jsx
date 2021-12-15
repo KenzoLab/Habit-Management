@@ -40,27 +40,6 @@ function Dashboard() {
   return (
     <App>
       <HamburguerMenu />
-      {/* <Aside>
-        <header>
-          <img alt="Logo" />
-        </header>
-        <section>
-          <div className="pages">Dashboard</div>
-          <div className="pages">Groups</div>
-          <div className="pages">Activities</div>
-          <div className="pages">Goals</div>
-          <div className="pages">Logout</div>
-        </section>
-        <footer>
-          <div id="usuario-card">
-            <img alt="usuario" />
-            <div>
-              <h3>Nome</h3>
-              <p>Email</p>
-            </div>
-          </div>
-        </footer>
-      </Aside> */}
       <Container>
         <Header>
           <section className="header-top">
