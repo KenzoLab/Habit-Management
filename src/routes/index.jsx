@@ -11,7 +11,7 @@ import Goals from "../pages/Goals";
 const Routes = () => {
   return (
     <Switch>
-      <Route exact path="/" component={Dashboard} />
+      <Route exact path="/" component={Signin} />
       <Route path="/signup" component={Signup} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
       <Route path="/groups" component={Groups} isPrivate />
