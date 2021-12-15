@@ -19,6 +19,7 @@ import {
   Head,
   ButtonSub,
   BtnCloseDelete,
+  Paragraph,
 } from "./styles";
 import Input from "../../components/Input";
 import { InputSelect } from "../../components/Input";
@@ -56,7 +57,7 @@ const ModalHabits = ({ open, handle }) => {
         .string()
         .required("Título obrigatório!")
         .min(8, "Mínimo de 8 caracteres.")
-        .max(30, "Mínimo de 20 caracteres."),
+        .max(30, "Máximo de 30 caracteres."),
       category: yup.object().shape({
         label: yup.string().required("Selecione uma categoria!"),
         value: yup.string().required("Selecione uma categoria!"),
@@ -86,6 +87,7 @@ const ModalHabits = ({ open, handle }) => {
   // ADD HABIT
   const onAddHabit = (data) => {
     createHabitFunction(data);
+    resetInputs();
   };
 
   //DELETE HABIT
@@ -93,14 +95,19 @@ const ModalHabits = ({ open, handle }) => {
     deleteHabitFunction(idHabit);
   };
 
-  //CLOSE MODAL AND RESET INPUTS
-  const CloseModal = () => {
+  //RESET INPUTS
+  const resetInputs = () => {
     reset({
       title: "",
       category: { value: "", label: "Select an option" },
       difficulty: { value: "", label: "Select an option" },
       frequency: { value: "", label: "Select an option" },
     });
+  };
+
+  //CLOSE MODAL AND RESET INPUTS
+  const CloseModal = () => {
+    resetInputs();
     handle();
   };
 
@@ -131,9 +138,11 @@ const ModalHabits = ({ open, handle }) => {
                         <h4>{`${item.title.substring(0, 15)}...`}</h4>
                         <ContTitlesItem>
                           <h5>{item.category}</h5>
-                          <h6>{item.difficulty}</h6>
+                          <h6>{item.frequency}</h6>
                         </ContTitlesItem>
-                        <p>{item.frequency}</p>
+                        <Paragraph diff={item.difficulty}>
+                          {item.difficulty}
+                        </Paragraph>
                       </ContInfosItem>
                       <BtnCloseDelete onClick={() => onDeleteHabit(item.id)}>
                         <IoCloseOutline />
