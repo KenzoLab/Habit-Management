@@ -5,8 +5,14 @@ import { useHabit } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from '../../components/SpeedDialHabits';
+﻿import { useState } from "react";
+import ModalHabits from "../../components/HabitModal";
+import ModalGoals from "../../components/GoalsModal";
+import ModalActivities from "../../components/ActivitiesModal";
+
 
 function Dashboard() {
+  const [openModalHabits, setOpenModalHabits] = useState(false);
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
   const habitModel = {
@@ -31,12 +37,14 @@ function Dashboard() {
     habitModel,
     habitModel,
   ];
-
+  
   useEffect(() => {
     listHabitsFunction(token);
   }, []);
 
-  // console.log(listHabits);
+  const handleModalHabits = () => {
+    setOpenModalHabits(!openModalHabits);
+  };
 
   return (
     <App>
@@ -44,7 +52,7 @@ function Dashboard() {
       <Container>
         <Header>
           <section className="header-top">
-            <h2>Groups</h2>
+            <h2>Dashboard</h2>
             <div className="header-search">
               <input
                 placeholder="Search..."
@@ -76,27 +84,22 @@ function Dashboard() {
             />
           ))}
         </Cards>
-        <BasicSpeedDial />
+        <BasicSpeedDial handleModalHabits={handleModalHabits} />
+        <ModalHabits open={openModalHabits} handle={handleModalHabits} />
       </Container>
     </App>
   );
 }
 
-// ﻿import { useState } from "react";
-// import ModalHabits from "../../components/HabitModal";
-// import ModalGoals from "../../components/GoalsModal";
-// import ModalActivities from "../../components/ActivitiesModal";
 
 // const Dashboard = () => {
 //   //State Modal Window
-//   const [openModalHabits, setOpenModalHabits] = useState(false);
+//   
 //   const [openModalGoals, setOpenModalGoals] = useState(false);
 //   const [openModalActivities, setOpenModalActivities] = useState(false);
 
 //   //Handle Modal Window
-//   const handleModalHabits = () => {
-//     setOpenModalHabits(!openModalHabits);
-//   };
+
 //   const handleModalGoals = () => {
 //     setOpenModalGoals(!openModalGoals);
 //   };
