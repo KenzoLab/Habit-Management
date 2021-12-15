@@ -143,11 +143,17 @@ export const Header = styled.header`
 
 export const Cards = styled.section`
   margin: auto;
-  width: 95%;
+  width: 100%;
   height: 82vh;
   overflow-y: auto;
-  border-radius: 10px;
-  font-size: 14px;
+  padding: 0 50px;
+  /* border-radius: 10px; */
+  /* font-size: 14px; */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
 
   h2 {
     font-size: 24px;
