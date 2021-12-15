@@ -23,6 +23,7 @@ export const Nav = styled.div`
     Link {
       display: block;
       padding: 0.5rem;
+      font-size: 23px;
     }
   }
 
@@ -34,9 +35,13 @@ export const Nav = styled.div`
     display: ${(props) => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
-    padding: 25px;
+    padding: 25px 25px 14px 25px;
     width: 80vw;
     height: 86.6vh;
+
+    @media (max-width: 600px) {
+      padding: 25px 5px 25px 5px;
+    }
 
     section {
       width: 80vw;
@@ -64,6 +69,7 @@ export const Nav = styled.div`
           text-decoration: none;
           color: #081140;
           margin-top: 6px;
+          font-size: 23px;
         }
       }
     }
@@ -89,7 +95,6 @@ export const Nav = styled.div`
           flex-direction: column;
           width: 200px;
           justify-content: center;
-
           li {
             display: flex;
             align-items: center;
@@ -102,7 +107,7 @@ export const Nav = styled.div`
             text-decoration: none;
             color: #081140;
             margin-top: 6px;
-            font-size: 17px;
+            font-size: 18px;
             font-family: "Fira Sans";
           }
         }
@@ -112,6 +117,15 @@ export const Nav = styled.div`
         width: 250px;
       }
     }
+  }
+
+  @media (max-width: 900px) {
+    width: 200px;
+    padding: 25px 5px 25px 25px;
+  }
+  @media (max-width: 601px) {
+    width: 100%;
+    padding: 1rem 0;
   }
 `;
 
