@@ -22,6 +22,7 @@ export default createGlobalStyle`
     --lightGray: #dedede4d;
     --yellow: #FABD59;
     --lightYellow: #FFCF81;
+    --extraLightYellow: #f0d6ab;
     --black: #000000;
     --whiteSmoke: #FBFBF8;
     --white: #FFFFFF;
