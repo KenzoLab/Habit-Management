@@ -1,8 +1,11 @@
-﻿import Modal from "@mui/material/Modal";
-import { IoCloseOutline } from "react-icons/io5";
-import { useForm } from "react-hook-form";
+﻿import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useEffect } from "react";
+import Modal from "@mui/material/Modal";
+import { IoCloseOutline } from "react-icons/io5";
+
+import { useHabit } from "../../providers/Habits";
 
 import {
   ContainerModal,
@@ -17,11 +20,15 @@ import {
   ButtonSub,
   BtnCloseDelete,
 } from "./styles";
-
 import Input from "../../components/Input";
 import { InputSelect } from "../../components/Input";
 
 const ModalHabits = ({ open, handle }) => {
+  //PROPS PROVIDER
+  const { listHabits, listHabitsFunction } = useHabit();
+  const { createHabitFunction, deleteHabitFunction } = useHabit();
+
+  //ARRAYS SELECT OPTIONS
   const arrFrequency = [
     { value: "Daily", label: "Daily" },
     { value: "Weekly", label: "Weekly" },
@@ -42,6 +49,7 @@ const ModalHabits = ({ open, handle }) => {
     { value: "Sports", label: "Sports" },
   ];
 
+  //SCHEMA YUP VALIDATION
   const schema = yup
     .object({
       title: yup
@@ -64,6 +72,7 @@ const ModalHabits = ({ open, handle }) => {
     })
     .required();
 
+  // HOOK FORM
   const {
     register,
     handleSubmit,
@@ -74,11 +83,17 @@ const ModalHabits = ({ open, handle }) => {
     resolver: yupResolver(schema),
   });
 
+  // ADD HABIT
   const onAddHabit = (data) => {
-    console.log(data);
-    //função da Context API
+    createHabitFunction(data);
   };
 
+  //DELETE HABIT
+  const onDeleteHabit = (idHabit) => {
+    deleteHabitFunction(idHabit);
+  };
+
+  //CLOSE MODAL AND RESET INPUTS
   const CloseModal = () => {
     reset({
       title: "",
@@ -89,6 +104,12 @@ const ModalHabits = ({ open, handle }) => {
     handle();
   };
 
+  //USE EFFECT
+  useEffect(() => {
+    listHabitsFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <div>
       <Modal
@@ -97,32 +118,32 @@ const ModalHabits = ({ open, handle }) => {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ContainerModal onSubmit={handleSubmit(onAddHabit)}>
+        <ContainerModal>
           <ContHabits>
             <Head>
               <h3>Habits</h3>
             </Head>
             <ContList>
-              {/* Receber habits e fazer um map */}
-              {/* ContItem >> Container de cada item da lista */}
-              <ContItem>
-                <ContInfosItem>
-                  <h4>Habit's Title...</h4>
-                  <ContTitlesItem>
-                    <h5>Category</h5>
-                    <h6>Hard</h6>
-                  </ContTitlesItem>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit...
-                  </p>
-                </ContInfosItem>
-                <BtnCloseDelete>
-                  <IoCloseOutline />
-                </BtnCloseDelete>
-              </ContItem>
+              {listHabits.length !== 0
+                ? listHabits.map((item, idx) => (
+                    <ContItem key={idx}>
+                      <ContInfosItem>
+                        <h4>{`${item.title.substring(0, 15)}...`}</h4>
+                        <ContTitlesItem>
+                          <h5>{item.category}</h5>
+                          <h6>{item.difficulty}</h6>
+                        </ContTitlesItem>
+                        <p>{item.frequency}</p>
+                      </ContInfosItem>
+                      <BtnCloseDelete onClick={() => onDeleteHabit(item.id)}>
+                        <IoCloseOutline />
+                      </BtnCloseDelete>
+                    </ContItem>
+                  ))
+                : "Lista de hábitos vazia!"}
             </ContList>
           </ContHabits>
-          <ContForm>
+          <ContForm onSubmit={handleSubmit(onAddHabit)}>
             <Head>
               <h6>Add Habit</h6>
               <BtnCloseDelete onClick={() => CloseModal()}>
