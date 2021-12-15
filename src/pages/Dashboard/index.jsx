@@ -1,5 +1,5 @@
-import HamburguerMenu from "../../components/HamburguerMenu";
-import { App, Container, Aside, Header, Cards } from "./styles";
+﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import { App, Container, Footer, Header, Cards } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
@@ -59,11 +59,11 @@ function Dashboard() {
                 placeholder="Search..."
                 //onChange={(evt) setSearch(evt.target.value)}
               />
-              <button
+              {/*<button
               //onClick={() => addGroup()}
               >
                 + add grupo
-              </button>
+              </button>*/}
             </div>
           </section>
 
@@ -85,8 +85,10 @@ function Dashboard() {
             />
           ))}
         </Cards>
+        <Footer>
         <BasicSpeedDial handleModalHabits={handleModalHabits} />
         <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+        </Footer>
       </Container>
     </App>
   );

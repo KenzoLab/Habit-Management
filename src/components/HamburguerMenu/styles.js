@@ -13,7 +13,7 @@ export const Nav = styled.div`
   left: 0;
   top: 0;
 
-  height: ${(props) => (props.toggleNav ? "100vh" : "18vh")};
+  height: ${(props) => (props.toggleNav ? "100vh" : "12vh")};
 
   ul {
     display: flex;
@@ -39,7 +39,7 @@ export const Nav = styled.div`
     width: 80vw;
     height: 86.6vh;
 
-    @media (max-width: 600px) {
+    @media (max-width: 767px) {
       padding: 25px 5px 25px 5px;
     }
 
@@ -79,7 +79,7 @@ export const Nav = styled.div`
     }
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 767px) {
     width: 250px;
     height: 100vh;
 
@@ -123,7 +123,7 @@ export const Nav = styled.div`
     width: 200px;
     padding: 25px 5px 25px 25px;
   }
-  @media (max-width: 601px) {
+  @media (max-width: 767px) {
     width: 100%;
     padding: 1rem 0;
   }
@@ -149,7 +149,7 @@ export const Header = styled.div`
     height: 25px;
   }
 
-  @media (min-width: 601px) {
+  @media (min-width: 767px) {
     width: 250px;
     button {
       display: none;
@@ -178,7 +178,7 @@ export const Footer = styled.div`
     color: #9398a2;
   }
 
-  @media (min-width: 601px) {
+  @media (min-width: 767px) {
     section {
       margin-bottom: 10px;
     }
