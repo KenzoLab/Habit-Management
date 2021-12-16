@@ -27,23 +27,6 @@ export const Container = styled.section`
   }
 `;
 
-export const Aside = styled.aside`
-  width: 100vw;
-  height: 18vh;
-  /* display: flex;
-  flex-direction: row;
-  background-color: lightgray;
-  justify-content: space-between; */
-
-  @media (min-width: 768px) {
-    width: 250px;
-    height: 100vh;
-    /* max-width: 260px; */
-    /* flex-direction: column;
-    justify-content: space-between; */
-  }
-`;
-
 export const Header = styled.header`
   height: 22vh;
   display: flex;
@@ -59,7 +42,6 @@ export const Header = styled.header`
   }
 
   .header-search {
-    /* margin-right: 10%; */
     display: flex;
     @media (max-width: 730px) {
       margin-right: 9px;
@@ -81,7 +63,6 @@ export const Header = styled.header`
     margin-right: 25px;
     height: 50px;
     background-color: var(--extraLightYellow);
-    /*margin-right: 12px;*/
     @media (max-width: 900px) {
       width: 154px;
     }
@@ -89,7 +70,6 @@ export const Header = styled.header`
 
   button {
     padding: 7px 16px;
-    background-color: var(--blue);
     font-size: 24px;
     font-weight: 600;
     width: 173px;
@@ -137,9 +117,7 @@ export const Header = styled.header`
     }
 
     button {
-      //padding: 15px;
       margin: 6px 0;
-      background: transparent;
       color: var(--blue);
       font-weight: bold;
       font-size: calc(12px + 1.3vmax);
@@ -165,16 +143,22 @@ export const Header = styled.header`
         width: 90px;
       }
     }
-
-    button:focus {
-      background: var(--extraLightBlue);
-      /* opacity: 70%; */
-    }
   }
+`;
 
-  #blues {
-    /* background-color: var(--greyBackground); */
-  }
+export const ButtonToday = styled.button`
+  background-color: ${(props) =>
+    props.filter === "Daily" ? "var(--extraLightBlue)" : "none"};
+`;
+
+export const ButtonWeek = styled.button`
+  background-color: ${(props) =>
+    props.filter === "Weekly" ? "var(--extraLightBlue)" : "none"};
+`;
+
+export const ButtonMonth = styled.button`
+  background-color: ${(props) =>
+    props.filter === "Monthly" ? "var(--extraLightBlue)" : "none"};
 `;
 
 export const Cards = styled.section`
