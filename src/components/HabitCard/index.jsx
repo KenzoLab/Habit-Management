@@ -1,17 +1,25 @@
 ﻿import CardFrame from "../CardFrame";
-import { ContentContainer, Difficult, LineVertical } from "./styles";
+import { ContentContainer, Difficulty, LineVertical } from "./styles";
 
-const HabitCard = ({ title, category, description, difficult }) => {
+// achieved: false
+// difficulty: "Easy"
+// frequency: "Diary"
+// how_much_achieved: 0
+// id: 1447
+// user: 100
+
+const HabitCard = ({ title, category, frequency, difficulty }) => {
+  console.log(difficulty);
   return (
     <CardFrame cardType="habit">
       <ContentContainer cardType="habit">
         <div className="content__text">
           <h4 className="content__title">{title}</h4>
-          <p className="content__description">{description}</p>
+          <p className="content__frequency">{frequency}</p>
           <span className="content__category">{category}</span>
-          <Difficult>{difficult}</Difficult>
+          <Difficulty>{difficulty}</Difficulty>
         </div>
-          <LineVertical/>
+        <LineVertical />
         <div className="delete__button">X</div>
       </ContentContainer>
     </CardFrame>
