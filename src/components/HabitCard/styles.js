@@ -52,7 +52,7 @@ export const ContentContainer = styled.div`
     border-radius: 50%;
     background-color: var(--yellow);
 
-    margin-left:10px;
+    margin-left: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -62,7 +62,7 @@ export const ContentContainer = styled.div`
   @media (min-width: 600px) {
     .content__text {
       grid-template-areas:
-        "title category difficult"
+        "title category difficulty"
         "description description description"
         "description description description"
         "description description description";
@@ -83,29 +83,22 @@ export const ContentContainer = styled.div`
   }
 `;
 
-export const Difficult = styled.span`
-  grid-area: difficult;
+export const Difficulty = styled.span`
+  grid-area: difficulty;
   font-size: 15px;
   font-weight: 600;
   align-self: center;
   text-align: end;
 
-  color: ${(props) => {
-    if (props.children.toLowerCase() === "easy") {
-      return "var(--green)";
-    } else if (props.children.toLowerCase() === "medium") {
-      return "var(--yellow)";
-    } else {
-      return "var(--red)";
-    }
-  }};
-  @media (min-width: 600px) {
-    align-self: center;
-    margin-bottom: 20px;
-  }
+  color: ${(props) =>
+    props.children === "Easy"
+      ? "var(--green)"
+      : props.children === "Hard"
+      ? "var(--red)"
+      : "var(--yellow)"};
 `;
 
 export const LineVertical = styled.hr`
   height: 96%;
   margin: 0px 15px 0px 60px;
-`
+`;

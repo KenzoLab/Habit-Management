@@ -178,7 +178,7 @@ export const Header = styled.header`
 `;
 
 export const Cards = styled.section`
-  margin: auto;
+  margin: 0 auto;
   width: 100%;
   height: 70vh;
   overflow-y: auto;
@@ -190,7 +190,7 @@ export const Cards = styled.section`
   gap: 20px;
   justify-content: space-evenly;
   align-items: flex-start;
-  margin-top: 50px;
+  /* margin-top: 50px; */
 
   h2 {
     font-size: 24px;

@@ -9,7 +9,6 @@ import { ContentContainer, Difficulty, LineVertical } from "./styles";
 // user: 100
 
 const HabitCard = ({ title, category, frequency, difficulty }) => {
-  console.log(difficulty);
   return (
     <CardFrame cardType="habit">
       <ContentContainer cardType="habit">
