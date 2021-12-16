@@ -18,8 +18,9 @@ export const Nav = styled.div`
   position: absolute;
   left: 0;
   top: 0;
-  width: 100vh;
-  height: ${props => (props.toggleNav ? "100vh" : "12vh")};
+  width: 100vw;
+  height: ${props => (props.toggleNav ? "100vh" : "15vh")};
+
   ul {
     display: flex;
     list-style: none;
@@ -40,9 +41,13 @@ export const Nav = styled.div`
     display: ${props => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
-    padding: 25px 5px 25px 5px;
+    padding: 25px 25px 14px 25px;
     width: 80vw;
     height: 86.6vh;
+
+    @media (max-width: 767px) {
+      padding: 25px 5px 25px 5px;
+    }
 
     section {
       width: 80vw;
@@ -58,6 +63,7 @@ export const Nav = styled.div`
           height: 50px;
           border-bottom: 1px solid #0000002b;
           margin-bottom: 10px;
+          width: 75vw;
 
           button {
             border: 1px solid transparent;
@@ -87,8 +93,9 @@ export const Nav = styled.div`
   }*/
 
   @media (min-width: 767px) {
-    width: 250px;
+    width: 200px;
     height: 100vh;
+    padding: 25px 5px 25px 25px;
     .menu-list {
       width: 250px;
       display: flex;
@@ -107,6 +114,7 @@ export const Nav = styled.div`
             align-items: center;
             height: 50px;
             border: none;
+            width: 176px;
             margin: 0px 0px 10px 15px;
           }
 
@@ -121,7 +129,13 @@ export const Nav = styled.div`
       }
 
       div {
-        width: 250px;
+        width: 190px;
+        padding-left: 14px;
+
+        div {
+          width: 100px;
+          padding: 0px;
+        }
       }
     }
 
@@ -131,19 +145,15 @@ export const Nav = styled.div`
       padding-left: 5px;
     }
   }
-  @media (max-width: 900px) {
-    width: 200px;
-    padding: 25px 5px 25px 25px;
-  }
-  /*
   @media (max-width: 767px) {
     width: 100%;
     padding: 1rem 0;
-  }*/
+  }
 `;
 
 export const Header = styled.div`
   width: 100vw;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -173,7 +183,7 @@ export const Header = styled.div`
 
   @media (min-width: 767px) {
     width: 250px;
-    button {
+    div {
       display: none;
     }
 

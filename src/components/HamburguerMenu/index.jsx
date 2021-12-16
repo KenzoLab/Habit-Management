@@ -12,18 +12,15 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useParams } from "react-router-dom";
 
 function HamburguerMenu() {
-  const [currentPage, setCurrentPage] = useState("");
   const [toggleNav, setToggleNav] = useState(false);
 
   function handleClick() {
     setToggleNav(!toggleNav);
   }
 
-  const { id } = useParams();
-  console.log({ id });
   return (
-    <Nav currentPage="dashboard" toggleNav={toggleNav}>
-      <Header currentPage="activities">
+    <Nav currentPage toggleNav={toggleNav}>
+      <Header currentPage>
         <div onClick={() => handleClick()}></div>
 
         <img src={logo} alt="Logo HabitTracker"></img>
