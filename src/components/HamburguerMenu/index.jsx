@@ -1,7 +1,7 @@
 ﻿import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { Footer, Nav, Header } from "./styles";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
@@ -9,12 +9,26 @@ import BorderColorIcon from "@mui/icons-material/BorderColor";
 import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../../assets/habitLogo.png";
+import { useAuth } from "../../providers/AuthProvider";
+import api from "../../services/api";
+
 function HamburguerMenu() {
   const [toggleNav, setToggleNav] = useState(false);
+
+  const { getUserInfo, userInfo } = useAuth();
+
+  const [userId, setUserId] = useState(() => {
+    const id = localStorage.getItem("@Habit:userId");
+    return id ? id : null;
+  });
 
   function handleClick() {
     setToggleNav(!toggleNav);
   }
+
+  useEffect(() => {
+    getUserInfo(userId);
+  }, []);
 
   return (
     <Nav toggleNav={toggleNav}>
@@ -99,8 +113,8 @@ function HamburguerMenu() {
               }}
             />
             <div>
-              <p className="username">Nome</p>
-              <p className="useremail">Email</p>
+              <p className="username">{userInfo.username}</p>
+              <p className="useremail">{userInfo.email}</p>
             </div>
           </section>
         </Footer>

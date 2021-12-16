@@ -20,6 +20,8 @@ const AuthProvider = ({ children }) => {
     return token ? token : "";
   });
 
+  const [userInfo, setUserInfo] = useState({});
+
   const signInFunction = (formData, toastError) => {
     api
       .post("/sessions/", formData)
@@ -37,6 +39,17 @@ const AuthProvider = ({ children }) => {
       })
       .catch((error) => toastError("Invalid email or password"));
   };
+
+  const getUserInfo = (userId) => {
+    api
+      .get(`/users/${userId}/`)
+      .then((response) => {
+        console.log(response.data);
+        setUserInfo({ ...response.data });
+      })
+      .catch((error) => console.log(error));
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -45,8 +58,9 @@ const AuthProvider = ({ children }) => {
         signInFunction,
         isAuth,
         setIsAuth,
-      }}
-    >
+        getUserInfo,
+        userInfo,
+      }}>
       {children}
     </AuthContext.Provider>
   );
