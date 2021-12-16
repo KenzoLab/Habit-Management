@@ -23,6 +23,7 @@ function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
+
   const [filteredList, setFilteredList] = useState([]);
 
   const { listHabitsFunction, listHabits } = useHabit();
@@ -41,10 +42,26 @@ function Dashboard() {
   const handleModalHabits = () => {
     setOpenModalHabits(!openModalHabits);
   };
+  //////////////////////////////////
+  const [search, setSearch] = useState("");
+
+  function procurar() {
+    if (search !== "") {
+      //const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
+      setFilter(search);
+      //setFilteredList(filter);
+      setIsFiltered(true);
+    } else {
+      setIsFiltered(false);
+      setFilteredList([]);
+    }
+  }
+  console.log(filteredList, "filtrados");
+  //////////////////////////////////
 
   useEffect(() => {
     const filteredHabits = listHabits.filter(
-      (habit) => habit.frequency === filter,
+      (habit) => habit.frequency === filter
     );
     setFilteredList([...filteredHabits]);
   }, [isFiltered, filter]);
@@ -63,13 +80,11 @@ function Dashboard() {
             <div className="header-search">
               <input
                 placeholder="Search..."
-                //onChange={(evt) setSearch(evt.target.value)}
+                onChange={(evt) => setFilter(evt.target.value.toString())}
               />
-              {/*<button
-              //onClick={() => addGroup()}
-              >
-                + add grupo
-              </button>*/}
+              <button className="search" onClick={() => procurar()}>
+                p
+              </button>
             </div>
           </section>
 

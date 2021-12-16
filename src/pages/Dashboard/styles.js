@@ -41,26 +41,11 @@ export const Header = styled.header`
     /* height: 10vh; */
   }
 
-  .header-search {
-    display: flex;
-    @media (max-width: 730px) {
-      margin-right: 9px;
-      input {
-        padding: 6px 0px 7px 9px;
-        margin-right: 10px;
-      }
-      button {
-        padding: 7px 14px;
-      }
-    }
-  }
-
   input {
     padding: 7px 0px 7px 12px;
     font-size: 16px;
     border-radius: 15px;
     border: none;
-    margin-right: 25px;
     height: 50px;
     background-color: var(--extraLightYellow);
     @media (max-width: 900px) {
@@ -77,6 +62,26 @@ export const Header = styled.header`
     color: var(--whiteSmoke);
     border-radius: 15px;
     border: none;
+  }
+
+  .header-search {
+    display: flex;
+    align-items: center;
+    @media (max-width: 730px) {
+      margin-right: 9px;
+      input {
+        padding: 6px 0px 7px 9px;
+      }
+    }
+  }
+
+  .search {
+    width: 35px;
+    height: 35px;
+    padding: 0px;
+    background-color: red;
+    position: relative;
+    right: 54px;
   }
 
   .header-top {
