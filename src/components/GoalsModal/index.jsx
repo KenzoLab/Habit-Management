@@ -12,7 +12,7 @@ import {
   ContForm,
   ContRight,
   ContCurrent,
-  ContHabits,
+  ContGoals,
   ContList,
   ContInput,
   ContItem,
@@ -28,8 +28,8 @@ import { InputSelect } from "../../components/Input";
 
 const ModalGoals = ({ open, handle, idGroup }) => {
   //PROPS PROVIDER
-  const { message, goals, loadGoals } = useGoals();
-  const { addGoal, updateGoal, deleteGoal, teste } = useGoals();
+  const { goals, loadGoals } = useGoals();
+  const { addGoal, deleteGoal } = useGoals();
 
   //ARRAYS SELECT OPTIONS
   const arrDifficulty = [
@@ -102,7 +102,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
         aria-describedby="parent-modal-description"
       >
         <ContainerModal onSubmit={handleSubmit(onAddGoal)}>
-          <ContHabits>
+          <ContGoals>
             <Head>
               <h3>Goals</h3>
             </Head>
@@ -123,7 +123,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
                 </ContItem>
               ))}
             </ContList>
-          </ContHabits>
+          </ContGoals>
           <ContRight>
             <ContCurrent>
               <Head>

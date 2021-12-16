@@ -42,6 +42,7 @@ const Dashboard = () => {
       <ModalActivities
         open={openModalActivities}
         handle={handleModalActivities}
+        idGroup={1267}
       />
     </div>
   );
