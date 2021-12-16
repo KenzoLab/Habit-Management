@@ -9,7 +9,6 @@ import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../../assets/habitLogo.png";
 import EditIcon from "@mui/icons-material/Edit";
-import { useParams } from "react-router-dom";
 
 function HamburguerMenu() {
   const [toggleNav, setToggleNav] = useState(false);
