@@ -175,7 +175,7 @@ export const ButtonSub = styled.button`
   }
 `;
 
-export const ContHabits = styled.div`
+export const ContGroups = styled.div`
   display: none;
   flex-direction: column;
   align-items: center;

@@ -4,13 +4,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 
 import { useGroups } from "../../providers/Groups";
 
 import {
   ContainerModal,
   ContForm,
-  ContHabits,
+  ContGroups,
   ContList,
   ContInput,
   ContItem,
@@ -27,9 +28,8 @@ import { InputSelect, InputTextArea } from "../../components/Input";
 
 const ModalGroups = ({ open, handle }) => {
   //PROPS PROVIDER
-  const { allGroupsList, userGroups, lastCreatedGroup, listGroupsFunction } =
-    useGroups();
-  const { createGroupFunction } = useGroups();
+  const { createGroupFunction, searchSubscriptionsFunction } = useGroups();
+  const { subscriptions, unsubscribeFunction } = useGroups();
 
   //ARRAYS SELECT OPTIONS
   const arrCategory = [
@@ -75,14 +75,13 @@ const ModalGroups = ({ open, handle }) => {
 
   // ADD GROUP
   const onAddGroup = (data) => {
-    console.log(data);
     createGroupFunction(data);
-    // resetInputs();
+    resetInputs();
   };
 
   // DELETE GROUP
   const onDeleteGroup = (idGroup) => {
-    // deleteHabitFunction(idHabit);
+    unsubscribeFunction(idGroup);
   };
 
   // RESET INPUTS
@@ -102,11 +101,10 @@ const ModalGroups = ({ open, handle }) => {
 
   //USE EFFECT
   useEffect(() => {
-    listGroupsFunction();
+    searchSubscriptionsFunction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(allGroupsList, userGroups);
   return (
     <div>
       <Modal
@@ -116,45 +114,41 @@ const ModalGroups = ({ open, handle }) => {
         aria-describedby="parent-modal-description"
       >
         <ContainerModal>
-          <ContHabits>
+          <ContGroups>
             <Head>
               <h3>Your Groups</h3>
             </Head>
             <ContList>
-              {userGroups.length !== 0
-                ? userGroups.map((item, idx) => (
+              {subscriptions.length !== 0
+                ? subscriptions.map((item, idx) => (
                     <ContItem key={idx}>
                       <ContInfosItem>
                         <h4>{`${item.name.substring(0, 15)}...`}</h4>
                         <ContTitlesItem>
                           <h5>{item.category}</h5>
                         </ContTitlesItem>
-                        <Paragraph>{`${item.description.substring(
-                          0,
-                          40
-                        )}...`}</Paragraph>
+                        <Paragraph>
+                          {item.description.includes(" ")
+                            ? `${item.description.substring(0, 40)}..`
+                            : `${item.description
+                                .split("")
+                                .map((item, idx) =>
+                                  idx === 20 ? `${item} ` : item
+                                )
+                                .join("")
+                                .substring(0, 40)}...`}
+                        </Paragraph>
                       </ContInfosItem>
                       <BtnCloseDelete>
-                        <IoCloseOutline />
+                        <BookmarkRemoveIcon
+                          onClick={() => onDeleteGroup(item.id)}
+                        />
                       </BtnCloseDelete>
                     </ContItem>
                   ))
                 : "Lista de grupos vazia!"}
-              {/* <ContItem>
-                <ContInfosItem>
-                  <h4>Title</h4>
-                  <ContTitlesItem>
-                    <h5>Category</h5>
-                    <h6>Frequency</h6>
-                  </ContTitlesItem>
-                  <Paragraph>Difficulty</Paragraph>
-                </ContInfosItem>
-                <BtnCloseDelete>
-                  <IoCloseOutline />
-                </BtnCloseDelete>
-              </ContItem> */}
             </ContList>
-          </ContHabits>
+          </ContGroups>
           <ContForm onSubmit={handleSubmit(onAddGroup)}>
             <Head>
               <h6>Create Group</h6>

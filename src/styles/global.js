@@ -18,17 +18,17 @@ export default createGlobalStyle`
     --aliceBlue: #F0F8FF;
     --darkGreen: #124F72;
     --green: #11995E;
-    --gray: #9398A2; 
+    --gray: #9398A2;
     --lightGray: #dedede4d;
     --yellow: #FABD59;
     --lightYellow: #FFCF81;
     --black: #000000;
-    --whiteSmoke: #FBFBF8; 
+    --whiteSmoke: #F2F0F0;
     --white: #FFFFFF;
     --red: #DC1F1F;
     --lightPurple: #818ed0;
 
-  } 
+  }
 
   body {
     background: var(--whiteSmoke);
@@ -36,7 +36,7 @@ export default createGlobalStyle`
   }
 
   body, input, button, p {
-    font-family: var(--font-inter); 
+    font-family: var(--font-inter);
     font-size: 1rem;
   }
 

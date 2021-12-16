@@ -10,7 +10,6 @@ const GroupsContext = createContext({});
 const GroupsProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [allGroupsList, setAllGroupsList] = useState([]);
-  const [userGroups, setUserGroups] = useState([]);
   const [lastCreatedGroup, setLastCreatedGroup] = useState({});
   const [updatedGroup, setUpdatedGroup] = useState({});
   const [subscriptions, setSubscriptions] = useState([]);
@@ -33,19 +32,9 @@ const GroupsProvider = ({ children }) => {
         array = [...array, ...currentPage];
       } while (response.data.next);
       setAllGroupsList([...array]);
-      filterGroupsUser(allGroupsList);
     } catch (error) {
       setErrorMessage(error);
     }
-  };
-
-  const filterGroupsUser = (arr) => {
-    const intId = parseInt(userId);
-    const groupsUser = arr.filter((item) =>
-      item.users_on_group.some((elem) => elem.id === 303)
-    );
-
-    setUserGroups(groupsUser);
   };
 
   const createGroupFunction = async (formData) => {
@@ -60,8 +49,9 @@ const GroupsProvider = ({ children }) => {
       setLastCreatedGroup(response.data);
       toast.success(
         "Successfully created group!"
-      ); /* toast register habit success */
-      // listGroupsFunction();
+      ); /* toast register group success */
+      listGroupsFunction();
+      searchSubscriptionsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -100,6 +90,11 @@ const GroupsProvider = ({ children }) => {
         "",
         AuthorizationObj
       );
+      toast.success(
+        "Successfully subscribed!"
+      ); /* toast subscribe group success */
+      listGroupsFunction();
+      searchSubscriptionsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -111,7 +106,11 @@ const GroupsProvider = ({ children }) => {
         `/groups/${groupId}/unsubscribe/`,
         AuthorizationObj
       );
-      console.log("deu certo");
+      toast.success(
+        "Successfully unsubscribed!"
+      ); /* toast unsubscribe group success */
+      listGroupsFunction();
+      searchSubscriptionsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -131,7 +130,7 @@ const GroupsProvider = ({ children }) => {
         subscriptions,
         subscribeFunction,
         unsubscribeFunction,
-        userGroups,
+        userId,
       }}
     >
       {children}
