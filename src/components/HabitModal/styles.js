@@ -7,8 +7,9 @@ export const ContainerModal = styled.div`
   transform: translate(-50%, -50%);
   width: 90vw;
   max-width: 600px;
-  height: 500px;
+  height: 470px;
   border-radius: 25px;
+  margin-top: 30px;
   border: solid 3px var(--yellow);
   box-shadow: 0px 0px 12px 3px rgba(30, 30, 30, 0.61);
   padding: 5px;
@@ -20,6 +21,9 @@ export const ContainerModal = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
+    margin-top: 0;
+
+    height: 500px;
   }
 `;
 

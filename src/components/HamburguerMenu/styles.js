@@ -6,9 +6,9 @@ export const Nav = styled.div`
   padding: 1rem 0;
   align-items: center;
   flex-direction: column;
-  justify-content: counter-increment;
-  background-color: #fbfbf8;
-  z-index: 9999;
+  justify-content: center; /* era counter-incremencentert */
+  background-color: var(--whiteSmoke);
+  z-index: 100;
   position: absolute;
   left: 0;
   top: 0;
@@ -61,13 +61,13 @@ export const Nav = styled.div`
           button {
             border: 1px solid transparent;
             background-color: transparent;
-            color: #081140;
+            color: var(--darkBlue);
           }
         }
 
         a {
           text-decoration: none;
-          color: #081140;
+          color: var(--darkBlue);
           margin-top: 6px;
           font-size: 23px;
         }
@@ -105,7 +105,7 @@ export const Nav = styled.div`
 
           a {
             text-decoration: none;
-            color: #081140;
+            color: var(--darkBlue);
             margin-top: 6px;
             font-size: 18px;
             font-family: "Fira Sans";
@@ -121,11 +121,11 @@ export const Nav = styled.div`
 
   @media (max-width: 900px) {
     width: 200px;
-    padding: 25px 5px 25px 25px;
+    /* padding: 25px 5px 25px 25px; */
   }
   @media (max-width: 767px) {
     width: 100%;
-    padding: 1rem 0;
+    /* padding: 1rem 0; */
   }
 `;
 
@@ -134,7 +134,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 20px;
+  /* padding-top: 20px; */
 
   img {
     width: 130px;
@@ -170,12 +170,12 @@ export const Footer = styled.div`
   }
   .username {
     font-size: 15px;
-    color: #081140;
+    color: var(--darkBlue);
   }
   .useremail {
     font-size: 12px;
     font-style: italic;
-    color: #9398a2;
+    color: var(--gray);
   }
 
   @media (min-width: 767px) {

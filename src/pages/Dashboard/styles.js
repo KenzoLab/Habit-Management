@@ -38,7 +38,7 @@ export const Header = styled.header`
 
   @media (max-width: 768px) {
     padding: 0px;
-    height: 10vh;
+    /* height: 10vh; */
   }
 
   .header-search {
@@ -176,7 +176,7 @@ export const Cards = styled.section`
   align-items: flex-start;
   /* margin-top: 50px; */
 
-  h2 {
+  /* h2 {
     font-size: 24px;
     margin: 5px 10px;
   }
@@ -198,7 +198,7 @@ export const Cards = styled.section`
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
-    background-color: #f2f0f0;
+    background-color: var(--greyBackground);
     border-radius: 10px;
 
     @media (max-width: 768px) {
@@ -236,7 +236,7 @@ export const Cards = styled.section`
       @media (max-width: 768px) {
       }
     }
-  }
+  } */
 `;
 
 export const Footer = styled.footer`
@@ -245,12 +245,12 @@ export const Footer = styled.footer`
   align-self: flex-end;
   margin-bottom: 20px;
 
-  #toglebutton {
+  /* #toglebutton {
     padding: 9px 18px;
     width: 40px;
     border-radius: 50%;
     border: none;
     background-color: gray;
     color: white;
-  }
+  } */
 `;
