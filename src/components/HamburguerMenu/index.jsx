@@ -1,5 +1,4 @@
 ﻿import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Footer, Nav, Header } from "./styles";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,15 +7,15 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+
 import logo from "../../assets/habitLogo.png";
 import { useAuth } from "../../providers/AuthProvider";
-import api from "../../services/api";
+import { Footer, Nav, Header } from "./styles";
 
 function HamburguerMenu() {
+  const { getUserInfo, userInfo, logoutFunction } = useAuth();
+
   const [toggleNav, setToggleNav] = useState(false);
-
-  const { getUserInfo, userInfo } = useAuth();
-
   const [userId, setUserId] = useState(() => {
     const id = localStorage.getItem("@Habit:userId");
     return id ? id : null;
@@ -90,7 +89,7 @@ function HamburguerMenu() {
               />
               <Link to="/goals">Goals</Link>
             </li>
-            <li>
+            <li onClick={() => logoutFunction()}>
               <LogoutIcon
                 sx={{
                   width: 35,

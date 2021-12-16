@@ -50,6 +50,12 @@ const AuthProvider = ({ children }) => {
       .catch((error) => console.log(error));
   };
 
+  const logoutFunction = () => {
+    localStorage.removeItem("@Habit:userId");
+    localStorage.removeItem("@Habit:token");
+    setToken("");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -60,6 +66,7 @@ const AuthProvider = ({ children }) => {
         setIsAuth,
         getUserInfo,
         userInfo,
+        logoutFunction,
       }}>
       {children}
     </AuthContext.Provider>
