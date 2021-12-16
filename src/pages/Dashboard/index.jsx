@@ -22,21 +22,19 @@ import ModalActivities from "../../components/ActivitiesModal";
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
-  const [filter, serFilter] = useState("");
+  const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
 
   const filtering = (period) => {
-    if (!isFiltered) {
+    if (!isFiltered || filter !== period) {
       setIsFiltered(true);
-      serFilter(period);
+      setFilter(period);
     } else if (filter === period) {
       setIsFiltered(false);
-      serFilter("");
-    } else if (filter !== period) {
-      serFilter(period);
+      setFilter("");
     }
   };
 
@@ -49,7 +47,7 @@ function Dashboard() {
       (habit) => habit.frequency === filter,
     );
     setFilteredList([...filteredHabits]);
-  }, [isFiltered]);
+  }, [isFiltered, filter]);
 
   useEffect(() => {
     listHabitsFunction(token);
