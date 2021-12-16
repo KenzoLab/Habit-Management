@@ -12,29 +12,15 @@ export const Container = styled.div`
     }
   }};
   border-radius: 15px;
-  background-color: var(--yellow);
   position: relative;
   padding: 25px;
+  background-color: var(--white);
   padding-left: 20px;
   box-sizing: border-box;
-  transform: translateX(15px);
+  border-right: 7px solid var(--yellow);
 
-  ::after {
-    content: "";
-    height: 100%;
-    width: 100%;
-    border-radius: 15px;
-    background-color: var(--white);
-    position: absolute;
-    top: 0;
-    left: -10px;
-    z-index: -1;
-  }
   @media (min-width: 600px) {
     border-radius: 34px;
-    ::after {
-      content: "";
-      border-radius: 34px;
-    }
+    border-right: 12px solid var(--yellow);
   }
 `;
