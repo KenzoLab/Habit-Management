@@ -1,14 +1,25 @@
 ﻿import styled from "styled-components";
+import home from "../../assets/home.png";
+import groups from "../../assets/groups.png";
+import activities from "../../assets/edit.png";
+import goals from "../../assets/goals.png";
+
+const Page = props => props.currentPage;
 
 export const Nav = styled.div`
   display: flex;
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 1rem 0;
   align-items: center;
   flex-direction: column;
   justify-content: counter-increment;
   background-color: #fbfbf8;
-  height: ${props => (props.toggleNav ? "100vh" : "18vh")};
+  z-index: 9999;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vh;
+  height: ${props => (props.toggleNav ? "100vh" : "12vh")};
   ul {
     display: flex;
     list-style: none;
@@ -17,6 +28,7 @@ export const Nav = styled.div`
     Link {
       display: block;
       padding: 0.5rem;
+      font-size: 23px;
     }
   }
 
@@ -28,7 +40,7 @@ export const Nav = styled.div`
     display: ${props => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
-    padding: 25px;
+    padding: 25px 5px 25px 5px;
     width: 80vw;
     height: 86.6vh;
 
@@ -58,6 +70,7 @@ export const Nav = styled.div`
           text-decoration: none;
           color: #081140;
           margin-top: 6px;
+          font-size: 23px;
         }
       }
     }
@@ -67,11 +80,18 @@ export const Nav = styled.div`
     }
   }
 
-  @media (min-width: 601px) {
+  /* @media (max-width: 767px) {
+    .menu-list {
+      padding: 25px 5px 25px 5px;
+    }
+  }*/
+
+  @media (min-width: 767px) {
     width: 250px;
     height: 100vh;
     .menu-list {
       width: 250px;
+      display: flex;
 
       section {
         width: 250px;
@@ -94,7 +114,7 @@ export const Nav = styled.div`
             text-decoration: none;
             color: #081140;
             margin-top: 6px;
-            font-size: 17px;
+            font-size: 18px;
             font-family: "Fira Sans";
           }
         }
@@ -104,7 +124,22 @@ export const Nav = styled.div`
         width: 250px;
       }
     }
+
+    .${Page} {
+      background-color: var(--whiteSmoke);
+      border-radius: 5px 0px 0px 5px;
+      padding-left: 5px;
+    }
   }
+  @media (max-width: 900px) {
+    width: 200px;
+    padding: 25px 5px 25px 25px;
+  }
+  /*
+  @media (max-width: 767px) {
+    width: 100%;
+    padding: 1rem 0;
+  }*/
 `;
 
 export const Header = styled.div`
@@ -119,15 +154,24 @@ export const Header = styled.div`
     margin-right: 25px;
   }
 
-  button {
+  div {
     margin-left: 25px;
     border: 1px solid transparent;
-    background-color: transparent;
-    width: 25px;
-    height: 25px;
+    width: 45px;
+    height: 45px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-image: ${props =>
+      props.currentPage === "groups"
+        ? `url(${groups})`
+        : props.currentPage === "activities"
+        ? `url(${activities})`
+        : props.currentPage === "goals"
+        ? `url(${goals})`
+        : `url(${home})`};
   }
 
-  @media (min-width: 601px) {
+  @media (min-width: 767px) {
     width: 250px;
     button {
       display: none;
@@ -156,7 +200,7 @@ export const Footer = styled.div`
     color: #9398a2;
   }
 
-  @media (min-width: 601px) {
+  @media (min-width: 767px) {
     section {
       margin-bottom: 10px;
     }
