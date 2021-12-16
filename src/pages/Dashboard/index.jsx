@@ -1,11 +1,17 @@
-import HamburguerMenu from "../../components/HamburguerMenu";
-import { App, Container, Aside, Header, Cards } from "./styles";
+﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import { App, Container, Footer, Header, Cards } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
+import BasicSpeedDial from "../../components/SpeedDialHabits";
+import { useState } from "react";
+import ModalHabits from "../../components/HabitModal";
+import ModalGoals from "../../components/GoalsModal";
+import ModalActivities from "../../components/ActivitiesModal";
 
 function Dashboard() {
+  const [openModalHabits, setOpenModalHabits] = useState(false);
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
   const habitModel = {
@@ -35,7 +41,9 @@ function Dashboard() {
     listHabitsFunction(token);
   }, []);
 
-  // console.log(listHabits);
+  const handleModalHabits = () => {
+    setOpenModalHabits(!openModalHabits);
+  };
 
   return (
     <App>
@@ -43,17 +51,17 @@ function Dashboard() {
       <Container>
         <Header>
           <section className="header-top">
-            <h2>Groups</h2>
+            <h2>Dashboard</h2>
             <div className="header-search">
               <input
                 placeholder="Search..."
                 //onChange={(evt) setSearch(evt.target.value)}
               />
-              <button
+              {/*<button
               //onClick={() => addGroup()}
               >
                 + add grupo
-              </button>
+              </button>*/}
             </div>
           </section>
 
@@ -66,71 +74,54 @@ function Dashboard() {
           </section>
         </Header>
         <Cards>
-          {cards.map((habit) => (
+          {cards.map((habit, index) => (
             <HabitCard
+              key={index}
               title={habit.title}
               description={habit.description}
               category={habit.category}
               difficult={habit.difficult}
             />
-            //   <div className="card-border" key={nome}>
-            //     <div className="card">
-            //       <div className="card-conteudo">
-            //         <div className="card-header">
-            //           <h2>{nome}</h2>
-            //           <p>metas: 10</p>
-            //         </div>
-
-            //         <div className="card-description">
-            //           <p>
-            //             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            //             Quidem, ea obcaecati. Vitae nostrum omnis, explicabo
-            //             temporibus eaque officia repudiandae tempora. Vel
-            //             molestiae harum reiciendis illo enim pariatur dolorum
-            //             dolorem nemo!
-            //           </p>
-            //           <details>
-            //             <summary>Participantes</summary>
-            //             <ul>
-            //               <li>Breno</li>
-            //               <li>Bruno</li>
-            //               <li>Breno</li>
-            //               <li>Evandro</li>
-            //               <li>Loro</li>
-            //               <li>José</li>
-            //               <li>Faustão</li>
-            //             </ul>
-            //           </details>
-            //         </div>
-            //       </div>
-
-            //       <hr className="card-description-border" />
-
-            //       <div className="card-buttons">
-            //         <button
-            //         //onClick={() => entratNoGrupo()}
-            //         >
-            //           subscribe
-            //         </button>
-            //         <button
-            //         //onClick={() => ModalAtividader()}
-            //         >
-            //           atividades
-            //         </button>
-            //         <button
-            //         //onClick={() => ModalMetas()}
-            //         >
-            //           goals
-            //         </button>
-            //       </div>
-            //     </div>
-            //   </div>
-            //
           ))}
         </Cards>
+        <Footer>
+          <BasicSpeedDial handleModalHabits={handleModalHabits} />
+          <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+        </Footer>
       </Container>
     </App>
   );
 }
+
+// const Dashboard = () => {
+//   //State Modal Window
+//
+//   const [openModalGoals, setOpenModalGoals] = useState(false);
+//   const [openModalActivities, setOpenModalActivities] = useState(false);
+
+//   //Handle Modal Window
+
+//   const handleModalGoals = () => {
+//     setOpenModalGoals(!openModalGoals);
+//   };
+//   const handleModalActivities = () => {
+//     setOpenModalActivities(!openModalActivities);
+//   };
+
+//   return (
+//     <div>
+//       <h1>Dashboard </h1>
+//       <button onClick={handleModalHabits}>Modal Habits</button>
+//       <button onClick={handleModalGoals}>Modal Goals</button>
+//       <button onClick={handleModalActivities}>Modal Activities</button>
+//       <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+//       <ModalGoals open={openModalGoals} handle={handleModalGoals} />
+//       <ModalActivities
+//         open={openModalActivities}
+//         handle={handleModalActivities}
+//       />
+//     </div>
+//   );
+// };
 
 export default Dashboard;

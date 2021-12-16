@@ -96,7 +96,7 @@ export const Container = styled.div`
     }
 
     h1 {
-      font-family: var(--font-fira)
+      font-family: var(--font-fira);
       position: relative;
       margin: 0;
       margin-bottom: 50px;

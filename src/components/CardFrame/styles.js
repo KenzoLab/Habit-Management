@@ -11,10 +11,10 @@ export const Container = styled.div`
       return "650px";
     }
   }};
-  border-radius: 15px;
-  background-color: var(--yellow);
+  border-radius: 30px;
   position: relative;
   padding: 25px;
+  background-color: var(--white);
   padding-left: 20px;
   box-sizing: border-box;
   transform: translateX(15px);
@@ -36,10 +36,7 @@ export const Container = styled.div`
     z-index: -1;
   }
   @media (min-width: 600px) {
-    border-radius: 34px;
-    ::after {
-      content: "";
-      border-radius: 34px;
-    }
+    border-radius: 20px;
+    border-right: 12px solid var(--yellow);
   }
 `;

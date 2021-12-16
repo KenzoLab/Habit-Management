@@ -6,7 +6,7 @@ export const ContentContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 8px;
+  border-radius: 28px;
 
   // Card Content
   .content__text {

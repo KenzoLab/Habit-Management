@@ -1,5 +1,9 @@
 ﻿import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
+
 import api from "../../services/api";
+
+import { useAuth } from "../AuthProvider";
 
 const HabitContext = createContext({});
 
@@ -9,48 +13,52 @@ const HabitProvider = ({ children }) => {
   const [updatedHabit, setUpdatedHabit] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
 
-  const token = localStorage.getItem("@Habit:token");
+  const { token, userId } = useAuth();
+
   const AuthorizationObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const listHabitsFunction = async (token) => {
-    const AuthorizationObj = {
-      headers: { Authorization: `Bearer ${token}` },
-    };
-    try {
-      const response = await api.get("/habits/personal/", AuthorizationObj);
-      console.log("provider habit", response.data);
-      setListHabits([...response.data]);
-    } catch (error) {
-      console.log(error.message);
-    }
-
-    // api
-    //   .get("/habits/personal/", AuthorizationObj)
-    //   .then((response) => {
-    //     setListHabits([...response.data]);
-    //   })
-    //   .catch((error) => console.log(error.message));
+  const listHabitsFunction = () => {
+    api
+      .get("/habits/personal/", AuthorizationObj)
+      .then((response) => {
+        setListHabits([...response.data]);
+      })
+      .catch((error) => console.log(error.message));
   };
 
   const createHabitFunction = (formData) => {
+    const dataHabit = {
+      title: formData.title,
+      category: formData.category.value,
+      difficulty: formData.difficulty.value,
+      frequency: formData.frequency.value,
+      achieved: false,
+      how_much_achieved: 30,
+      user: userId,
+    };
+
     api
-      .post("/habits/", formData, AuthorizationObj)
-      .then(
-        (response) =>
-          setLastHabitCreated(response.data) /* toast register habit success */,
-      )
+      .post("/habits/", dataHabit, AuthorizationObj)
+      .then(() => {
+        toast.success(
+          "Successfully added habit!",
+        ); /* toast register habit success */
+        listHabitsFunction();
+        setLastHabitCreated(dataHabit);
+      })
       .catch((error) => setErrorMessage(error.message));
   };
 
   const deleteHabitFunction = (habitId) => {
     api
       .delete(`/habits/${habitId}/`, AuthorizationObj)
-      .then(
-        (response) =>
-          console.log(response.data) /* toast delete habit success */,
-      )
+      .then(() => {
+        toast.success("Deleted habit!");
+        /* toast delete habit success */
+        listHabitsFunction();
+      })
       .catch((error) => setErrorMessage(error.message));
   };
 
