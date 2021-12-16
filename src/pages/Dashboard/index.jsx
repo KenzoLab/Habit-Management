@@ -34,7 +34,11 @@ const Dashboard = () => {
       <button onClick={handleModalActivities}>Modal Activities</button>
       <ModalHabits open={openModalHabits} handle={handleModalHabits} />
       <ModalGroups open={openModalGroups} handle={handleModalGroups} />
-      <ModalGoals open={openModalGoals} handle={handleModalGoals} />
+      <ModalGoals
+        open={openModalGoals}
+        handle={handleModalGoals}
+        idGroup={1267}
+      />
       <ModalActivities
         open={openModalActivities}
         handle={handleModalActivities}
