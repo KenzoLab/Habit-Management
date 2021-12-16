@@ -4,18 +4,16 @@ import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
-import BasicSpeedDial from '../../components/SpeedDialHabits';
-﻿import { useState } from "react";
+import BasicSpeedDial from "../../components/SpeedDialHabits";
+import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
 import ModalGoals from "../../components/GoalsModal";
 import ModalActivities from "../../components/ActivitiesModal";
-
 
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
-  console.log(token)
   const habitModel = {
     title: "Title",
     category: "Category",
@@ -38,7 +36,7 @@ function Dashboard() {
     habitModel,
     habitModel,
   ];
-  
+
   useEffect(() => {
     listHabitsFunction(token);
   }, []);
@@ -76,8 +74,9 @@ function Dashboard() {
           </section>
         </Header>
         <Cards>
-          {cards.map((habit) => (
+          {cards.map((habit, index) => (
             <HabitCard
+              key={index}
               title={habit.title}
               description={habit.description}
               category={habit.category}
@@ -86,18 +85,17 @@ function Dashboard() {
           ))}
         </Cards>
         <Footer>
-        <BasicSpeedDial handleModalHabits={handleModalHabits} />
-        <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+          <BasicSpeedDial handleModalHabits={handleModalHabits} />
+          <ModalHabits open={openModalHabits} handle={handleModalHabits} />
         </Footer>
       </Container>
     </App>
   );
 }
 
-
 // const Dashboard = () => {
 //   //State Modal Window
-//   
+//
 //   const [openModalGoals, setOpenModalGoals] = useState(false);
 //   const [openModalActivities, setOpenModalActivities] = useState(false);
 
