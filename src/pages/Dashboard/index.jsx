@@ -14,28 +14,27 @@ function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
-  const habitModel = {
-    title: "Title",
-    category: "Category",
-    description:
-      "Lorem Ipsum",
-    difficult: "Hard",
-    frequency: "Diary",
-  };
-  const cards = [
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-    habitModel,
-  ];
+  // const habitModel = {
+  //   title: "Title",
+  //   category: "Category",
+  //   description: "Lorem Ipsum",
+  //   difficult: "Hard",
+  //   frequency: "Diary",
+  // };
+  // const cards = [
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  //   habitModel,
+  // ];
 
   useEffect(() => {
     listHabitsFunction(token);
@@ -74,13 +73,13 @@ function Dashboard() {
           </section>
         </Header>
         <Cards>
-          {cards.map((habit, index) => (
+          {listHabits.map((habit, index) => (
             <HabitCard
               key={index}
               title={habit.title}
-              description={habit.description}
+              frequency={habit.frequency}
               category={habit.category}
-              difficult={habit.difficult}
+              difficulty={habit.difficulty}
             />
           ))}
         </Cards>
