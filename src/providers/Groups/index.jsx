@@ -1,16 +1,22 @@
 ﻿import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
+
 import api from "../../services/api";
+
+import { useAuth } from "../AuthProvider";
 
 const GroupsContext = createContext({});
 
 const GroupsProvider = ({ children }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [allGroupsList, setAllGroupsList] = useState([]);
+  const [userGroups, setUserGroups] = useState([]);
   const [lastCreatedGroup, setLastCreatedGroup] = useState({});
   const [updatedGroup, setUpdatedGroup] = useState({});
   const [subscriptions, setSubscriptions] = useState([]);
 
-  const token = localStorage.getItem("@Habit:token");
+  const { token, userId } = useAuth();
+
   const AuthorizationObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -27,15 +33,35 @@ const GroupsProvider = ({ children }) => {
         array = [...array, ...currentPage];
       } while (response.data.next);
       setAllGroupsList([...array]);
+      filterGroupsUser(allGroupsList);
     } catch (error) {
       setErrorMessage(error);
     }
   };
 
+  const filterGroupsUser = (arr) => {
+    const intId = parseInt(userId);
+    const groupsUser = arr.filter((item) =>
+      item.users_on_group.some((elem) => elem.id === 303)
+    );
+
+    setUserGroups(groupsUser);
+  };
+
   const createGroupFunction = async (formData) => {
+    const dataGroup = {
+      name: formData.title,
+      description: formData.description,
+      category: formData.category.value,
+    };
+
     try {
-      const response = await api.post("/groups/", formData, AuthorizationObj);
+      const response = await api.post("/groups/", dataGroup, AuthorizationObj);
       setLastCreatedGroup(response.data);
+      toast.success(
+        "Successfully created group!"
+      ); /* toast register habit success */
+      // listGroupsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -47,7 +73,7 @@ const GroupsProvider = ({ children }) => {
       const response = await api.patch(
         `/groups/${groupId}/`,
         formData,
-        AuthorizationObj,
+        AuthorizationObj
       );
       setUpdatedGroup(response.data);
     } catch (error) {
@@ -59,7 +85,7 @@ const GroupsProvider = ({ children }) => {
     try {
       const response = await api.get(
         "/groups/subscriptions/",
-        AuthorizationObj,
+        AuthorizationObj
       );
       setSubscriptions(response.data);
     } catch (error) {
@@ -72,7 +98,7 @@ const GroupsProvider = ({ children }) => {
       const response = await api.post(
         `/groups/${groupId}/subscribe/`,
         "",
-        AuthorizationObj,
+        AuthorizationObj
       );
     } catch (error) {
       setErrorMessage(error);
@@ -83,7 +109,7 @@ const GroupsProvider = ({ children }) => {
     try {
       const response = await api.delete(
         `/groups/${groupId}/unsubscribe/`,
-        AuthorizationObj,
+        AuthorizationObj
       );
       console.log("deu certo");
     } catch (error) {
@@ -105,7 +131,9 @@ const GroupsProvider = ({ children }) => {
         subscriptions,
         subscribeFunction,
         unsubscribeFunction,
-      }}>
+        userGroups,
+      }}
+    >
       {children}
     </GroupsContext.Provider>
   );
