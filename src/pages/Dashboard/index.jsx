@@ -1,5 +1,14 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
-import { App, Container, Footer, Header, Cards } from "./styles";
+import {
+  App,
+  Container,
+  Footer,
+  Header,
+  Cards,
+  ButtonToday,
+  ButtonWeek,
+  ButtonMonth,
+} from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
@@ -12,37 +21,39 @@ import ModalActivities from "../../components/ActivitiesModal";
 
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [filter, serFilter] = useState("");
+  const [filteredList, setFilteredList] = useState([]);
+
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
-  // const habitModel = {
-  //   title: "Title",
-  //   category: "Category",
-  //   description: "Lorem Ipsum",
-  //   difficult: "Hard",
-  //   frequency: "Diary",
-  // };
-  // const cards = [
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  //   habitModel,
-  // ];
 
-  useEffect(() => {
-    listHabitsFunction(token);
-  }, []);
+  const filtering = (period) => {
+    if (!isFiltered) {
+      setIsFiltered(true);
+      serFilter(period);
+    } else if (filter === period) {
+      setIsFiltered(false);
+      serFilter("");
+    } else if (filter !== period) {
+      serFilter(period);
+    }
+  };
 
   const handleModalHabits = () => {
     setOpenModalHabits(!openModalHabits);
   };
+
+  useEffect(() => {
+    const filteredHabits = listHabits.filter(
+      (habit) => habit.frequency === filter,
+    );
+    setFilteredList([...filteredHabits]);
+  }, [isFiltered]);
+
+  useEffect(() => {
+    listHabitsFunction(token);
+  }, []);
 
   return (
     <App>
@@ -66,23 +77,40 @@ function Dashboard() {
 
           <section className="header-bottom">
             <div id="blues">
-              <button>Today</button>
-              <button>Week</button>
-              <button>Month</button>
+              <ButtonToday onClick={() => filtering("Daily")} filter={filter}>
+                Today
+              </ButtonToday>
+              <ButtonWeek onClick={() => filtering("Weekly")} filter={filter}>
+                Week
+              </ButtonWeek>
+              <ButtonMonth onClick={() => filtering("Monthly")} filter={filter}>
+                Month
+              </ButtonMonth>
             </div>
           </section>
         </Header>
         <Cards>
-          {listHabits.map((habit, index) => (
-            <HabitCard
-              key={index}
-              title={habit.title}
-              frequency={habit.frequency}
-              category={habit.category}
-              difficulty={habit.difficulty}
-              habitId={habit.id}
-            />
-          ))}
+          {isFiltered
+            ? filteredList.map((habit, index) => (
+                <HabitCard
+                  key={index}
+                  title={habit.title}
+                  frequency={habit.frequency}
+                  category={habit.category}
+                  difficulty={habit.difficulty}
+                  habitId={habit.id}
+                />
+              ))
+            : listHabits.map((habit, index) => (
+                <HabitCard
+                  key={index}
+                  title={habit.title}
+                  frequency={habit.frequency}
+                  category={habit.category}
+                  difficulty={habit.difficulty}
+                  habitId={habit.id}
+                />
+              ))}
         </Cards>
         <Footer>
           <BasicSpeedDial handleModalHabits={handleModalHabits} />
