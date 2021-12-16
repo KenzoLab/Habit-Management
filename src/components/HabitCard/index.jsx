@@ -1,5 +1,6 @@
 ﻿import CardFrame from "../CardFrame";
 import { ContentContainer, Difficulty, LineVertical } from "./styles";
+import { useHabit } from "../../providers/Habits";
 
 // achieved: false
 // difficulty: "Easy"
@@ -8,7 +9,13 @@ import { ContentContainer, Difficulty, LineVertical } from "./styles";
 // id: 1447
 // user: 100
 
-const HabitCard = ({ title, category, frequency, difficulty }) => {
+const HabitCard = ({ title, category, frequency, difficulty, habitId }) => {
+  const { deleteHabitFunction } = useHabit();
+
+  //DELETE HABIT
+  const onDeleteHabit = () => {
+    deleteHabitFunction(habitId);
+  };
   return (
     <CardFrame cardType="habit">
       <ContentContainer cardType="habit">
@@ -19,7 +26,9 @@ const HabitCard = ({ title, category, frequency, difficulty }) => {
           <Difficulty>{difficulty}</Difficulty>
         </div>
         <LineVertical />
-        <div className="delete__button">X</div>
+        <div className="delete__button" onClick={onDeleteHabit}>
+          X
+        </div>
       </ContentContainer>
     </CardFrame>
   );

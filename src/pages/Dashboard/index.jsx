@@ -80,6 +80,7 @@ function Dashboard() {
               frequency={habit.frequency}
               category={habit.category}
               difficulty={habit.difficulty}
+              habitId={habit.id}
             />
           ))}
         </Cards>
