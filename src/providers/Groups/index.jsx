@@ -15,14 +15,14 @@ const GroupsProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const listGroupsFunction = async () => {
+  const listGroupsFunction = async (token) => {
     let counter = 0;
     let array = [];
     let response = {};
     try {
       do {
         counter++;
-        response = await api.get(`/groups/?page=${counter}`, AuthorizationObj);
+        response = await api.get(`/groups/?page=${counter}`, token);
         const currentPage = response.data.results;
         array = [...array, ...currentPage];
       } while (response.data.next);

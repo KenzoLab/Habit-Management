@@ -6,7 +6,7 @@ import RadarIcon from "@mui/icons-material/Radar";
 import CardFrame from "../CardFrame";
 import { ContentContainer } from "./styles";
 
-const GroupCard = ({ group }) => {
+const GroupCard = ({ group, cardType }) => {
   const [finishedGoals, setFinishedGols] = useState(0);
   const { title, description, goals, category } = group;
 
@@ -18,8 +18,8 @@ const GroupCard = ({ group }) => {
   }, [goals]);
 
   return (
-    <CardFrame cardType="habit">
-      <ContentContainer cardType="habit">
+    <CardFrame cardType={cardType}>
+      <ContentContainer cardType={cardType}>
         <div className="content__text">
           <h4 className="content__title">{title}</h4>
           <p className="content__description">{description}</p>
