@@ -180,16 +180,17 @@ export const Header = styled.header`
 export const Cards = styled.section`
   margin: auto;
   width: 100%;
-  height: 82vh;
+  height: 70vh;
   overflow-y: auto;
-  padding: 0 50px;
+  max-width: 1900px;
   /* border-radius: 10px; */
   /* font-size: 14px; */
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: flex-start;
+  justify-content: space-evenly;
   align-items: flex-start;
+  margin-top: 50px;
 
   h2 {
     font-size: 24px;

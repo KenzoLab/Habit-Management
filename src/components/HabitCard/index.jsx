@@ -1,5 +1,5 @@
 ﻿import CardFrame from "../CardFrame";
-import { ContentContainer, Difficult } from "./styles";
+import { ContentContainer, Difficult, LineVertical } from "./styles";
 
 const HabitCard = ({ title, category, description, difficult }) => {
   return (
@@ -11,6 +11,7 @@ const HabitCard = ({ title, category, description, difficult }) => {
           <span className="content__category">{category}</span>
           <Difficult>{difficult}</Difficult>
         </div>
+          <LineVertical/>
         <div className="delete__button">X</div>
       </ContentContainer>
     </CardFrame>

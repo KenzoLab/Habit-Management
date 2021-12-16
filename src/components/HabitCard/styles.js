@@ -1,23 +1,21 @@
 ﻿import styled from "styled-components";
 
 export const ContentContainer = styled.div`
-  width: 100%;
+  width: 99%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 8px;
 
   // Card Content
   .content__text {
     border-radius: 34px;
     height: 100%;
-    flex: 1;
-    display: grid;
-    grid-template-areas:
-      "title title"
-      "description description"
-      "description description"
-      "category difficult";
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
   }
   .content__title {
     grid-area: title;
@@ -54,10 +52,11 @@ export const ContentContainer = styled.div`
     border-radius: 50%;
     background-color: var(--yellow);
 
-    margin-left: 30px;
+    margin-left:10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 
   @media (min-width: 600px) {
@@ -105,3 +104,8 @@ export const Difficult = styled.span`
     margin-bottom: 20px;
   }
 `;
+
+export const LineVertical = styled.hr`
+  height: 96%;
+  margin: 0px 15px 0px 60px;
+`
