@@ -1,4 +1,6 @@
-import { Container } from "./styles";
+import { Container, StyledSelect } from "./styles";
+import { Controller } from "react-hook-form";
+
 function Input({ label, errors, register, data, ...rest }) {
   return (
     <Container>
@@ -10,3 +12,34 @@ function Input({ label, errors, register, data, ...rest }) {
 }
 
 export default Input;
+
+export const InputSelect = ({
+  label,
+  name,
+  control,
+  options,
+  errors,
+  ...rest
+}) => {
+  return (
+    <Container>
+      <label htmlFor={name}>{label}</label>
+      <Controller
+        name={name}
+        control={control}
+        render={({ field }) => {
+          return (
+            <StyledSelect
+              {...field}
+              classNamePrefix="Select"
+              options={options}
+              placeholder={"Select an option"}
+              {...rest}
+            />
+          );
+        }}
+      />
+      <p className="error">{errors}</p>
+    </Container>
+  );
+};

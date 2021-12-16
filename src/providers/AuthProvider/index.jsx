@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   });
 
   const [userId, setUserId] = useState(() => {
-    const id = JSON.parse(localStorage.getItem("@Habit:userId"));
+    const id = localStorage.getItem("@Habit:userId");
     return id ? id : null;
   });
 
@@ -29,10 +29,7 @@ const AuthProvider = ({ children }) => {
         const { user_id } = tokenDecodificado;
 
         localStorage.setItem("@Habit:token", token);
-        localStorage.setItem(
-          "@Habit:userId",
-          JSON.stringify({ userId: user_id }),
-        );
+        localStorage.setItem("@Habit:userId", user_id);
 
         setToken(token);
         setUserId(user_id);
@@ -48,7 +45,8 @@ const AuthProvider = ({ children }) => {
         signInFunction,
         isAuth,
         setIsAuth,
-      }}>
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );
