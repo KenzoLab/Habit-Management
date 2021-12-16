@@ -18,17 +18,18 @@ export default createGlobalStyle`
     --aliceBlue: #F0F8FF;
     --darkGreen: #124F72;
     --green: #11995E;
-    --gray: #9398A2; 
+    --gray: #9398A2;
     --lightGray: #dedede4d;
+    --greyBackground: #f2f0f0;
     --yellow: #FABD59;
     --lightYellow: #FFCF81;
+    --extraLightYellow: #f0d6ab;
     --black: #000000;
-    --whiteSmoke: #FBFBF8; 
+    --whiteSmoke: #FBFBF8;
     --white: #FFFFFF;
     --red: #DC1F1F;
-    --lightPurple: #818ed0;
-
-  } 
+    --lightPurple: #818ED0;
+  }
 
   body {
     background: var(--whiteSmoke);
