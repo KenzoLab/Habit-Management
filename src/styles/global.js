@@ -37,7 +37,7 @@ export default createGlobalStyle`
   }
 
   body, input, button, p {
-    font-family: var(--font-inter); 
+    font-family: var(--font-inter);
     font-size: 1rem;
   }
 
