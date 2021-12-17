@@ -8,10 +8,13 @@ import { useGroups } from "../../providers/Groups";
 import CardFrame from "../CardFrame";
 import { ContentContainer } from "./styles";
 import ModalGoals from "../GoalsModal";
+import ModalActivities from "../ActivitiesModal";
 
 const GroupCard = ({ group, cardType }) => {
   const { subscribeFunction, unsubscribeFunction } = useGroups();
   const [openModalGoals, setOpenModalGoals] = useState(false);
+  const [openModalActivities, setOpenModalActivities] = useState(false);
+
   const [isSubscribed, setSubscribed] = useState(false);
   const [finishedGoals, setFinishedGols] = useState(0);
   const { name, description, goals, category, id, users_on_group } = group;
@@ -30,15 +33,16 @@ const GroupCard = ({ group, cardType }) => {
   };
 
   const handleModalGoals = () => {
-    console.log("GroupCard-sub", id);
     setOpenModalGoals(!openModalGoals);
+  };
+
+  const handleModalActivities = () => {
+    setOpenModalActivities(!openModalActivities);
   };
 
   useEffect(() => {
     const userId = localStorage.getItem("@Habit:userId");
-    const check = group.users_on_group.some(
-      (user) => user.id === parseInt(userId),
-    );
+    const check = users_on_group.some((user) => user.id === parseInt(userId));
     setSubscribed(check);
   }, [group]);
 
@@ -56,17 +60,13 @@ const GroupCard = ({ group, cardType }) => {
           <span className="content__goals">Goals: {finishedGoals}</span>
         </div>
         <div className="mobile__buttons">
-          <button type="button">
+          <button
+            type="button"
+            onClick={isSubscribed ? unSubscribe : subscribe}>
             {isSubscribed ? (
-              <BookmarkRemoveIcon
-                className="unsubscribe__icon"
-                onClick={unSubscribe}
-              />
+              <BookmarkRemoveIcon className="unsubscribe__icon" />
             ) : (
-              <BookmarkAddIcon
-                className="subscribe__icon"
-                onClick={subscribe}
-              />
+              <BookmarkAddIcon className="subscribe__icon" />
             )}
           </button>
           <button type="button">
@@ -77,41 +77,38 @@ const GroupCard = ({ group, cardType }) => {
           </button>
         </div>
         <div className="desktop__buttons">
-          <button type="button">
+          <button
+            type="button"
+            onClick={isSubscribed ? unSubscribe : subscribe}>
             {isSubscribed ? (
               <>
-                <BookmarkRemoveIcon
-                  className="unsubscribe__icon"
-                  onClick={unSubscribe}
-                />
-                <span className="unsubscribe__text" onClick={unSubscribe}>
-                  Unsubscribe
-                </span>
+                <BookmarkRemoveIcon className="unsubscribe__icon" />
+                <span className="unsubscribe__text">Unsubscribe</span>
               </>
             ) : (
               <>
-                <BookmarkAddIcon
-                  className="subscribe__icon"
-                  onClick={subscribe}
-                />
-                <span className="subscribe__text" onClick={subscribe}>
-                  Subscribe
-                </span>
+                <BookmarkAddIcon className="subscribe__icon" />
+                <span className="subscribe__text">Subscribe</span>
               </>
             )}
           </button>
-          <button type="button">
+          <button type="button" onClick={handleModalActivities}>
             <BorderColorIcon />
             <span>Activities</span>
           </button>
-          <button type="button">
-            <RadarIcon onClick={handleModalGoals} />
-            <span onClick={handleModalGoals}>Goals</span>
+          <button onClick={handleModalGoals} type="button">
+            <RadarIcon />
+            <span>Goals</span>
           </button>
         </div>
         <ModalGoals
           open={openModalGoals}
           handle={handleModalGoals}
+          idGroup={parseInt(id)}
+        />
+        <ModalActivities
+          open={openModalActivities}
+          handle={handleModalActivities}
           idGroup={parseInt(id)}
         />
       </ContentContainer>
