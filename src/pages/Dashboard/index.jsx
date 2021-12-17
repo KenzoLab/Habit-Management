@@ -47,9 +47,9 @@ function Dashboard() {
 
   function procurar() {
     if (search !== "") {
-      //const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
+      const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
       setFilter(search);
-      //setFilteredList(filter);
+      setFilteredList(cardSearch);
       setIsFiltered(true);
     } else {
       setIsFiltered(false);
@@ -60,10 +60,13 @@ function Dashboard() {
   //////////////////////////////////
 
   useEffect(() => {
-    const filteredHabits = listHabits.filter(
-      (habit) => habit.frequency === filter
-    );
-    setFilteredList([...filteredHabits]);
+    console.log();
+    if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
+      const filteredHabits = listHabits.filter(
+        (habit) => habit.frequency === filter
+      );
+      setFilteredList([...filteredHabits]);
+    }
   }, [isFiltered, filter]);
 
   useEffect(() => {
@@ -80,7 +83,7 @@ function Dashboard() {
             <div className="header-search">
               <input
                 placeholder="Search..."
-                onChange={(evt) => setFilter(evt.target.value.toString())}
+                onChange={(evt) => setSearch(evt.target.value.toString())}
               />
               <button className="search" onClick={() => procurar()}>
                 p
