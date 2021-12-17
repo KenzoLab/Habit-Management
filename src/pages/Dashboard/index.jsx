@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
+import { useCurrentPage } from "../../providers/CurrentPage";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
@@ -29,6 +30,7 @@ function Dashboard() {
   const [filter, setFilter] = useState("");
 
   const [filteredList, setFilteredList] = useState([]);
+  const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
   const filtering = (period) => {
@@ -43,7 +45,7 @@ function Dashboard() {
   const handleModalHabits = () => {
     setOpenModalHabits(!openModalHabits);
   };
-  //////////////////////////////////
+
   const [search, setSearch] = useState("");
 
   function procurar() {
@@ -57,18 +59,18 @@ function Dashboard() {
       setFilteredList([]);
     }
   }
-  //////////////////////////////////
+
   useEffect(() => {
-    console.log();
     if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
       const filteredHabits = listHabits.filter(
-        (habit) => habit.frequency === filter
+        (habit) => habit.frequency === filter,
       );
       setFilteredList([...filteredHabits]);
     }
   }, [isFiltered, filter]);
   useEffect(() => {
     listHabitsFunction(token);
+    defineCurrentPageFunction("dashboard");
   }, []);
   return (
     <App>
@@ -99,29 +101,25 @@ function Dashboard() {
               <ButtonToday
                 className="filter-buttons"
                 onClick={() => filtering("Daily")}
-                filter={filter}
-              >
+                filter={filter}>
                 Today
               </ButtonToday>
               <ButtonWeek
                 className="filter-buttons"
                 onClick={() => filtering("Weekly")}
-                filter={filter}
-              >
+                filter={filter}>
                 Week
               </ButtonWeek>
               <ButtonMonth
                 className="filter-buttons"
                 onClick={() => filtering("Monthly")}
-                filter={filter}
-              >
+                filter={filter}>
                 Month
               </ButtonMonth>
             </div>
           </section>
         </Header>
-
-        {/* <MainContainer>
+        <MainContainer>
           <Cards>
             {isFiltered
               ? filteredList.map((habit, index) => (
@@ -146,41 +144,10 @@ function Dashboard() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModalHabits={handleModalHabits} />
+            <BasicSpeedDial handleModal={handleModalHabits} />
             <ModalHabits open={openModalHabits} handle={handleModalHabits} />
           </Footer>
-
-        </MainContainer> */}
-
-        <Cards>
-          {isFiltered
-            ? filteredList.map((habit, index) => (
-                <HabitCard
-                  key={index}
-                  title={habit.title}
-                  frequency={habit.frequency}
-                  category={habit.category}
-                  difficulty={habit.difficulty}
-                  habitId={habit.id}
-                />
-              ))
-            : listHabits.map((habit, index) => (
-                <HabitCard
-                  key={index}
-                  title={habit.title}
-                  frequency={habit.frequency}
-                  category={habit.category}
-                  difficulty={habit.difficulty}
-                  habitId={habit.id}
-                />
-              ))}
-        </Cards>
-        <Footer>
-          <BasicSpeedDial handleModal={handleModalHabits} />
-          <ModalHabits open={openModalHabits} handle={handleModalHabits} />
-        </Footer>
-
-        {/* </MainContainer> */}
+        </MainContainer>
       </Container>
     </App>
   );

@@ -17,6 +17,7 @@ import {
 import ActivitiesCard from "../../components/ActivitiesCard";
 import { useActivities } from "../../providers/Activities";
 import { useAuth } from "../../providers/AuthProvider";
+import { useCurrentPage } from "../../providers/CurrentPage";
 import { useEffect } from "react";
 //import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
@@ -28,6 +29,7 @@ function Activities() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
+  const { defineCurrentPageFunction } = useCurrentPage();
 
   const [filteredList, setFilteredList] = useState([]);
 
@@ -76,6 +78,7 @@ function Activities() {
  */
   useEffect(() => {
     loadActivities(token);
+    defineCurrentPageFunction("activities");
   }, []);
 
   return (
