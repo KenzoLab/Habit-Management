@@ -1,4 +1,4 @@
-import { Container, StyledSelect } from "./styles";
+import { Container, ContainerTextArea, StyledSelect } from "./styles";
 import { Controller } from "react-hook-form";
 
 function Input({ label, errors, register, data, ...rest }) {
@@ -41,5 +41,15 @@ export const InputSelect = ({
       />
       <p className="error">{errors}</p>
     </Container>
+  );
+};
+
+export const InputTextArea = ({ label, errors, register, data, ...rest }) => {
+  return (
+    <ContainerTextArea>
+      <label>{label}</label>
+      <textarea {...register(`${data}`)} {...rest}></textarea>
+      <p className="error">{errors}</p>
+    </ContainerTextArea>
   );
 };

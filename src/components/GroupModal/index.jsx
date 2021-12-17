@@ -4,42 +4,34 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 
-import { useHabit } from "../../providers/Habits";
+import { useGroups } from "../../providers/Groups";
 
 import {
   ContainerModal,
   ContForm,
-  ContHabits,
+  ContGroups,
   ContList,
   ContInput,
   ContItem,
   ContInfosItem,
   ContTitlesItem,
+  ContTextArea,
   Head,
   ButtonSub,
   BtnCloseDelete,
   Paragraph,
 } from "./styles";
 import Input from "../../components/Input";
-import { InputSelect } from "../../components/Input";
+import { InputSelect, InputTextArea } from "../../components/Input";
 
-const ModalHabits = ({ open, handle }) => {
+const ModalGroups = ({ open, handle }) => {
   //PROPS PROVIDER
-  const { listHabits, listHabitsFunction } = useHabit();
-  const { createHabitFunction, deleteHabitFunction } = useHabit();
+  const { createGroupFunction, searchSubscriptionsFunction } = useGroups();
+  const { subscriptions, unsubscribeFunction } = useGroups();
 
   //ARRAYS SELECT OPTIONS
-  const arrFrequency = [
-    { value: "Daily", label: "Daily" },
-    { value: "Weekly", label: "Weekly" },
-    { value: "Monthly", label: "Monthly" },
-  ];
-  const arrDifficulty = [
-    { value: "Easy", label: "Easy" },
-    { value: "Medium", label: "Medium" },
-    { value: "Hard", label: "Hard" },
-  ];
   const arrCategory = [
     { value: "Financial", label: "Financial" },
     { value: "Health", label: "Health" },
@@ -62,14 +54,11 @@ const ModalHabits = ({ open, handle }) => {
         label: yup.string().required("Selecione uma categoria!"),
         value: yup.string().required("Selecione uma categoria!"),
       }),
-      difficulty: yup.object().shape({
-        label: yup.string().required("Selecione uma dificuldade!"),
-        value: yup.string().required("Selecione uma dificuldade!"),
-      }),
-      frequency: yup.object().shape({
-        label: yup.string().required("Selecione uma frequência!"),
-        value: yup.string().required("Selecione uma frequência!"),
-      }),
+      description: yup
+        .string()
+        .required("Descrição obrigatória!")
+        .min(8, "Mínimo de 8 caracteres.")
+        .max(180, "Máximo de 180 caracteres."),
     })
     .required();
 
@@ -84,24 +73,23 @@ const ModalHabits = ({ open, handle }) => {
     resolver: yupResolver(schema),
   });
 
-  // ADD HABIT
-  const onAddHabit = (data) => {
-    createHabitFunction(data);
+  // ADD GROUP
+  const onAddGroup = (data) => {
+    createGroupFunction(data);
     resetInputs();
   };
 
-  //DELETE HABIT
-  const onDeleteHabit = (idHabit) => {
-    deleteHabitFunction(idHabit);
+  // DELETE GROUP
+  const onDeleteGroup = (idGroup) => {
+    unsubscribeFunction(idGroup);
   };
 
-  //RESET INPUTS
+  // RESET INPUTS
   const resetInputs = () => {
     reset({
       title: "",
       category: { value: "", label: "Select an option" },
-      difficulty: { value: "", label: "Select an option" },
-      frequency: { value: "", label: "Select an option" },
+      description: "",
     });
   };
 
@@ -113,7 +101,7 @@ const ModalHabits = ({ open, handle }) => {
 
   //USE EFFECT
   useEffect(() => {
-    listHabitsFunction();
+    searchSubscriptionsFunction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -126,35 +114,44 @@ const ModalHabits = ({ open, handle }) => {
         aria-describedby="parent-modal-description"
       >
         <ContainerModal>
-          <ContHabits>
+          <ContGroups>
             <Head>
-              <h3>Habits</h3>
+              <h3>Your Groups</h3>
             </Head>
             <ContList>
-              {listHabits.length !== 0
-                ? listHabits.map((item, idx) => (
+              {subscriptions.length !== 0
+                ? subscriptions.map((item, idx) => (
                     <ContItem key={idx}>
                       <ContInfosItem>
-                        <h4>{`${item.title.substring(0, 15)}...`}</h4>
+                        <h4>{`${item.name.substring(0, 15)}...`}</h4>
                         <ContTitlesItem>
                           <h5>{item.category}</h5>
-                          <h6>{item.frequency}</h6>
                         </ContTitlesItem>
-                        <Paragraph diff={item.difficulty}>
-                          {item.difficulty}
+                        <Paragraph>
+                          {item.description.includes(" ")
+                            ? `${item.description.substring(0, 40)}..`
+                            : `${item.description
+                                .split("")
+                                .map((item, idx) =>
+                                  idx === 20 ? `${item} ` : item
+                                )
+                                .join("")
+                                .substring(0, 40)}...`}
                         </Paragraph>
                       </ContInfosItem>
-                      <BtnCloseDelete onClick={() => onDeleteHabit(item.id)}>
-                        <IoCloseOutline />
+                      <BtnCloseDelete>
+                        <BookmarkRemoveIcon
+                          onClick={() => onDeleteGroup(item.id)}
+                        />
                       </BtnCloseDelete>
                     </ContItem>
                   ))
-                : "Lista de hábitos vazia!"}
+                : "Lista de grupos vazia!"}
             </ContList>
-          </ContHabits>
-          <ContForm onSubmit={handleSubmit(onAddHabit)}>
+          </ContGroups>
+          <ContForm onSubmit={handleSubmit(onAddGroup)}>
             <Head>
-              <h6>Add Habit</h6>
+              <h6>Create Group</h6>
               <BtnCloseDelete onClick={() => CloseModal()}>
                 <IoCloseOutline />
               </BtnCloseDelete>
@@ -170,7 +167,7 @@ const ModalHabits = ({ open, handle }) => {
             </ContInput>
             <ContInput>
               <InputSelect
-                label="Choose a category:"
+                label="Category:"
                 name="category"
                 control={control}
                 register={register}
@@ -181,36 +178,18 @@ const ModalHabits = ({ open, handle }) => {
                 options={arrCategory}
               />
             </ContInput>
-            <ContInput>
-              <InputSelect
-                label="Choose a difficulty:"
-                name="difficulty"
-                control={control}
+            <ContTextArea>
+              <InputTextArea
+                label="Description:"
+                errors={errors.description ? errors.description.message : " "}
                 register={register}
-                data="difficulty"
-                errors={
-                  errors?.difficulty?.value
-                    ? errors.difficulty.value.message
-                    : " "
-                }
-                options={arrDifficulty}
+                data="description"
+                placeholder="Enter a description"
+                rows="5"
+                cols="30"
               />
-            </ContInput>
-            <ContInput>
-              <InputSelect
-                label="Choose a frequency:"
-                name="frequency"
-                control={control}
-                register={register}
-                data="frequency"
-                errors={
-                  errors?.frequency?.value
-                    ? errors.frequency.value.message
-                    : " "
-                }
-                options={arrFrequency}
-              />
-            </ContInput>
+            </ContTextArea>
+
             <ButtonSub type="submit">Add</ButtonSub>
           </ContForm>
         </ContainerModal>
@@ -219,4 +198,4 @@ const ModalHabits = ({ open, handle }) => {
   );
 };
 
-export default ModalHabits;
+export default ModalGroups;
