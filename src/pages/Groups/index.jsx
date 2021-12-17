@@ -15,14 +15,12 @@ import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
-import ModalHabits from "../../components/HabitModal";
-import ModalGoals from "../../components/GoalsModal";
-import ModalActivities from "../../components/ActivitiesModal";
+import ModalGroups from "../../components/GroupModal";
 import { useGroups } from "../../providers/Groups";
 
 function Groups() {
   const { listGroupsFunction, allGroupsList } = useGroups();
-  const [openModalHabits, setOpenModalHabits] = useState(false);
+  const [openModalGroups, setOpenModalGroups] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
@@ -30,7 +28,7 @@ function Groups() {
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
 
-  const filtering = period => {
+  const filtering = (period) => {
     if (!isFiltered || filter !== period) {
       setIsFiltered(true);
       setFilter(period);
@@ -40,13 +38,13 @@ function Groups() {
     }
   };
 
-  const handleModalHabits = () => {
-    setOpenModalHabits(!openModalHabits);
+  const handleModalGroups = () => {
+    setOpenModalGroups(!openModalGroups);
   };
 
   useEffect(() => {
     const filteredHabits = listHabits.filter(
-      habit => habit.frequency === filter
+      (habit) => habit.frequency === filter,
     );
     setFilteredList([...filteredHabits]);
   }, [isFiltered, filter]);
@@ -97,8 +95,8 @@ function Groups() {
           ))}
         </Cards>
         <Footer>
-          <BasicSpeedDial handleModalHabits={handleModalHabits} />
-          <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+          <BasicSpeedDial handleModal={handleModalGroups} />
+          <ModalGroups open={openModalGroups} handle={handleModalGroups} />
         </Footer>
       </Container>
     </App>

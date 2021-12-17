@@ -16,13 +16,13 @@ import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
-import ModalGroups from "../../components/GroupModal";
+
 import ModalGoals from "../../components/GoalsModal";
 import ModalActivities from "../../components/ActivitiesModal";
 
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
-  const [openModalGroups, setOpenModalGroups] = useState(false);
+
   const [openModalGoals, setOpenModalGoals] = useState(false);
   const [openModalActivities, setOpenModalActivities] = useState(false);
 
@@ -116,14 +116,12 @@ function Dashboard() {
               ))}
         </Cards>
         <Footer>
-          <BasicSpeedDial handleModalHabits={handleModalHabits} />
+          <BasicSpeedDial handleModal={handleModalHabits} />
           <ModalHabits open={openModalHabits} handle={handleModalHabits} />
         </Footer>
       </Container>
     </App>
-    // const handleModalGroups = () => {
-    //   setOpenModalGroups(!openModalGroups);
-    // };
+
     // const handleModalGoals = () => {
     //   setOpenModalGoals(!openModalGoals);
     // };
