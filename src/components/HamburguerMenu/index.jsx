@@ -108,8 +108,8 @@ function HamburguerMenu() {
               }}
             />
             <div>
-              <p className="username">{userInfo.username}</p>
-              <p className="useremail">{userInfo.email}</p>
+              <p className="username">{userInfo.username.substring(0, 9)}...</p>
+              <p className="useremail">{userInfo.email.substring(0, 12)}... </p>
             </div>
           </section>
         </Footer>

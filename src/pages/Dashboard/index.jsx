@@ -64,10 +64,7 @@ function Dashboard() {
           <section className="header-top">
             <h2>Dashboard</h2>
             <div className="header-search">
-              <input
-                placeholder="Search..."
-                //onChange={(evt) setSearch(evt.target.value)}
-              />
+              <input placeholder="Search..." />
             </div>
           </section>
 
@@ -116,36 +113,5 @@ function Dashboard() {
     </App>
   );
 }
-
-// const Dashboard = () => {
-//   //State Modal Window
-//
-//   const [openModalGoals, setOpenModalGoals] = useState(false);
-//   const [openModalActivities, setOpenModalActivities] = useState(false);
-
-//   //Handle Modal Window
-
-//   const handleModalGoals = () => {
-//     setOpenModalGoals(!openModalGoals);
-//   };
-//   const handleModalActivities = () => {
-//     setOpenModalActivities(!openModalActivities);
-//   };
-
-//   return (
-//     <div>
-//       <h1>Dashboard </h1>
-//       <button onClick={handleModalHabits}>Modal Habits</button>
-//       <button onClick={handleModalGoals}>Modal Goals</button>
-//       <button onClick={handleModalActivities}>Modal Activities</button>
-//       <ModalHabits open={openModalHabits} handle={handleModalHabits} />
-//       <ModalGoals open={openModalGoals} handle={handleModalGoals} />
-//       <ModalActivities
-//         open={openModalActivities}
-//         handle={handleModalActivities}
-//       />
-//     </div>
-//   );
-// };
 
 export default Dashboard;
