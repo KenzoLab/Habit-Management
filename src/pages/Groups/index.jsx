@@ -102,11 +102,11 @@ function Groups() {
                 key={index}
               />
             ))}
+          </Cards>
         <Footer>
           <BasicSpeedDial handleModal={handleModalGroups} />
           <ModalGroups open={openModalGroups} handle={handleModalGroups} />
         </Footer>
-          </Cards>
         </MainContainer>
       </Container>
     </App>

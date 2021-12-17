@@ -92,7 +92,6 @@ export const Nav = styled.div`
   @media (min-width: 767px) {
     width: 250px;
     height: 100vh;
-
     .menu-list {
       width: 250px;
       display: flex;

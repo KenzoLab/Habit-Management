@@ -12,8 +12,7 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   background-color: var(--greyBackground);
-  margin-top: 15vh;
-
+  margin-top: 20vh;
   @media (min-width: 768px) {
     margin-top: 5vh;
     margin-left: 250px;
@@ -41,7 +40,6 @@ export const Header = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
-
     h2 {
       color: var(--darkBlue);
       font-size: 52px;
@@ -59,12 +57,10 @@ export const Header = styled.header`
       }
     }
   }
-
   .header-search {
     display: flex;
     justify-content: flex-end;
   }
-
   .header-bottom {
     display: flex;
     justify-content: center;
@@ -82,7 +78,6 @@ export const Header = styled.header`
       }
     }
   }
-
   .filter-buttons {
     padding: 8px 0px;
     margin: 10px 4px;
@@ -177,15 +172,17 @@ export const ButtonMonth = styled.button`
 export const Cards = styled.section`
   height: 65vh;
   overflow-y: auto;
+
   @media (min-width: 768px) {
     max-width: 1060px;
     display: flex;
     justify-content: space-evenly;
     flex-direction: row;
     flex-wrap: wrap;
+    margin-left: 5vh;
   }
 `;
 
 export const Footer = styled.footer`
-  align-self: flex-end;
+align-self: flex-end;
 `;
