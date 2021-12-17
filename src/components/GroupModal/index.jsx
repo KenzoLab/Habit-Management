@@ -74,13 +74,13 @@ const ModalGroups = ({ open, handle }) => {
   });
 
   // ADD GROUP
-  const onAddGroup = (data) => {
+  const onAddGroup = data => {
     createGroupFunction(data);
     resetInputs();
   };
 
   // DELETE GROUP
-  const onDeleteGroup = (idGroup) => {
+  const onDeleteGroup = idGroup => {
     unsubscribeFunction(idGroup);
   };
 
@@ -111,8 +111,7 @@ const ModalGroups = ({ open, handle }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal>
           <ContGroups>
             <Head>
@@ -133,7 +132,7 @@ const ModalGroups = ({ open, handle }) => {
                             : `${item.description
                                 .split("")
                                 .map((item, idx) =>
-                                  idx === 20 ? `${item} ` : item
+                                  idx === 20 ? `${item} ` : item,
                                 )
                                 .join("")
                                 .substring(0, 40)}...`}

@@ -20,17 +20,17 @@ const GroupsProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const listGroupsFunction = async () => {
-    let counter = 0;
+  const listGroupsFunction = async (token) => {
+    let counter = 1;
     let array = [];
     let response = {};
     try {
-      do {
-        counter++;
-        response = await api.get(`/groups/?page=${counter}`, AuthorizationObj);
-        const currentPage = response.data.results;
-        array = [...array, ...currentPage];
-      } while (response.data.next);
+      // do {
+      // counter++;
+      response = await api.get(`/groups/?page=${counter}`, token);
+      const currentPage = response.data.results;
+      array = [...array, ...currentPage];
+      // } while (response.data.next);
       setAllGroupsList([...array]);
     } catch (error) {
       setErrorMessage(error);
@@ -48,7 +48,7 @@ const GroupsProvider = ({ children }) => {
       const response = await api.post("/groups/", dataGroup, AuthorizationObj);
       setLastCreatedGroup(response.data);
       toast.success(
-        "Successfully created group!"
+        "Successfully created group!",
       ); /* toast register group success */
       listGroupsFunction();
       searchSubscriptionsFunction();
@@ -63,7 +63,7 @@ const GroupsProvider = ({ children }) => {
       const response = await api.patch(
         `/groups/${groupId}/`,
         formData,
-        AuthorizationObj
+        AuthorizationObj,
       );
       setUpdatedGroup(response.data);
     } catch (error) {
@@ -75,7 +75,7 @@ const GroupsProvider = ({ children }) => {
     try {
       const response = await api.get(
         "/groups/subscriptions/",
-        AuthorizationObj
+        AuthorizationObj,
       );
       setSubscriptions(response.data);
     } catch (error) {
@@ -88,10 +88,10 @@ const GroupsProvider = ({ children }) => {
       const response = await api.post(
         `/groups/${groupId}/subscribe/`,
         "",
-        AuthorizationObj
+        AuthorizationObj,
       );
       toast.success(
-        "Successfully subscribed!"
+        "Successfully subscribed!",
       ); /* toast subscribe group success */
       listGroupsFunction();
       searchSubscriptionsFunction();
@@ -104,10 +104,11 @@ const GroupsProvider = ({ children }) => {
     try {
       const response = await api.delete(
         `/groups/${groupId}/unsubscribe/`,
-        AuthorizationObj
+        AuthorizationObj,
       );
+
       toast.success(
-        "Successfully unsubscribed!"
+        "Successfully unsubscribed!",
       ); /* toast unsubscribe group success */
       listGroupsFunction();
       searchSubscriptionsFunction();
@@ -131,8 +132,7 @@ const GroupsProvider = ({ children }) => {
         subscribeFunction,
         unsubscribeFunction,
         userId,
-      }}
-    >
+      }}>
       {children}
     </GroupsContext.Provider>
   );

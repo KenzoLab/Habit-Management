@@ -3,14 +3,7 @@
 export const Container = styled.div`
   height: 234px;
   width: 20%;
-  min-width: 290px;
-  max-width: ${(props) => {
-    if (props.cardType === "activities" || props.cardType === "goals") {
-      return "350px";
-    } else {
-      return "650px";
-    }
-  }};
+  width: ${props => (props.cardType === "group" ? "80vw" : "800px")};
   border-radius: 30px;
   position: relative;
   padding: 25px;
@@ -37,5 +30,6 @@ export const Container = styled.div`
   @media (min-width: 600px) {
     border-radius: 20px;
     border-right: 12px solid var(--yellow);
+    max-width: ${props => (props.cardType === "group" ? "460px" : "800px")};
   }
 `;

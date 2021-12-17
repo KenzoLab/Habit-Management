@@ -99,8 +99,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal onSubmit={handleSubmit(onAddGoal)}>
           <ContGoals>
             <Head>

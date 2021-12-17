@@ -21,13 +21,13 @@ import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
-import ModalGroups from "../../components/GroupModal";
+
 import ModalGoals from "../../components/GoalsModal";
 import ModalActivities from "../../components/ActivitiesModal";
 
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
-  const [openModalGroups, setOpenModalGroups] = useState(false);
+
   const [openModalGoals, setOpenModalGoals] = useState(false);
   const [openModalActivities, setOpenModalActivities] = useState(false);
 
@@ -131,7 +131,8 @@ function Dashboard() {
             </div>
           </section>
         </Header>
-        <MainContainer>
+
+        {/* <MainContainer>
           <Cards>
             {isFiltered
               ? filteredList.map((habit, index) => (
@@ -159,12 +160,38 @@ function Dashboard() {
             <BasicSpeedDial handleModalHabits={handleModalHabits} />
             <ModalHabits open={openModalHabits} handle={handleModalHabits} />
           </Footer>
-        </MainContainer>
+        </MainContainer> */}
+
+        <Cards>
+          {isFiltered
+            ? filteredList.map((habit, index) => (
+                <HabitCard
+                  key={index}
+                  title={habit.title}
+                  frequency={habit.frequency}
+                  category={habit.category}
+                  difficulty={habit.difficulty}
+                  habitId={habit.id}
+                />
+              ))
+            : listHabits.map((habit, index) => (
+                <HabitCard
+                  key={index}
+                  title={habit.title}
+                  frequency={habit.frequency}
+                  category={habit.category}
+                  difficulty={habit.difficulty}
+                  habitId={habit.id}
+                />
+              ))}
+        </Cards>
+        <Footer>
+          <BasicSpeedDial handleModal={handleModalHabits} />
+          <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+        </Footer>
       </Container>
     </App>
-    // const handleModalGroups = () => {
-    //   setOpenModalGroups(!openModalGroups);
-    // };
+
     // const handleModalGoals = () => {
     //   setOpenModalGoals(!openModalGoals);
     // };
