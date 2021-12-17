@@ -7,7 +7,7 @@ import CreateIcon from "@mui/icons-material/Create";
 
 const actions = [{ icon: <CreateIcon />, name: "Add" }];
 
-export default function BasicSpeedDial({ handleModal }) {
+export default function BasicSpeedDial({ handleModalHabits }) {
   return (
     <Box sx={{ height: 0, transform: "translateZ(0px)", flexGrow: 1 }}>
       <SpeedDial
@@ -18,7 +18,7 @@ export default function BasicSpeedDial({ handleModal }) {
         {actions.map(action => (
           <SpeedDialAction
             FabProps={{
-              onClick: () => handleModal(),
+              onClick: () => handleModalHabits(),
             }}
             key={action.name}
             icon={action.icon}
