@@ -104,12 +104,16 @@ function HamburguerMenu() {
               sx={{
                 width: 50,
                 height: 50,
-                mr: 3,
+                mr: 1,
               }}
             />
             <div>
-              <p className="username">{userInfo.username.substring(0, 9)}...</p>
-              <p className="useremail">{userInfo.email.substring(0, 12)}... </p>
+              <p className="username">
+                {userInfo?.username?.substring(0, 9)}...
+              </p>
+              <p className="useremail">
+                {userInfo?.email?.substring(0, 12)}...{" "}
+              </p>
             </div>
           </section>
         </Footer>

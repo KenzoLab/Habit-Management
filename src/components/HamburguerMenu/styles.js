@@ -88,12 +88,6 @@ export const Nav = styled.div`
     }
   }
 
-  /* @media (max-width: 767px) {
-    .menu-list {
-      padding: 25px 5px 25px 5px;
-    }
-  }*/
-
   @media (min-width: 767px) {
     width: 200px;
     height: 100vh;
@@ -103,12 +97,12 @@ export const Nav = styled.div`
       display: flex;
 
       section {
-        width: 250px;
+        width: 195px;
         display: flex;
         align-items: center;
         ul {
           flex-direction: column;
-          width: 200px;
+          width: 195px;
           justify-content: center;
           li {
             display: flex;
@@ -130,7 +124,7 @@ export const Nav = styled.div`
       }
 
       div {
-        width: 190px;
+        width: 195px;
         padding-left: 14px;
 
         div {
@@ -141,7 +135,7 @@ export const Nav = styled.div`
     }
 
     .${Page} {
-      background-color: var(--whiteSmoke);
+      background-color: var(--lightGray);
       border-radius: 5px 0px 0px 5px;
       padding-left: 5px;
     }
@@ -154,10 +148,6 @@ export const Nav = styled.div`
   @media (max-width: 900px) {
     width: 200px;
     /* padding: 25px 5px 25px 25px; */
-  }
-  @media (max-width: 767px) {
-    width: 100%;
-    /* padding: 1rem 0; */
   }
 `;
 
@@ -207,7 +197,7 @@ export const Header = styled.div`
 export const Footer = styled.div`
   section {
     display: ${(props) => (props.toggleNav ? "block" : "none")};
-    width: 80vw;
+    width: 70vw;
     align-items: center;
   }
   .username {
