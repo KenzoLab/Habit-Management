@@ -80,8 +80,10 @@ function Dashboard() {
 
   return (
     <App>
-      <HamburguerMenu />
       <Container>
+        <div>
+      <HamburguerMenu />
+        </div>
         <Header>
           <section className="header-top">
             <h2>Dashboard</h2>

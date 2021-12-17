@@ -8,6 +8,13 @@ export const ContentContainer = styled.div`
   align-items: center;
   border-radius: 28px;
 
+  /*
+  width: 700px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    */
+
   // Card Content
   .content__text {
     border-radius: 34px;
