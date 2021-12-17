@@ -7,9 +7,8 @@ export const ContainerModal = styled.div`
   transform: translate(-50%, -50%);
   width: 90vw;
   max-width: 600px;
-  height: 470px;
+  height: 500px;
   border-radius: 25px;
-  margin-top: 30px;
   border: solid 3px var(--yellow);
   box-shadow: 0px 0px 12px 3px rgba(30, 30, 30, 0.61);
   padding: 5px;
@@ -21,9 +20,6 @@ export const ContainerModal = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
-    margin-top: 0;
-
-    height: 500px;
   }
 `;
 
@@ -84,7 +80,7 @@ export const ContForm = styled.form`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
 
@@ -99,8 +95,9 @@ export const ContInput = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 90%;
-  margin-bottom: 10px;
-  height: 60px;
+  margin-bottom: 0px;
+  height: 90px;
+  margin: 0;
 
   .error {
     color: var(--red);
@@ -119,6 +116,43 @@ export const ContInput = styled.div`
 
   label {
     font-family: var(--font-inter);
+  }
+
+  div {
+    margin: 0;
+  }
+`;
+
+export const ContTextArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 0;
+  height: 160px;
+  margin: 0;
+
+  .error {
+    color: var(--red);
+    font-size: 10px;
+    height: 12px;
+    margin-top: 2px;
+  }
+
+  textarea {
+    border: solid 1px var(--gray);
+    font-style: italic;
+    font-family: var(--font-fira);
+    padding: 5px 15px;
+  }
+
+  label {
+    font-family: var(--font-inter);
+  }
+
+  div {
+    margin: 0;
   }
 `;
 
@@ -141,7 +175,7 @@ export const ButtonSub = styled.button`
   }
 `;
 
-export const ContHabits = styled.div`
+export const ContGroups = styled.div`
   display: none;
   flex-direction: column;
   align-items: center;
@@ -205,21 +239,17 @@ export const ContInfosItem = styled.div`
 `;
 
 export const Paragraph = styled.p`
-  width: 40%;
+  width: 65%;
   height: 65%;
-  font-size: 12px;
-  padding: 10px;
-  margin-left: 15px;
-  color: ${(props) =>
-    props.diff === "Easy"
-      ? `var(--green)`
-      : props.diff === "Hard"
-      ? `var(--red)`
-      : `var(--yellow)`};
+  font-size: 8px;
+  padding: 7px 0px;
+  margin-left: 5px;
+
+  color: var(--gray);
 `;
 
 export const ContTitlesItem = styled.div`
-  width: 40%;
+  width: 25%;
   height: 65%;
   display: flex;
   flex-direction: column;
@@ -227,12 +257,6 @@ export const ContTitlesItem = styled.div`
 
   h5 {
     font-size: 12px;
-    font-weight: 500;
-    color: var(--gray);
-  }
-
-  h6 {
-    font-size: 10px;
     font-weight: 500;
     color: var(--gray);
   }

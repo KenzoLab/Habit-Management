@@ -42,6 +42,48 @@ export const Container = styled.div`
   }
 `;
 
+export const ContainerTextArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 300px;
+  margin-bottom: 25px;
+  height: 390px;
+
+  label {
+    color: var(--darkBlue);
+    margin-bottom: 5px;
+    font-family: var(--font-fira);
+    font-size: 15px;
+    width: 256px;
+    text-align: left;
+  }
+
+  textarea {
+    width: 256px;
+    height: 100px;
+    padding: 5 15px;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: var(--lightGray);
+    color: var(--gray);
+    font-size: 14px;
+
+    &::placeholder {
+      color: var(--gray);
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+  .error {
+    margin: 7px;
+    height: 12px;
+  }
+`;
+
 export const StyledSelect = styled(Select)`
   .Select__control {
     height: 40px;

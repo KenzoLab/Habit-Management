@@ -4,13 +4,13 @@ import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
-import BorderColorIcon from "@mui/icons-material/BorderColor";
 import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 import logo from "../../assets/habitLogo.png";
 import { useAuth } from "../../providers/AuthProvider";
 import { Footer, Nav, Header } from "./styles";
+import EditIcon from "@mui/icons-material/Edit";
 
 function HamburguerMenu() {
   const { getUserInfo, userInfo, logoutFunction } = useAuth();
@@ -30,22 +30,16 @@ function HamburguerMenu() {
   }, []);
 
   return (
-    <Nav toggleNav={toggleNav}>
-      <Header>
-        <button onClick={() => handleClick()}>
-          <MenuIcon
-            sx={{
-              width: 35,
-              height: 35,
-            }}
-          />
-        </button>
+    <Nav currentPage toggleNav={toggleNav}>
+      <Header currentPage>
+        <div onClick={() => handleClick()}></div>
+
         <img src={logo} alt="Logo HabitTracker"></img>
       </Header>
       <div className="menu-list">
         <section>
           <ul>
-            <li>
+            <li className="dashboard">
               <HomeOutlinedIcon
                 sx={{
                   width: 35,
@@ -56,7 +50,7 @@ function HamburguerMenu() {
               />
               <Link to="/dashboard">Dashboard</Link>
             </li>
-            <li>
+            <li className="groups">
               <PeopleOutlineIcon
                 sx={{
                   width: 35,
@@ -67,8 +61,8 @@ function HamburguerMenu() {
               />
               <Link to="/groups">Groups</Link>
             </li>
-            <li>
-              <BorderColorIcon
+            <li className="activities">
+              <EditIcon
                 sx={{
                   width: 35,
                   height: 35,
@@ -78,7 +72,7 @@ function HamburguerMenu() {
               />
               <Link to="/activities">Activities</Link>
             </li>
-            <li>
+            <li className="goals">
               <RadarOutlinedIcon
                 sx={{
                   width: 35,

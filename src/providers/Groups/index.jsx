@@ -1,5 +1,9 @@
 ﻿import { createContext, useContext, useState } from "react";
+import { toast } from "react-toastify";
+
 import api from "../../services/api";
+
+import { useAuth } from "../AuthProvider";
 
 const GroupsContext = createContext({});
 
@@ -10,7 +14,8 @@ const GroupsProvider = ({ children }) => {
   const [updatedGroup, setUpdatedGroup] = useState({});
   const [subscriptions, setSubscriptions] = useState([]);
 
-  const token = localStorage.getItem("@Habit:token");
+  const { token, userId } = useAuth();
+
   const AuthorizationObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
@@ -33,9 +38,20 @@ const GroupsProvider = ({ children }) => {
   };
 
   const createGroupFunction = async (formData) => {
+    const dataGroup = {
+      name: formData.title,
+      description: formData.description,
+      category: formData.category.value,
+    };
+
     try {
-      const response = await api.post("/groups/", formData, AuthorizationObj);
+      const response = await api.post("/groups/", dataGroup, AuthorizationObj);
       setLastCreatedGroup(response.data);
+      toast.success(
+        "Successfully created group!",
+      ); /* toast register group success */
+      listGroupsFunction();
+      searchSubscriptionsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -74,6 +90,11 @@ const GroupsProvider = ({ children }) => {
         "",
         AuthorizationObj,
       );
+      toast.success(
+        "Successfully subscribed!",
+      ); /* toast subscribe group success */
+      listGroupsFunction();
+      searchSubscriptionsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -85,7 +106,12 @@ const GroupsProvider = ({ children }) => {
         `/groups/${groupId}/unsubscribe/`,
         AuthorizationObj,
       );
-      console.log("deu certo");
+
+      toast.success(
+        "Successfully unsubscribed!",
+      ); /* toast unsubscribe group success */
+      listGroupsFunction();
+      searchSubscriptionsFunction();
     } catch (error) {
       setErrorMessage(error);
     }
@@ -105,6 +131,7 @@ const GroupsProvider = ({ children }) => {
         subscriptions,
         subscribeFunction,
         unsubscribeFunction,
+        userId,
       }}>
       {children}
     </GroupsContext.Provider>

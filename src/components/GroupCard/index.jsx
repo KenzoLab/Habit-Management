@@ -1,17 +1,34 @@
 ﻿import { useEffect, useState } from "react";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
+import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
 import RadarIcon from "@mui/icons-material/Radar";
+import { useGroups } from "../../providers/Groups";
 
 import CardFrame from "../CardFrame";
 import { ContentContainer } from "./styles";
 
 const GroupCard = ({ group, cardType }) => {
+  const { subscribeFunction, unsubscribeFunction } = useGroups();
   const [finishedGoals, setFinishedGols] = useState(0);
-  const { name, description, goals, category } = group;
+  const { name, description, goals, category, id, users_on_group } = group;
+  const [isSubscribed, setIsSubscribed] = useState(() => {
+    const userId = localStorage.getItem("@Habit:userId");
+    return users_on_group.some((user) => user.id === userId);
+  });
 
   const countFinishedGoals = () =>
     goals.reduce((acc, goal) => (goal.achieved ? acc + 1 : acc), 0);
+
+  const subscribe = () => {
+    subscribeFunction(id);
+    setIsSubscribed(true);
+  };
+
+  const unSubscribe = () => {
+    unsubscribeFunction(id);
+    setIsSubscribed(false);
+  };
 
   useEffect(() => {
     setFinishedGols(countFinishedGoals());
@@ -28,7 +45,17 @@ const GroupCard = ({ group, cardType }) => {
         </div>
         <div className="mobile__buttons">
           <button type="button">
-            <BookmarkAddIcon />
+            {isSubscribed ? (
+              <BookmarkRemoveIcon
+                className="unsubscribe__icon"
+                onClick={unSubscribe}
+              />
+            ) : (
+              <BookmarkAddIcon
+                className="subscribe__icon"
+                onClick={subscribe}
+              />
+            )}
           </button>
           <button type="button">
             <BorderColorIcon />
@@ -39,8 +66,27 @@ const GroupCard = ({ group, cardType }) => {
         </div>
         <div className="desktop__buttons">
           <button type="button">
-            <BookmarkAddIcon />
-            <span>Subscribe</span>
+            {isSubscribed ? (
+              <>
+                <BookmarkRemoveIcon
+                  className="unsubscribe__icon"
+                  onClick={unSubscribe}
+                />
+                <span className="unsubscribe__text" onClick={unSubscribe}>
+                  Unsubscribe
+                </span>
+              </>
+            ) : (
+              <>
+                <BookmarkAddIcon
+                  className="subscribe__icon"
+                  onClick={subscribe}
+                />
+                <span className="subscribe__text" onClick={subscribe}>
+                  Subscribe
+                </span>
+              </>
+            )}
           </button>
           <button type="button">
             <BorderColorIcon />
