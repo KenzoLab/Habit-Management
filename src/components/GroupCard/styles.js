@@ -61,6 +61,7 @@ export const ContentContainer = styled.div`
     flex-direction: column;
     justify-content: space-around;
     align-items: flex-end;
+
     > * {
       width: 30px;
       height: 30px;
@@ -135,6 +136,14 @@ export const ContentContainer = styled.div`
         }
       }
     }
+  }
+  .unsubscribe__icon,
+  .unsubscribe__text {
+    color: var(--red);
+  }
+  .subscribe__icon,
+  .subscribe__text {
+    color: var(--green);
   }
 `;
 
