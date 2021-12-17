@@ -9,7 +9,7 @@ import { useAuth } from "../AuthProvider";
 export const GoalsContext = createContext();
 
 export const GoalsProvider = ({ children }) => {
-  const { token, userId } = useAuth();
+  const { token } = useAuth();
 
   const AuthObj = {
     headers: { Authorization: `Bearer ${token}` },
@@ -18,7 +18,6 @@ export const GoalsProvider = ({ children }) => {
   const [currentGroup, setCurrentGroup] = useState("");
   const [goals, setGoals] = useState([]);
   const [message, setMessage] = useState([]);
-  const [teste, setTeste] = useState({});
 
   const loadGoals = async (idGroup) => {
     setCurrentGroup(idGroup);
@@ -58,7 +57,6 @@ export const GoalsProvider = ({ children }) => {
           "Successfully added goal!"
         ); /* toast register goal success */
         loadGoals(currentGroup);
-        setTeste(dataGoal);
       })
       .catch((err) => setMessage(err));
   };
@@ -69,7 +67,7 @@ export const GoalsProvider = ({ children }) => {
       difficulty: dataUpdate.difficulty.value,
       how_much_achieved: 100,
       achieved: false,
-      group: userId,
+      group: parseInt(currentGroup),
     };
 
     api
@@ -105,7 +103,6 @@ export const GoalsProvider = ({ children }) => {
         addGoal,
         updateGoal,
         deleteGoal,
-        teste,
       }}
     >
       {children}
