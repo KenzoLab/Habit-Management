@@ -69,11 +69,11 @@ const GroupCard = ({ group, cardType }) => {
               <BookmarkAddIcon className="subscribe__icon" />
             )}
           </button>
-          <button type="button">
+          <button type="button" onClick={handleModalActivities}>
             <BorderColorIcon />
           </button>
-          <button type="button">
-            <RadarIcon onClick={handleModalGoals} />
+          <button type="button" onClick={handleModalGoals}>
+            <RadarIcon />
           </button>
         </div>
         <div className="desktop__buttons">
