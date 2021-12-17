@@ -80,38 +80,12 @@ export const ContForm = styled.form`
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   box-sizing: border-box;
 
-  h3 {
-    font-family: var(--font-inter);
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: var(--darkBlue);
-  }
-
-  h6 {
-    font-family: var(--font-inter);
-    color: var(--darkBlue);
-    font-size: 25px;
-    font-style: medium;
-    font-weight: 500;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: center;
-  }
-
   @media (min-width: 768px) {
     width: 50%;
-
-    h3 {
-      display: none;
-    }
   }
 `;
 
@@ -121,12 +95,15 @@ export const ContInput = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 90%;
-  margin-bottom: 10px;
-  height: 60px;
+  margin-bottom: 0px;
+  height: 90px;
+  margin: 0;
 
-  p {
+  .error {
     color: var(--red);
     font-size: 10px;
+    height: 12px;
+    margin-top: 2px;
   }
 
   input {
@@ -140,16 +117,54 @@ export const ContInput = styled.div`
   label {
     font-family: var(--font-inter);
   }
+
+  div {
+    margin: 0;
+  }
+`;
+
+export const ContTextArea = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 0;
+  height: 160px;
+  margin: 0;
+
+  .error {
+    color: var(--red);
+    font-size: 10px;
+    height: 12px;
+    margin-top: 2px;
+  }
+
+  textarea {
+    border: solid 1px var(--gray);
+    font-style: italic;
+    font-family: var(--font-fira);
+    padding: 5px 15px;
+  }
+
+  label {
+    font-family: var(--font-inter);
+  }
+
+  div {
+    margin: 0;
+  }
 `;
 
 export const ButtonSub = styled.button`
   background-color: var(--blue);
   color: var(--whiteSmoke);
   width: 97%;
+  max-width: 264px;
   height: 40px;
   border: none;
   border-radius: 7px;
-  margin-bottom: 80px;
+  margin-bottom: 15px;
 
   &:hover {
     background-color: var(--lightBlue);
@@ -160,7 +175,7 @@ export const ButtonSub = styled.button`
   }
 `;
 
-export const ContActivities = styled.div`
+export const ContGroups = styled.div`
   display: none;
   flex-direction: column;
   align-items: center;
@@ -215,38 +230,35 @@ export const ContInfosItem = styled.div`
   justify-content: space-between;
 
   h4 {
-    /* padding-left: 10px; */
     width: 100%;
     height: 35%;
     font-size: 16px;
     font-weight: 500;
     color: var(--darkBlue);
   }
+`;
 
-  p {
-    width: 60%;
-    height: 65%;
-    font-size: 8.5px;
-    padding: 3px;
-  }
+export const Paragraph = styled.p`
+  width: 65%;
+  height: 65%;
+  font-size: 8px;
+  padding: 7px 0px;
+  margin-left: 5px;
+
+  color: var(--gray);
 `;
 
 export const ContTitlesItem = styled.div`
-  width: 30%;
+  width: 25%;
   height: 65%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   h5 {
     font-size: 12px;
     font-weight: 500;
     color: var(--gray);
-  }
-
-  h6 {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--red);
   }
 `;
 

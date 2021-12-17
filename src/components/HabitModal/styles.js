@@ -7,8 +7,9 @@ export const ContainerModal = styled.div`
   transform: translate(-50%, -50%);
   width: 90vw;
   max-width: 600px;
-  height: 500px;
+  height: 470px;
   border-radius: 25px;
+  margin-top: 30px;
   border: solid 3px var(--yellow);
   box-shadow: 0px 0px 12px 3px rgba(30, 30, 30, 0.61);
   padding: 5px;
@@ -20,6 +21,9 @@ export const ContainerModal = styled.div`
 
   @media (min-width: 768px) {
     flex-direction: row;
+    margin-top: 0;
+
+    height: 500px;
   }
 `;
 
@@ -84,34 +88,8 @@ export const ContForm = styled.form`
   align-items: center;
   box-sizing: border-box;
 
-  h3 {
-    font-family: var(--font-inter);
-    font-size: 36px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: center;
-    color: var(--darkBlue);
-  }
-
-  h6 {
-    font-family: var(--font-inter);
-    color: var(--darkBlue);
-    font-size: 25px;
-    font-style: medium;
-    font-weight: 500;
-    line-height: 28px;
-    letter-spacing: 0em;
-    text-align: center;
-  }
-
   @media (min-width: 768px) {
     width: 50%;
-
-    h3 {
-      display: none;
-    }
   }
 `;
 
@@ -124,9 +102,11 @@ export const ContInput = styled.div`
   margin-bottom: 10px;
   height: 60px;
 
-  p {
+  .error {
     color: var(--red);
     font-size: 10px;
+    height: 12px;
+    margin-top: 2px;
   }
 
   input {
@@ -146,10 +126,11 @@ export const ButtonSub = styled.button`
   background-color: var(--blue);
   color: var(--whiteSmoke);
   width: 97%;
+  max-width: 264px;
   height: 40px;
   border: none;
   border-radius: 7px;
-  margin-bottom: 80px;
+  margin-bottom: 15px;
 
   &:hover {
     background-color: var(--lightBlue);
@@ -160,7 +141,7 @@ export const ButtonSub = styled.button`
   }
 `;
 
-export const ContActivities = styled.div`
+export const ContHabits = styled.div`
   display: none;
   flex-direction: column;
   align-items: center;
@@ -215,27 +196,34 @@ export const ContInfosItem = styled.div`
   justify-content: space-between;
 
   h4 {
-    /* padding-left: 10px; */
     width: 100%;
     height: 35%;
     font-size: 16px;
     font-weight: 500;
     color: var(--darkBlue);
   }
+`;
 
-  p {
-    width: 60%;
-    height: 65%;
-    font-size: 8.5px;
-    padding: 3px;
-  }
+export const Paragraph = styled.p`
+  width: 40%;
+  height: 65%;
+  font-size: 12px;
+  padding: 10px;
+  margin-left: 15px;
+  color: ${(props) =>
+    props.diff === "Easy"
+      ? `var(--green)`
+      : props.diff === "Hard"
+      ? `var(--red)`
+      : `var(--yellow)`};
 `;
 
 export const ContTitlesItem = styled.div`
-  width: 30%;
+  width: 40%;
   height: 65%;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 
   h5 {
     font-size: 12px;
@@ -244,9 +232,9 @@ export const ContTitlesItem = styled.div`
   }
 
   h6 {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
-    color: var(--red);
+    color: var(--gray);
   }
 `;
 

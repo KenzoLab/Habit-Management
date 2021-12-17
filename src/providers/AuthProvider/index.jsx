@@ -11,7 +11,7 @@ const AuthProvider = ({ children }) => {
   });
 
   const [userId, setUserId] = useState(() => {
-    const id = JSON.parse(localStorage.getItem("@Habit:userId"));
+    const id = localStorage.getItem("@Habit:userId");
     return id ? id : null;
   });
 
@@ -19,6 +19,8 @@ const AuthProvider = ({ children }) => {
     const token = localStorage.getItem("@Habit:token");
     return token ? token : "";
   });
+
+  const [userInfo, setUserInfo] = useState({});
 
   const signInFunction = (formData, toastError) => {
     api
@@ -29,10 +31,7 @@ const AuthProvider = ({ children }) => {
         const { user_id } = tokenDecodificado;
 
         localStorage.setItem("@Habit:token", token);
-        localStorage.setItem(
-          "@Habit:userId",
-          JSON.stringify({ userId: user_id }),
-        );
+        localStorage.setItem("@Habit:userId", user_id);
 
         setToken(token);
         setUserId(user_id);
@@ -40,6 +39,22 @@ const AuthProvider = ({ children }) => {
       })
       .catch((error) => toastError("Invalid email or password"));
   };
+
+  const getUserInfo = (userId) => {
+    api
+      .get(`/users/${userId}/`)
+      .then((response) => {
+        setUserInfo({ ...response.data });
+      })
+      .catch((error) => console.log(error));
+  };
+
+  const logoutFunction = () => {
+    localStorage.removeItem("@Habit:userId");
+    localStorage.removeItem("@Habit:token");
+    setToken("");
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -48,6 +63,9 @@ const AuthProvider = ({ children }) => {
         signInFunction,
         isAuth,
         setIsAuth,
+        getUserInfo,
+        userInfo,
+        logoutFunction,
       }}>
       {children}
     </AuthContext.Provider>
