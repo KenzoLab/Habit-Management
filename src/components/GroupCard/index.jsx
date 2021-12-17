@@ -12,31 +12,35 @@ import ModalGoals from "../GoalsModal";
 const GroupCard = ({ group, cardType }) => {
   const { subscribeFunction, unsubscribeFunction } = useGroups();
   const [openModalGoals, setOpenModalGoals] = useState(false);
+  const [isSubscribed, setSubscribed] = useState(false);
   const [finishedGoals, setFinishedGols] = useState(0);
   const { name, description, goals, category, id, users_on_group } = group;
-  const [isSubscribed, setIsSubscribed] = useState(() => {
-    const userId = localStorage.getItem("@Habit:userId");
-    return users_on_group.some((user) => user.id === userId);
-  });
 
   const countFinishedGoals = () =>
     goals.reduce((acc, goal) => (goal.achieved ? acc + 1 : acc), 0);
 
   const subscribe = () => {
     subscribeFunction(id);
-    setIsSubscribed(true);
+    setSubscribed(!isSubscribed);
   };
 
   const unSubscribe = () => {
     unsubscribeFunction(id);
-    setIsSubscribed(false);
+    setSubscribed(!isSubscribed);
   };
 
   const handleModalGoals = () => {
+    console.log("GroupCard-sub", id);
     setOpenModalGoals(!openModalGoals);
   };
 
-  console.log(id);
+  useEffect(() => {
+    const userId = localStorage.getItem("@Habit:userId");
+    const check = group.users_on_group.some(
+      (user) => user.id === parseInt(userId),
+    );
+    setSubscribed(check);
+  }, [group]);
 
   useEffect(() => {
     setFinishedGols(countFinishedGoals());
