@@ -44,7 +44,6 @@ const AuthProvider = ({ children }) => {
     api
       .get(`/users/${userId}/`)
       .then((response) => {
-        console.log(response.data);
         setUserInfo({ ...response.data });
       })
       .catch((error) => console.log(error));

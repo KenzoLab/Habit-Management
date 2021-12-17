@@ -85,7 +85,6 @@ const GroupsProvider = ({ children }) => {
         `/groups/${groupId}/unsubscribe/`,
         AuthorizationObj,
       );
-      console.log("deu certo");
     } catch (error) {
       setErrorMessage(error);
     }
