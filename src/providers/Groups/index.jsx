@@ -21,16 +21,16 @@ const GroupsProvider = ({ children }) => {
   };
 
   const listGroupsFunction = async (token) => {
-    let counter = 1;
+    let counter = 0;
     let array = [];
     let response = {};
     try {
-      // do {
-      // counter++;
-      response = await api.get(`/groups/?page=${counter}`, token);
-      const currentPage = response.data.results;
-      array = [...array, ...currentPage];
-      // } while (response.data.next);
+      do {
+        counter++;
+        response = await api.get(`/groups/?page=${counter}`, token);
+        const currentPage = response.data.results;
+        array = [...array, ...currentPage];
+      } while (counter < 2);
       setAllGroupsList([...array]);
     } catch (error) {
       setErrorMessage(error);
