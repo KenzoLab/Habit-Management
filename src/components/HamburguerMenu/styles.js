@@ -13,7 +13,7 @@ export const Nav = styled.div`
   align-items: center;
   flex-direction: column;
 
-  justify-content: center; /* era counter-incremencentert */
+  justify-content: center; /* era center */
   /* justify-content: counter-increment; */
   background-color: var(--whiteSmoke);
   z-index: 100;

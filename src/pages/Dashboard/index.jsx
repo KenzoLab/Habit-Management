@@ -11,6 +11,7 @@ import {
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
+import { useCurrentPage } from "../../providers/CurrentPage";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
@@ -25,6 +26,7 @@ function Dashboard() {
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
 
+  const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
 
@@ -44,13 +46,14 @@ function Dashboard() {
 
   useEffect(() => {
     const filteredHabits = listHabits.filter(
-      (habit) => habit.frequency === filter,
+      (habit) => habit.frequency === filter
     );
     setFilteredList([...filteredHabits]);
   }, [isFiltered, filter]);
 
   useEffect(() => {
     listHabitsFunction(token);
+    defineCurrentPageFunction("dashboard");
   }, []);
 
   return (
@@ -65,11 +68,6 @@ function Dashboard() {
                 placeholder="Search..."
                 //onChange={(evt) setSearch(evt.target.value)}
               />
-              {/*<button
-              //onClick={() => addGroup()}
-              >
-                + add grupo
-              </button>*/}
             </div>
           </section>
 
