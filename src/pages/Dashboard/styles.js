@@ -41,6 +41,7 @@ export const Header = styled.header`
     display: flex;
     justify-content: center;
     align-items: center;
+
     h2 {
       color: var(--darkBlue);
       font-size: 52px;
@@ -67,19 +68,24 @@ export const Header = styled.header`
   .header-bottom {
     display: flex;
     justify-content: center;
-    @media (min-width: 768px) {
-      margin-bottom: 15px;
-      margin-left: 35px;
-      button {
-        font-size: 30px;
+    
+    button {
         padding: 8px 15px;
+      }
+      
+      @media (min-width: 768px) {
+        margin-bottom: 15px;
+        margin-left: 35px;
+        button {
+          padding: 8px 15px;
+          font-size: 30px;
       }
     }
   }
 
   .filter-buttons {
     padding: 8px 0px;
-    margin: 6px 22px;
+    margin: 10px 4px;
     color: var(--blue);
     font-weight: bold;
     font-size: 20px;
@@ -104,7 +110,7 @@ export const ContSearch = styled.div`
 `;
 export const InputSearch = styled.input`
   height: 50px;
-  width: 50px;
+  width: 290px;
   border-style: none;
   padding-left: 10px;
   font-size: 16px;
@@ -115,8 +121,11 @@ export const InputSearch = styled.input`
   background-color: #f9deb3;
   padding-right: 40px;
   color: #9398a2;
+  @media (min-width: 768px) {
+    width: 50px;  
+  }
   &:focus {
-    width: 300px;
+    width: 290px;
     border-radius: 15px;
     background-color: #f9deb3;
     transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
@@ -144,7 +153,7 @@ export const BtnSearch = styled.button`
     background-color:#f9deb3;
     pointer-events: painted;
     &:focus ~ input{
-    width: 300px;
+    width: 290px;
     border-radius: 15px;
     background-color: #F9DEB3;
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
