@@ -63,7 +63,7 @@ export const Nav = styled.div`
           display: flex;
           align-items: center;
           height: 50px;
-          border-bottom: 1px solid #0000002b;
+          border-bottom: 1px solid #9398A2;
           margin-bottom: 10px;
           width: 75vw;
 
@@ -117,6 +117,7 @@ export const Nav = styled.div`
             border: none;
             width: 176px;
             margin: 0px 0px 10px 15px;
+            font-family: var(--font-fira)
           }
 
           a {
@@ -124,7 +125,13 @@ export const Nav = styled.div`
             color: var(--darkBlue);
             margin-top: 6px;
             font-size: 18px;
-            font-family: "Fira Sans";
+            font-family: var(--fira-font)
+          } 
+
+          button {
+            color: var(--darkBlue);
+            font-size: 18px;
+            font-family: var(--fira-font);
           }
         }
       }
@@ -211,12 +218,15 @@ export const Footer = styled.div`
     align-items: center;
   }
   .username {
+    font-family: var(--font-fira);
     font-size: 15px;
     color: var(--darkBlue);
   }
   .useremail {
+    font-family: var(--font-fira);
     font-size: 12px;
     font-style: italic;
+    font-weight: light;
     color: var(--gray);
   }
 

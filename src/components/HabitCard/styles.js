@@ -1,63 +1,46 @@
 ﻿import styled from "styled-components";
 
-export const ContentContainer = styled.div`
-  width: 99%;
-  height: 100%;
+export const CardFrame = styled.div`
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+
+  width: 290px;
+  height: 235px;
+  border-radius: 30px;
+  padding: 25px;
+  border-right: 12px solid var(--yellow);
+  background-color: var(--white);
+  box-sizing: border-box;
+  margin: 10px;
+  box-shadow: 4px 2px 11px 0px rgba(147, 152, 162, 0.6);
+  border-radius: 20px;
+`;
+
+export const ContentContainer = styled.div`
+  display: flex;
+  align-items: flex-start;
   border-radius: 28px;
+  flex-direction: column;
+  width: 190px;
+  justify-content: space-between;
 
-  // Card Content
-  .content__text {
-    border-radius: 34px;
-    height: 100%;
-
-    display: flex;
-    justify-content: space-evenly;
-    flex-direction: column;
+  .content__frequency {
+    color: var(--blue);
   }
   .content__title {
-    grid-area: title;
-    font-size: 28px;
-    align-self: center;
+    font-size: 23px;
     font-weight: 600;
-    color: var(--black);
+    color: var(--darkBlue);
   }
-  .content__description {
-    font-size: 15px;
-    grid-area: description;
-    text-align: justify;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    max-height: 80px;
-    -webkit-line-clamp: 4;
-    -webkit-box-orient: vertical;
-  }
+
   .content__category {
-    grid-area: category;
     font-size: 15px;
     font-weight: 600;
-    align-self: center;
     color: var(--grey);
   }
 
-  .delete__button {
-    height: 36px;
-    width: 36px;
-    color: var(--whiteSmoke);
-    font-size: 20px;
-    font-weight: bold;
-    border-radius: 50%;
-    background-color: var(--yellow);
 
-    margin-left: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
 
   @media (min-width: 600px) {
     .content__text {
@@ -67,21 +50,35 @@ export const ContentContainer = styled.div`
         "description description description"
         "description description description";
     }
-    .content__title {
-      align-self: center;
-      margin-bottom: 20px;
-    }
     .content__category {
-      justify-self: center;
-      align-self: center;
       margin-bottom: 20px;
-    }
-    .content__description {
-      max-height: 109px;
-      -webkit-line-clamp: 6;
     }
   }
 `;
+
+export const ButtonContainer = styled.div`
+  
+  button {
+    background-color: var(--lightGray);
+    border: solid 1px var(--gray);
+    color: var(--darkBlue);
+    height: 26px;
+    width: 26px;
+    font-size: 20px;
+    font-family: var(--fira-font);
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  
+    &:hover {
+      background-color: var(--gray);
+      border: 1px solid var(--gray);
+    }
+  }
+`
 
 export const Difficulty = styled.span`
   grid-area: difficulty;

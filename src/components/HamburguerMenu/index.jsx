@@ -102,7 +102,7 @@ function HamburguerMenu() {
               sx={{
                 width: 50,
                 height: 50,
-                mr: 3,
+                mr: 0.5,
               }}
             />
             <div>

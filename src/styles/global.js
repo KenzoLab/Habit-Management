@@ -32,7 +32,7 @@ export default createGlobalStyle`
   }
 
   body {
-    background: var(--whiteSmoke);
+    background-color: var(--greyBackground);
     color: var(--gray);
   }
 
