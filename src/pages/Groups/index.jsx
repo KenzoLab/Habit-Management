@@ -1,13 +1,14 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import { FiSearch } from "react-icons/fi";
 import {
   App,
   Container,
   Footer,
   Header,
   Cards,
-  ButtonToday,
-  ButtonWeek,
-  ButtonMonth,
+  InputSearch,
+  BtnSearch,
+  ContSearch,
 } from "./styles";
 import GroupCard from "../../components/GroupCard";
 import { useHabit } from "../../providers/Habits";
@@ -61,29 +62,33 @@ function Groups() {
           <section className="header-top">
             <h2>Groups</h2>
             <div className="header-search">
-              <input
-                placeholder="Search..."
-                //onChange={(evt) setSearch(evt.target.value)}
-              />
-              {/*<button
-              //onClick={() => addGroup()}
-              >
-                + add grupo
-              </button>*/}
+              <ContSearch>
+                <div>
+                  <BtnSearch>
+                    <FiSearch />
+                  </BtnSearch>
+                  <InputSearch type="text" placeholder="Type to Search..." />
+                </div>
+              </ContSearch>
             </div>
           </section>
 
           <section className="header-bottom">
             <div id="blues">
-              <ButtonToday onClick={() => filtering("Daily")} filter={filter}>
+              <button
+                className="filter-buttons"
+                onClick={() => filtering("Daily")}
+                filter={filter}
+              >
                 Discovery
-              </ButtonToday>
-              <ButtonWeek onClick={() => filtering("Weekly")} filter={filter}>
+              </button>
+              <button
+                className="filter-buttons"
+                onClick={() => filtering("Weekly")}
+                filter={filter}
+              >
                 Registered
-              </ButtonWeek>
-              <ButtonMonth onClick={() => filtering("Monthly")} filter={filter}>
-                All
-              </ButtonMonth>
+              </button>
             </div>
           </section>
         </Header>
