@@ -102,7 +102,6 @@ export const ContSearch = styled.div`
     position: relative;
   }
 `;
-
 export const InputSearch = styled.input`
   height: 50px;
   width: 290px;
