@@ -24,9 +24,6 @@ import ModalHabits from "../../components/HabitModal";
 import ModalGroups from "../../components/GroupModal";
 import ModalGoals from "../../components/GoalsModal";
 import ModalActivities from "../../components/ActivitiesModal";
-import { FiSearch } from "react-icons/fi";
-
-import { ContainerDash, ContSearch, InputSearch, BtnSearch } from "./styles";
 
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
@@ -76,7 +73,7 @@ function Dashboard() {
     console.log();
     if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
       const filteredHabits = listHabits.filter(
-        (habit) => habit.frequency === filter
+        (habit) => habit.frequency === filter,
       );
       setFilteredList([...filteredHabits]);
     }
@@ -90,7 +87,7 @@ function Dashboard() {
     <App>
       <Container>
         <div>
-      <HamburguerMenu />
+          <HamburguerMenu />
         </div>
         <Header>
           <section className="header-top">
@@ -116,22 +113,19 @@ function Dashboard() {
               <ButtonToday
                 className="filter-buttons"
                 onClick={() => filtering("Daily")}
-                filter={filter}
-              >
+                filter={filter}>
                 Today
               </ButtonToday>
               <ButtonWeek
                 className="filter-buttons"
                 onClick={() => filtering("Weekly")}
-                filter={filter}
-              >
+                filter={filter}>
                 Week
               </ButtonWeek>
               <ButtonMonth
                 className="filter-buttons"
                 onClick={() => filtering("Monthly")}
-                filter={filter}
-              >
+                filter={filter}>
                 Month
               </ButtonMonth>
             </div>
