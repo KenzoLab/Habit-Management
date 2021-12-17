@@ -108,8 +108,8 @@ export const ContForm = styled.form`
 
   @media (min-width: 768px) {
     width: 50%;
-    
-    h3{
+
+    h3 {
       display: none;
     }
   }
@@ -160,7 +160,7 @@ export const ButtonSub = styled.button`
   }
 `;
 
-export const ContHabits = styled.div`
+export const ContActivities = styled.div`
   display: none;
   flex-direction: column;
   align-items: center;

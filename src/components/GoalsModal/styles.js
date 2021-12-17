@@ -154,7 +154,7 @@ export const ButtonSub = styled.button`
   }
 `;
 
-export const ContHabits = styled.div`
+export const ContGoals = styled.div`
   display: none;
   flex-direction: column;
   align-items: center;
