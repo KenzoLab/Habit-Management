@@ -74,13 +74,13 @@ const ModalGroups = ({ open, handle }) => {
   });
 
   // ADD GROUP
-  const onAddGroup = (data) => {
+  const onAddGroup = data => {
     createGroupFunction(data);
     resetInputs();
   };
 
   // DELETE GROUP
-  const onDeleteGroup = (idGroup) => {
+  const onDeleteGroup = idGroup => {
     unsubscribeFunction(idGroup);
   };
 

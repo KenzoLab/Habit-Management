@@ -28,7 +28,7 @@ function Groups() {
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
 
-  const filtering = (period) => {
+  const filtering = period => {
     if (!isFiltered || filter !== period) {
       setIsFiltered(true);
       setFilter(period);
@@ -44,7 +44,7 @@ function Groups() {
 
   useEffect(() => {
     const filteredHabits = listHabits.filter(
-      (habit) => habit.frequency === filter,
+      habit => habit.frequency === filter
     );
     setFilteredList([...filteredHabits]);
   }, [isFiltered, filter]);
@@ -84,7 +84,7 @@ function Groups() {
                 Registered
               </ButtonWeek>
               <ButtonMonth onClick={() => filtering("Monthly")} filter={filter}>
-               All
+                All
               </ButtonMonth>
             </div>
           </section>
