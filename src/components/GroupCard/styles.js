@@ -11,26 +11,26 @@ export const ContentContainer = styled.div`
   .content__text {
     border-radius: 34px;
     height: 100%;
+    width: 160px;
     flex: 1;
     display: grid;
-    grid-template-areas:
-      "title title"
-      "description description"
-      "description description"
-      "category goals";
+    grid-template-areas: "title title" "category category" "description description" "description description" "goals goals";
   }
-  .content__title {
+  .content__name {
     grid-area: title;
-    font-size: 28px;
+    font-size: 23px;
+    max-width: 100%;
+    overflow-wrap: break-word;
     align-self: center;
     font-weight: 600;
-    color: var(--black);
+    color: var(--darkBlue);
   }
   .content__description {
     font-size: 15px;
     grid-area: description;
     text-align: justify;
     overflow: hidden;
+    max-width: 180px;
     text-overflow: ellipsis;
     display: -webkit-box;
     max-height: 80px;
@@ -47,7 +47,7 @@ export const ContentContainer = styled.div`
 
   .content__goals {
     grid-area: goals;
-    justify-self: end;
+    justify-self: center;
     align-self: center;
   }
 
@@ -78,26 +78,25 @@ export const ContentContainer = styled.div`
     display: none;
   }
 
-  @media (min-width: 600px) {
+  @media (min-width: 767px) {
     .content__text {
-      grid-template-areas:
-        "title category goals"
-        "description description description"
-        "description description description"
-        "description description description";
+      grid-template-areas: "title title goals" "category category category" "description description description";
     }
-    .content__title {
+    .content__name {
       align-self: center;
-      margin-bottom: 20px;
+      width: 160px;
+      margin-right: 3px;
+      margin-bottom: 0px;
     }
     .content__category {
-      justify-self: center;
+      justify-self: left;
       align-self: center;
       margin-bottom: 20px;
     }
 
     .content__goals {
-      margin-bottom: 20px;
+      width: 80px;
+      margin-bottom: 0px;
     }
 
     .content__description {
@@ -145,7 +144,7 @@ export const Difficult = styled.span`
   align-self: center;
   text-align: end;
 
-  color: ${(props) => {
+  color: ${props => {
     if (props.children.toLowerCase() === "easy") {
       return "var(--green)";
     } else if (props.children.toLowerCase() === "medium") {

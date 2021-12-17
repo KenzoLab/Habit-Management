@@ -21,9 +21,9 @@ const GroupCard = ({ group, cardType }) => {
     <CardFrame cardType={cardType}>
       <ContentContainer cardType={cardType}>
         <div className="content__text">
-          <h4 className="content__title">{name}</h4>
-          <p className="content__description">{description}</p>
+          <h4 className="content__name">{name}</h4>
           <span className="content__category">{category}</span>
+          <p className="content__description">{description}</p>
           <span className="content__goals">Goals: {finishedGoals}</span>
         </div>
         <div className="mobile__buttons">
