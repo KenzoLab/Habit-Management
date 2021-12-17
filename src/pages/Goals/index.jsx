@@ -14,24 +14,24 @@ import {
   ContSearch,
   ButtonMonth,
 } from "./styles";
-import HabitCard from "../../components/HabitCard";
+import GoalsCard from "../../components/GoalsCard";
 import { useGoals } from "../../providers/Goals";
 import { useAuth } from "../../providers/AuthProvider";
-//import { useEffect } from "react";
+import { useEffect } from "react";
 //import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 //import ModalHabits from "../../components/HabitModal";
 //import ModalGoals from "../../components/GoalsModal";
 //import ModalActivities from "../../components/ActivitiesModal";
 
-function Dashboard() {
+function Goals() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
 
   const [filteredList, setFilteredList] = useState([]);
 
-  const { goals } = useGoals();
+  const { goals, loadGoals } = useGoals();
   console.log(goals, "goals");
   const { token } = useAuth();
 
@@ -73,10 +73,10 @@ function Dashboard() {
      setFilteredList([...filteredHabits]);
    }
  }, [isFiltered, filter]);
- useEffect(() => {
-   listHabitsFunction(token);
- }, []);
-  */
+ */
+  useEffect(() => {
+    loadGoals(token);
+  }, []);
 
   return (
     <App>
@@ -86,7 +86,7 @@ function Dashboard() {
         </div>
         <Header>
           <section className="header-top">
-            <h2>Activites</h2>
+            <h2>Goals</h2>
             <div className="header-search">
               {/*<ContSearch>
                 <div>
@@ -133,23 +133,26 @@ function Dashboard() {
           <Cards>
             {isFiltered
               ? filteredList.map((habit, index) => (
-                  <HabitCard
+                  <GoalsCard
                     key={index}
                     title={habit.title}
-                    frequency={habit.frequency}
-                    category={habit.category}
-                    difficulty={habit.difficulty}
-                    habitId={habit.id}
+                    status={habit.how_much_achieved}
+                    //frequency={habit.frequency}
+                    //category={habit.category}
+                    difficult={habit.difficulty}
+                    //habitId={habit.id}
                   />
                 ))
               : goals.map((habit, index) => (
-                  <HabitCard
+                  <GoalsCard
                     key={index}
                     title={habit.title}
-                    frequency={habit.frequency}
-                    category={habit.category}
-                    difficulty={habit.difficulty}
-                    habitId={habit.id}
+                    status={habit.how_much_achieved}
+                    group={habit.group}
+                    //frequency={habit.frequency}
+                    //category={habit.category}
+                    difficult={habit.difficulty}
+                    //habitId={habit.id}
                   />
                 ))}
           </Cards>
@@ -163,4 +166,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Goals;

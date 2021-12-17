@@ -176,7 +176,7 @@ export const ButtonMonth = styled.button`
 `;
 
 export const Cards = styled.section`
-  height: 65vh;
+  height: 70vh;
   overflow-y: auto;
   @media (min-width: 768px) {
     max-width: 1060px;
