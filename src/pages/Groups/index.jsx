@@ -78,13 +78,13 @@ function Groups() {
           <section className="header-bottom">
             <div id="blues">
               <ButtonToday onClick={() => filtering("Daily")} filter={filter}>
-                Today
+                Discovery
               </ButtonToday>
               <ButtonWeek onClick={() => filtering("Weekly")} filter={filter}>
-                Week
+                Registered
               </ButtonWeek>
               <ButtonMonth onClick={() => filtering("Monthly")} filter={filter}>
-                Month
+               All
               </ButtonMonth>
             </div>
           </section>
