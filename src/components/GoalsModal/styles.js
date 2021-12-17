@@ -237,12 +237,17 @@ export const ContTitlesItem = styled.div`
     font-weight: 500;
     color: var(--gray);
   }
+`;
 
-  h6 {
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--red);
-  }
+export const H6 = styled.h6`
+  font-size: 12px;
+  font-weight: 500;
+  color: ${(props) =>
+    props.diff === "Easy"
+      ? `var(--green)`
+      : props.diff === "Hard"
+      ? `var(--red)`
+      : `var(--yellow)`};
 `;
 
 export const BtnCloseDelete = styled.button`
