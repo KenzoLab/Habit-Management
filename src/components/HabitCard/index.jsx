@@ -19,7 +19,7 @@ const HabitCard = ({ title, category, frequency, difficulty, habitId }) => {
   return (
     <CardFrame cardType="habit">
       <ContentContainer cardType="habit">
-        <div className="content__text">
+        {/*<div className="content__text">
           <h4 className="content__title">{title}</h4>
           <p className="content__frequency">{frequency}</p>
           <span className="content__category">{category}</span>
@@ -28,7 +28,7 @@ const HabitCard = ({ title, category, frequency, difficulty, habitId }) => {
         <LineVertical />
         <div className="delete__button" onClick={onDeleteHabit}>
           X
-        </div>
+  </div>*/}
       </ContentContainer>
     </CardFrame>
   );

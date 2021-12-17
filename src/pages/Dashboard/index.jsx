@@ -1,12 +1,17 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import { FiSearch } from "react-icons/fi";
 import {
   App,
   Container,
+  MainContainer,
   Footer,
   Header,
   Cards,
   ButtonToday,
   ButtonWeek,
+  InputSearch,
+  BtnSearch,
+  ContSearch,
   ButtonMonth,
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
@@ -81,57 +86,76 @@ function Dashboard() {
           <section className="header-top">
             <h2>Dashboard</h2>
             <div className="header-search">
-              <input
-                placeholder="Search..."
-                onChange={(evt) => setSearch(evt.target.value.toString())}
-              />
-              <button className="search" onClick={() => procurar()}>
-                p
-              </button>
+              <ContSearch>
+                <div>
+                  <BtnSearch onClick={() => procurar()}>
+                    <FiSearch />
+                  </BtnSearch>
+                  <InputSearch
+                    type="text"
+                    placeholder="Search..."
+                    onChange={(evt) => setSearch(evt.target.value.toString())}
+                  />
+                </div>
+              </ContSearch>
             </div>
           </section>
 
           <section className="header-bottom">
             <div id="blues">
-              <ButtonToday onClick={() => filtering("Daily")} filter={filter}>
+              <ButtonToday
+                className="filter-buttons"
+                onClick={() => filtering("Daily")}
+                filter={filter}
+              >
                 Today
               </ButtonToday>
-              <ButtonWeek onClick={() => filtering("Weekly")} filter={filter}>
+              <ButtonWeek
+                className="filter-buttons"
+                onClick={() => filtering("Weekly")}
+                filter={filter}
+              >
                 Week
               </ButtonWeek>
-              <ButtonMonth onClick={() => filtering("Monthly")} filter={filter}>
+              <ButtonMonth
+                className="filter-buttons"
+                onClick={() => filtering("Monthly")}
+                filter={filter}
+              >
                 Month
               </ButtonMonth>
             </div>
           </section>
         </Header>
-        <Cards>
-          {isFiltered
-            ? filteredList.map((habit, index) => (
-                <HabitCard
-                  key={index}
-                  title={habit.title}
-                  frequency={habit.frequency}
-                  category={habit.category}
-                  difficulty={habit.difficulty}
-                  habitId={habit.id}
-                />
-              ))
-            : listHabits.map((habit, index) => (
-                <HabitCard
-                  key={index}
-                  title={habit.title}
-                  frequency={habit.frequency}
-                  category={habit.category}
-                  difficulty={habit.difficulty}
-                  habitId={habit.id}
-                />
-              ))}
-        </Cards>
-        <Footer>
-          <BasicSpeedDial handleModalHabits={handleModalHabits} />
-          <ModalHabits open={openModalHabits} handle={handleModalHabits} />
-        </Footer>
+        <MainContainer>
+          <Cards>
+            {isFiltered
+              ? filteredList.map((habit, index) => (
+                  <HabitCard
+                    key={index}
+                    title={habit.title}
+                    frequency={habit.frequency}
+                    category={habit.category}
+                    difficulty={habit.difficulty}
+                    habitId={habit.id}
+                  />
+                ))
+              : listHabits.map((habit, index) => (
+                  <HabitCard
+                    key={index}
+                    title={habit.title}
+                    frequency={habit.frequency}
+                    category={habit.category}
+                    difficulty={habit.difficulty}
+                    habitId={habit.id}
+                  />
+                ))}
+          </Cards>
+          <Footer>
+            <BasicSpeedDial handleModalHabits={handleModalHabits} />
+            <ModalHabits open={openModalHabits} handle={handleModalHabits} />
+          </Footer>
+        </MainContainer>
       </Container>
     </App>
   );
