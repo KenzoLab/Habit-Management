@@ -8,7 +8,7 @@ import { ContentContainer } from "./styles";
 
 const GroupCard = ({ group, cardType }) => {
   const [finishedGoals, setFinishedGols] = useState(0);
-  const { title, description, goals, category } = group;
+  const { name, description, goals, category } = group;
 
   const countFinishedGoals = () =>
     goals.reduce((acc, goal) => (goal.achieved ? acc + 1 : acc), 0);
@@ -21,7 +21,7 @@ const GroupCard = ({ group, cardType }) => {
     <CardFrame cardType={cardType}>
       <ContentContainer cardType={cardType}>
         <div className="content__text">
-          <h4 className="content__title">{title}</h4>
+          <h4 className="content__name">{name}</h4>
           <p className="content__description">{description}</p>
           <span className="content__category">{category}</span>
           <span className="content__goals">Goals: {finishedGoals}</span>
