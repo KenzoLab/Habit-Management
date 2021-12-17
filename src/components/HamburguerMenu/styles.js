@@ -109,6 +109,13 @@ export const Nav = styled.div`
             color: var(--darkBlue);
             margin-top: 6px;
             font-size: 18px;
+            font-family: var(--fira-font)
+          } 
+
+          button {
+            color: var(--darkBlue);
+            font-size: 18px;
+            font-family: var(--fira-font);
           }
         }
       }
