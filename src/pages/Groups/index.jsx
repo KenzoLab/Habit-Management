@@ -9,6 +9,7 @@ import {
   InputSearch,
   BtnSearch,
   ContSearch,
+  MainContainer
 } from "./styles";
 import GroupCard from "../../components/GroupCard";
 import { useHabit } from "../../providers/Habits";
@@ -92,22 +93,21 @@ function Groups() {
             </div>
           </section>
         </Header>
-        <section>
+        <MainContainer>
           <Cards>
             {allGroupsList.map((group, index) => (
               <GroupCard
                 cardType="group"
                 group={group}
                 key={index}
-                // isSubscribed={checkIsSubscribed(group)}
               />
             ))}
-          </Cards>
-        </section>
         <Footer>
           <BasicSpeedDial handleModal={handleModalGroups} />
           <ModalGroups open={openModalGroups} handle={handleModalGroups} />
         </Footer>
+          </Cards>
+        </MainContainer>
       </Container>
     </App>
   );

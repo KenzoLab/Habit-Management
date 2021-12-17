@@ -88,16 +88,11 @@ export const Nav = styled.div`
     }
   }
 
-  /* @media (max-width: 767px) {
-    .menu-list {
-      padding: 25px 5px 25px 5px;
-    }
-  }*/
 
   @media (min-width: 767px) {
-    width: 200px;
+    width: 250px;
     height: 100vh;
-    padding: 25px 5px 25px 25px;
+
     .menu-list {
       width: 250px;
       display: flex;
@@ -138,7 +133,6 @@ export const Nav = styled.div`
 
       div {
         width: 190px;
-        padding-left: 14px;
 
         div {
           width: 100px;
