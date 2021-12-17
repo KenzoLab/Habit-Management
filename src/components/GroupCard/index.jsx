@@ -7,28 +7,40 @@ import { useGroups } from "../../providers/Groups";
 
 import CardFrame from "../CardFrame";
 import { ContentContainer } from "./styles";
+import ModalGoals from "../GoalsModal";
 
 const GroupCard = ({ group, cardType }) => {
   const { subscribeFunction, unsubscribeFunction } = useGroups();
+  const [openModalGoals, setOpenModalGoals] = useState(false);
+  const [isSubscribed, setSubscribed] = useState(false);
   const [finishedGoals, setFinishedGols] = useState(0);
   const { name, description, goals, category, id, users_on_group } = group;
-  const [isSubscribed, setIsSubscribed] = useState(() => {
-    const userId = localStorage.getItem("@Habit:userId");
-    return users_on_group.some((user) => user.id === userId);
-  });
 
   const countFinishedGoals = () =>
     goals.reduce((acc, goal) => (goal.achieved ? acc + 1 : acc), 0);
 
   const subscribe = () => {
     subscribeFunction(id);
-    setIsSubscribed(true);
+    setSubscribed(!isSubscribed);
   };
 
   const unSubscribe = () => {
     unsubscribeFunction(id);
-    setIsSubscribed(false);
+    setSubscribed(!isSubscribed);
   };
+
+  const handleModalGoals = () => {
+    console.log("GroupCard-sub", id);
+    setOpenModalGoals(!openModalGoals);
+  };
+
+  useEffect(() => {
+    const userId = localStorage.getItem("@Habit:userId");
+    const check = group.users_on_group.some(
+      (user) => user.id === parseInt(userId),
+    );
+    setSubscribed(check);
+  }, [group]);
 
   useEffect(() => {
     setFinishedGols(countFinishedGoals());
@@ -39,8 +51,8 @@ const GroupCard = ({ group, cardType }) => {
       <ContentContainer cardType={cardType}>
         <div className="content__text">
           <h4 className="content__name">{name}</h4>
-          <span className="content__category">{category}</span>
           <p className="content__description">{description}</p>
+          <span className="content__category">{category}</span>
           <span className="content__goals">Goals: {finishedGoals}</span>
         </div>
         <div className="mobile__buttons">
@@ -61,7 +73,7 @@ const GroupCard = ({ group, cardType }) => {
             <BorderColorIcon />
           </button>
           <button type="button">
-            <RadarIcon />
+            <RadarIcon onClick={handleModalGoals} />
           </button>
         </div>
         <div className="desktop__buttons">
@@ -93,10 +105,15 @@ const GroupCard = ({ group, cardType }) => {
             <span>Activities</span>
           </button>
           <button type="button">
-            <RadarIcon />
-            <span>Goals</span>
+            <RadarIcon onClick={handleModalGoals} />
+            <span onClick={handleModalGoals}>Goals</span>
           </button>
         </div>
+        <ModalGoals
+          open={openModalGoals}
+          handle={handleModalGoals}
+          idGroup={parseInt(id)}
+        />
       </ContentContainer>
     </CardFrame>
   );

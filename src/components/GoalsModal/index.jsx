@@ -1,20 +1,24 @@
 ﻿import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import { useGoals } from "../../providers/Goals";
 
 import {
   ContainerModal,
   ContForm,
   ContRight,
   ContCurrent,
-  ContHabits,
+  ContGoals,
   ContList,
   ContInput,
   ContItem,
   ContInfosItem,
   ContTitlesItem,
+  H6,
   Head,
   ButtonSub,
   BtnCloseDelete,
@@ -22,13 +26,19 @@ import {
 import Input from "../../components/Input";
 import { InputSelect } from "../../components/Input";
 
-const ModalGoals = ({ open, handle }) => {
+const ModalGoals = ({ open, handle, idGroup }) => {
+  //PROPS PROVIDER
+  const { goals, loadGoals } = useGoals();
+  const { addGoal, deleteGoal } = useGoals();
+
+  //ARRAYS SELECT OPTIONS
   const arrDifficulty = [
     { value: "Easy", label: "Easy" },
     { value: "Medium", label: "Medium" },
     { value: "Hard", label: "Hard" },
   ];
 
+  //SCHEMA YUP VALIDATION
   const schema = yup.object().shape({
     title: yup
       .string()
@@ -41,6 +51,7 @@ const ModalGoals = ({ open, handle }) => {
     }),
   });
 
+  // HOOK FORM
   const {
     register,
     handleSubmit,
@@ -51,18 +62,36 @@ const ModalGoals = ({ open, handle }) => {
     resolver: yupResolver(schema),
   });
 
-  const onAddHabit = (data) => {
-    console.log(data);
-    //função da Context API
+  //ADD GOAL
+  const onAddGoal = (data) => {
+    addGoal(data);
+    resetInputs();
   };
 
-  const CloseModal = () => {
+  // REMOVE GOAL
+  const onDeleteGoal = (idGoal) => {
+    deleteGoal(idGoal);
+  };
+
+  // RESET INPUTS
+  const resetInputs = () => {
     reset({
       title: "",
       difficulty: { value: "", label: "Select an option" },
     });
+  };
+
+  //CLOSE MODAL AND RESET INPUTS
+  const CloseModal = () => {
+    resetInputs();
     handle();
   };
+
+  //USE EFFECT
+  useEffect(() => {
+    loadGoals(idGroup);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -70,30 +99,30 @@ const ModalGoals = ({ open, handle }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
-        <ContainerModal onSubmit={handleSubmit(onAddHabit)}>
-          <ContHabits>
+        aria-describedby="parent-modal-description">
+        <ContainerModal onSubmit={handleSubmit(onAddGoal)}>
+          <ContGoals>
             <Head>
               <h3>Goals</h3>
             </Head>
             <ContList>
-              {/* Receber habits e fazer um map */}
-              <ContItem>
-                <ContInfosItem>
-                  <h4>Goal Title...</h4>
-                  <ContTitlesItem>
-                    <h5></h5>
-                    <h6>Hard</h6>
-                  </ContTitlesItem>
-                  <p></p>
-                </ContInfosItem>
-                <BtnCloseDelete>
-                  <IoCloseOutline />
-                </BtnCloseDelete>
-              </ContItem>
+              {goals.map((item, idx) => (
+                <ContItem key={idx}>
+                  <ContInfosItem>
+                    <h4>{`${item.title.substring(0, 15)}...`}</h4>
+                    <ContTitlesItem>
+                      <h5></h5>
+                      <H6 diff={item.difficulty}>{item.difficulty}</H6>
+                    </ContTitlesItem>
+                    <p></p>
+                  </ContInfosItem>
+                  <BtnCloseDelete onClick={() => onDeleteGoal(item.id)}>
+                    <IoCloseOutline />
+                  </BtnCloseDelete>
+                </ContItem>
+              ))}
             </ContList>
-          </ContHabits>
+          </ContGoals>
           <ContRight>
             <ContCurrent>
               <Head>
@@ -102,7 +131,11 @@ const ModalGoals = ({ open, handle }) => {
                   <IoCloseOutline />
                 </BtnCloseDelete>
               </Head>
-              <p>14 goals / 5 concluded</p>
+              <p>
+                {goals.length} goals /{" "}
+                {goals.filter((item) => item.achieved === false).length}{" "}
+                concluded
+              </p>
             </ContCurrent>
             <ContForm>
               <Head>

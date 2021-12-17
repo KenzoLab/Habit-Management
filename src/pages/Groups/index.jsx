@@ -53,8 +53,6 @@ function Groups() {
     listGroupsFunction(token);
   }, []);
 
-  console.log(allGroupsList);
-
   return (
     <App>
       <HamburguerMenu />
@@ -92,7 +90,12 @@ function Groups() {
         <section>
           <Cards>
             {allGroupsList.map((group, index) => (
-              <GroupCard cardType="group" group={group} key={index} />
+              <GroupCard
+                cardType="group"
+                group={group}
+                key={index}
+                // isSubscribed={checkIsSubscribed(group)}
+              />
             ))}
           </Cards>
         </section>

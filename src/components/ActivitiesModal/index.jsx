@@ -1,13 +1,16 @@
 ﻿import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
+import { useEffect } from "react";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+
+import { useActivities } from "../../providers/Activities";
 
 import {
   ContainerModal,
   ContForm,
-  ContHabits,
+  ContActivities,
   ContList,
   ContInput,
   ContItem,
@@ -18,7 +21,12 @@ import {
 } from "./styles";
 import Input from "../../components/Input";
 
-const ModalActivities = ({ open, handle }) => {
+const ModalActivities = ({ open, handle, idGroup }) => {
+  //PROPS PROVIDER
+  const { activities, loadActivities } = useActivities();
+  const { addActivity, deleteActivity } = useActivities();
+
+  //SCHEMA YUP VALIDATION
   const schema = yup.object().shape({
     title: yup
       .string()
@@ -27,6 +35,7 @@ const ModalActivities = ({ open, handle }) => {
       .max(30, "Mínimo de 20 caracteres."),
   });
 
+  // HOOK FORM
   const {
     register,
     handleSubmit,
@@ -36,20 +45,35 @@ const ModalActivities = ({ open, handle }) => {
     resolver: yupResolver(schema),
   });
 
-  const onAddHabit = (data) => {
-    console.log(data);
-    //função da Context API
+  //ADD ACTIVITY
+  const onAddActivity = (data) => {
+    addActivity(data);
+    resetInputs();
   };
 
-  const CloseModal = () => {
+  // REMOVE ACTIVITY
+  const onDeleteActivity = (idGoal) => {
+    deleteActivity(idGoal);
+  };
+
+  // RESET INPUTS
+  const resetInputs = () => {
     reset({
       title: "",
-      category: "",
-      difficulty: "",
-      frequency: "",
     });
+  };
+
+  //CLOSE MODAL AND RESET INPUTS
+  const CloseModal = () => {
+    resetInputs();
     handle();
   };
+
+  //USE EFFECT
+  useEffect(() => {
+    loadActivities(idGroup);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div>
@@ -59,31 +83,32 @@ const ModalActivities = ({ open, handle }) => {
         aria-labelledby="parent-modal-title"
         aria-describedby="parent-modal-description"
       >
-        <ContainerModal onSubmit={handleSubmit(onAddHabit)}>
-          <ContHabits>
+        <ContainerModal onSubmit={handleSubmit(onAddActivity)}>
+          <ContActivities>
             <Head>
               <h3>Activities</h3>
             </Head>
             <ContList>
-              {/* Receber habits e fazer um map */}
-              <ContItem>
-                <ContInfosItem>
-                  <h4>Activity</h4>
-                </ContInfosItem>
-                <BtnCloseDelete>
-                  <IoCloseOutline />
-                </BtnCloseDelete>
-              </ContItem>
+              {activities.map((item, idx) => (
+                <ContItem key={idx}>
+                  <ContInfosItem>
+                    <h4>{`${item.title.substring(0, 15)}...`}</h4>
+                  </ContInfosItem>
+                  <BtnCloseDelete onClick={() => onDeleteActivity(item.id)}>
+                    <IoCloseOutline />
+                  </BtnCloseDelete>
+                </ContItem>
+              ))}
             </ContList>
-          </ContHabits>
+          </ContActivities>
           <ContForm>
             <Head>
               <BtnCloseDelete onClick={() => CloseModal()}>
                 <IoCloseOutline />
               </BtnCloseDelete>
             </Head>
-              <h3>Activities</h3>
-              <h6>Add Activity</h6>
+            <h3>Activities</h3>
+            <h6>Add Activity</h6>
             <ContInput>
               <Input
                 label="Title:"
