@@ -91,11 +91,13 @@ function Groups() {
             </div>
           </section>
         </Header>
-        <Cards>
-          {allGroupsList.map((group, index) => (
-            <GroupCard cardType="group" group={group} key={index} />
-          ))}
-        </Cards>
+        <section>
+          <Cards>
+            {allGroupsList.map((group, index) => (
+              <GroupCard cardType="group" group={group} key={index} />
+            ))}
+          </Cards>
+        </section>
         <Footer>
           <BasicSpeedDial handleModalHabits={handleModalHabits} />
           <ModalHabits open={openModalHabits} handle={handleModalHabits} />

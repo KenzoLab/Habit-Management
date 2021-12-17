@@ -3,7 +3,7 @@
 export const Container = styled.div`
   height: 234px;
   width: 20%;
-  min-width: ${props => (props.cardType === "group" ? "500px" : "800px")};
+  min-width: ${props => (props.cardType === "group" ? "800px" : "800px")};
   border-radius: 30px;
   position: relative;
   padding: 25px;
