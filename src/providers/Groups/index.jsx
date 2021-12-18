@@ -14,20 +14,20 @@ const GroupsProvider = ({ children }) => {
   const [updatedGroup, setUpdatedGroup] = useState({});
   const [subscriptions, setSubscriptions] = useState([]);
 
-  const { token, userId } = useAuth();
+  const token = localStorage.getItem("@Habit:token");
 
   const AuthorizationObj = {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const listGroupsFunction = async (token) => {
+  const listGroupsFunction = async () => {
     let counter = 0;
     let array = [];
     let response = {};
     try {
       do {
         counter++;
-        response = await api.get(`/groups/?page=${counter}`, token);
+        response = await api.get(`/groups/?page=${counter}`, AuthorizationObj);
         const currentPage = response.data.results;
         array = [...array, ...currentPage];
       } while (counter < 2);
@@ -47,9 +47,7 @@ const GroupsProvider = ({ children }) => {
     try {
       const response = await api.post("/groups/", dataGroup, AuthorizationObj);
       setLastCreatedGroup(response.data);
-      toast.success(
-        "Successfully created group!",
-      ); /* toast register group success */
+      toast.success("Successfully created group!");
       listGroupsFunction();
       searchSubscriptionsFunction();
     } catch (error) {
@@ -131,7 +129,6 @@ const GroupsProvider = ({ children }) => {
         subscriptions,
         subscribeFunction,
         unsubscribeFunction,
-        userId,
       }}>
       {children}
     </GroupsContext.Provider>
