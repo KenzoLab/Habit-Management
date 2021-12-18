@@ -1,83 +1,34 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
 //import { FiSearch } from "react-icons/fi";
-import {
-  App,
-  Container,
-  MainContainer,
-  Footer,
-  Header,
-  Cards,
-  ButtonToday,
-  ButtonWeek,
-  InputSearch,
-  BtnSearch,
-  ContSearch,
-  ButtonMonth,
-} from "./styles";
+import { App, Container, MainContainer, Footer, Header, Cards } from "./styles";
 import ActivitiesCard from "../../components/ActivitiesCard";
-import { useActivities } from "../../providers/Activities";
-import { useAuth } from "../../providers/AuthProvider";
 import { useCurrentPage } from "../../providers/CurrentPage";
 import { useEffect } from "react";
-//import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
-//import ModalHabits from "../../components/HabitModal";
-//import ModalGoals from "../../components/GoalsModal";
-//import ModalActivities from "../../components/ActivitiesModal";
+import { useGroups } from "../../providers/Groups";
 
 function Activities() {
-  const [openModalHabits, setOpenModalHabits] = useState(false);
-  const [isFiltered, setIsFiltered] = useState(false);
-  const [filter, setFilter] = useState("");
+  const { allGroupsList, listGroupsFunction } = useGroups();
+  const [allActivities, setAllActivities] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
 
-  const [filteredList, setFilteredList] = useState([]);
-
-  const { activities, loadActivities } = useActivities();
-  console.log(activities, "atividades");
-  const { token } = useAuth();
-
-  /*
-  const filtering = (period) => {
-    if (!isFiltered || filter !== period) {
-      setIsFiltered(true);
-      setFilter(period);
-    } else if (filter === period) {
-      setIsFiltered(false);
-      setFilter("");
-    }
+  const getAllActivities = (allGroupsList) => {
+    const activities = allGroupsList.flatMap((group) => group.activities);
+    setAllActivities([...activities]);
   };
-  
-    const handleModalHabits = () => {
-      setOpenModalHabits(!openModalHabits);
-    };
-  const [search, setSearch] = useState("");
 
-  function procurar() {
-    if (search !== "") {
-      const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
-      setFilter(search);
-      setFilteredList(cardSearch);
-      setIsFiltered(true);
-    } else {
-      setIsFiltered(false);
-      setFilteredList([]);
-    }
-  }
-  console.log(filteredList, "filtrados");
+  const getGroupTitle = (groupId) => {
+    const foundGroup = allGroupsList.find((group) => group.id === groupId);
+    const title = foundGroup.name;
+    return title;
+  };
 
- useEffect(() => {
-   console.log();
-   if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
-     const filteredHabits = listHabits.filter(
-       (habit) => habit.frequency === filter
-     );
-     setFilteredList([...filteredHabits]);
-   }
- }, [isFiltered, filter]);
- */
   useEffect(() => {
-    loadActivities(token);
+    getAllActivities(allGroupsList);
+  }, [allGroupsList]);
+
+  useEffect(() => {
+    listGroupsFunction();
     defineCurrentPageFunction("activities");
   }, []);
 
@@ -134,30 +85,14 @@ function Activities() {
         </Header>
         <MainContainer>
           <Cards>
-            {isFiltered
-              ? filteredList.map((habit, index) => (
-                  <ActivitiesCard
-                    key={index}
-                    title={habit.title}
-                    date={habit.date}
-                    //frequency={habit.frequency}
-                    //category={habit.category}
-                    //difficulty={habit.difficulty}
-                    //habitId={habit.id}
-                  />
-                ))
-              : activities.map((habit, index) => (
-                  <ActivitiesCard
-                    key={index}
-                    title={habit.title}
-                    date={habit.realization_time}
-                    group={habit.group}
-                    //frequency={habit.frequency}
-                    //category={habit.category}
-                    //difficulty={habit.difficulty}
-                    //habitId={habit.id}
-                  />
-                ))}
+            {allActivities.map((activities, index) => (
+              <ActivitiesCard
+                key={index}
+                title={activities.title}
+                date={activities.realization_time}
+                group={getGroupTitle(activities.group)}
+              />
+            ))}
           </Cards>
           <Footer>
             {/*<BasicSpeedDial handleModalHabits={handleModalHabits} />*/}
