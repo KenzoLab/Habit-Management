@@ -1,83 +1,33 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
-//import { FiSearch } from "react-icons/fi";
-import {
-  App,
-  Container,
-  MainContainer,
-  Footer,
-  Header,
-  Cards,
-  ButtonToday,
-  ButtonWeek,
-  InputSearch,
-  BtnSearch,
-  ContSearch,
-  ButtonMonth,
-} from "./styles";
+import { App, Container, MainContainer, Footer, Header, Cards } from "./styles";
 import GoalsCard from "../../components/GoalsCard";
-import { useGoals } from "../../providers/Goals";
-import { useAuth } from "../../providers/AuthProvider";
 import { useCurrentPage } from "../../providers/CurrentPage";
 import { useEffect } from "react";
-//import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
-//import ModalHabits from "../../components/HabitModal";
-//import ModalGoals from "../../components/GoalsModal";
-//import ModalActivities from "../../components/ActivitiesModal";
+import { useGroups } from "../../providers/Groups";
 
 function Goals() {
-  const [openModalHabits, setOpenModalHabits] = useState(false);
-  const [isFiltered, setIsFiltered] = useState(false);
-  const [filter, setFilter] = useState("");
+  const { allGroupsList, listGroupsFunction } = useGroups();
+  const [allGoals, setAllGoals] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
 
-  const [filteredList, setFilteredList] = useState([]);
-
-  const { goals, loadGoals } = useGoals();
-  console.log(goals, "goals");
-  const { token } = useAuth();
-
-  /*
-  const filtering = (period) => {
-    if (!isFiltered || filter !== period) {
-      setIsFiltered(true);
-      setFilter(period);
-    } else if (filter === period) {
-      setIsFiltered(false);
-      setFilter("");
-    }
+  const getAllGoals = (allGroupsList) => {
+    const goals = allGroupsList.flatMap((group) => group.goals);
+    setAllGoals([...goals]);
   };
-  
-    const handleModalHabits = () => {
-      setOpenModalHabits(!openModalHabits);
-    };
-  const [search, setSearch] = useState("");
 
-  function procurar() {
-    if (search !== "") {
-      const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
-      setFilter(search);
-      setFilteredList(cardSearch);
-      setIsFiltered(true);
-    } else {
-      setIsFiltered(false);
-      setFilteredList([]);
-    }
-  }
-  console.log(filteredList, "filtrados");
+  const getGroupTitle = (groupId) => {
+    const foundGroup = allGroupsList.find((group) => group.id === groupId);
+    const title = foundGroup.name;
+    return title;
+  };
 
- useEffect(() => {
-   console.log();
-   if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
-     const filteredHabits = listHabits.filter(
-       (habit) => habit.frequency === filter
-     );
-     setFilteredList([...filteredHabits]);
-   }
- }, [isFiltered, filter]);
- */
   useEffect(() => {
-    loadGoals(token);
+    getAllGoals(allGroupsList);
+  }, [allGroupsList]);
+
+  useEffect(() => {
+    listGroupsFunction();
     defineCurrentPageFunction("goals");
   }, []);
 
@@ -134,35 +84,17 @@ function Goals() {
         </Header>
         <MainContainer>
           <Cards>
-            {isFiltered
-              ? filteredList.map((habit, index) => (
-                  <GoalsCard
-                    key={index}
-                    title={habit.title}
-                    status={habit.how_much_achieved}
-                    //frequency={habit.frequency}
-                    //category={habit.category}
-                    difficult={habit.difficulty}
-                    //habitId={habit.id}
-                  />
-                ))
-              : goals.map((habit, index) => (
-                  <GoalsCard
-                    key={index}
-                    title={habit.title}
-                    status={habit.how_much_achieved}
-                    group={habit.group}
-                    //frequency={habit.frequency}
-                    //category={habit.category}
-                    difficult={habit.difficulty}
-                    //habitId={habit.id}
-                  />
-                ))}
+            {allGoals.map((goal, index) => (
+              <GoalsCard
+                key={index}
+                title={goal.title}
+                status={100 - goal.how_much_achieved}
+                group={getGroupTitle(goal.group)}
+                difficult={goal.difficulty}
+              />
+            ))}
           </Cards>
-          <Footer>
-            {/*<BasicSpeedDial handleModalHabits={handleModalHabits} />*/}
-            {/*<ModalHabits open={openModalHabits} handle={handleModalHabits} />*/}
-          </Footer>
+          <Footer></Footer>
         </MainContainer>
       </Container>
     </App>
