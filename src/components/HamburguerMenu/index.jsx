@@ -47,7 +47,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/dashboard">Dashboard</Link>
@@ -58,7 +58,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/groups">Groups</Link>
@@ -69,7 +69,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/activities">Activities</Link>
@@ -80,7 +80,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/goals">Goals</Link>
@@ -91,7 +91,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <button className="logout-button">Logout</button>
