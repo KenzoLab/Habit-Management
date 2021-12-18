@@ -108,7 +108,6 @@ export const ContForm = styled.form`
 
   @media (min-width: 768px) {
     width: 50%;
-
     h3 {
       display: none;
     }

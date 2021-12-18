@@ -13,8 +13,7 @@ export const Nav = styled.div`
   align-items: center;
   flex-direction: column;
 
-  justify-content: center; /* era center */
-  /* justify-content: counter-increment; */
+  justify-content: center;
   background-color: var(--whiteSmoke);
   z-index: 100;
   position: absolute;
@@ -63,7 +62,7 @@ export const Nav = styled.div`
           display: flex;
           align-items: center;
           height: 50px;
-          border-bottom: 1px solid #9398a2;
+          border-bottom: 1px solid var(--gray);
           margin-bottom: 10px;
           width: 75vw;
 
@@ -118,13 +117,13 @@ export const Nav = styled.div`
             color: var(--darkBlue);
             margin-top: 6px;
             font-size: 18px;
-            font-family: var(--fira-font);
+            font-family: var(--font-fira);
           }
 
           button {
             color: var(--darkBlue);
             font-size: 18px;
-            font-family: var(--fira-font);
+            font-family: var(--font-fira);
           }
         }
       }
@@ -152,7 +151,6 @@ export const Nav = styled.div`
 
   @media (max-width: 900px) {
     width: 200px;
-    /* padding: 25px 5px 25px 25px; */
   }
 `;
 
@@ -162,7 +160,6 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding-top: 20px; */
 
   img {
     width: 130px;
