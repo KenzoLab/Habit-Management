@@ -16,6 +16,7 @@ import {
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
+import { useCurrentPage } from "../../providers/CurrentPage";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
@@ -29,6 +30,7 @@ function Dashboard() {
   const [filter, setFilter] = useState("");
 
   const [filteredList, setFilteredList] = useState([]);
+  const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
   const filtering = (period) => {
@@ -43,7 +45,7 @@ function Dashboard() {
   const handleModalHabits = () => {
     setOpenModalHabits(!openModalHabits);
   };
-  //////////////////////////////////
+
   const [search, setSearch] = useState("");
 
   function procurar() {
@@ -57,10 +59,8 @@ function Dashboard() {
       setFilteredList([]);
     }
   }
-  console.log(filteredList, "filtrados");
-  //////////////////////////////////
+
   useEffect(() => {
-    console.log();
     if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
       const filteredHabits = listHabits.filter(
         (habit) => habit.frequency === filter,
@@ -70,6 +70,7 @@ function Dashboard() {
   }, [isFiltered, filter]);
   useEffect(() => {
     listHabitsFunction(token);
+    defineCurrentPageFunction("dashboard");
   }, []);
   return (
     <App>
@@ -118,7 +119,6 @@ function Dashboard() {
             </div>
           </section>
         </Header>
-
         <MainContainer>
           <Cards>
             {isFiltered
@@ -144,10 +144,9 @@ function Dashboard() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModalHabits={handleModalHabits} />
+            <BasicSpeedDial handleModal={handleModalHabits} />
             <ModalHabits open={openModalHabits} handle={handleModalHabits} />
           </Footer>
-
         </MainContainer>
       </Container>
     </App>

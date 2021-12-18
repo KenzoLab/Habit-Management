@@ -19,6 +19,7 @@ import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalGroups from "../../components/GroupModal";
 import { useGroups } from "../../providers/Groups";
+import { useCurrentPage } from "../../providers/CurrentPage";
 
 function Groups() {
   const { listGroupsFunction, allGroupsList } = useGroups();
@@ -26,11 +27,12 @@ function Groups() {
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
+  const { defineCurrentPageFunction } = useCurrentPage();
 
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
 
-  const filtering = period => {
+  const filtering = (period) => {
     if (!isFiltered || filter !== period) {
       setIsFiltered(true);
       setFilter(period);
@@ -46,13 +48,14 @@ function Groups() {
 
   useEffect(() => {
     const filteredHabits = listHabits.filter(
-      habit => habit.frequency === filter
+      (habit) => habit.frequency === filter,
     );
     setFilteredList([...filteredHabits]);
   }, [isFiltered, filter]);
 
   useEffect(() => {
     listGroupsFunction(token);
+    defineCurrentPageFunction("groups");
   }, []);
 
   return (
@@ -79,15 +82,13 @@ function Groups() {
               <button
                 className="filter-buttons"
                 onClick={() => filtering("Daily")}
-                filter={filter}
-              >
+                filter={filter}>
                 Discovery
               </button>
               <button
                 className="filter-buttons"
                 onClick={() => filtering("Weekly")}
-                filter={filter}
-              >
+                filter={filter}>
                 Registered
               </button>
             </div>
