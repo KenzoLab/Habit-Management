@@ -42,7 +42,7 @@ export const Nav = styled.div`
     display: ${(props) => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
-    padding: 25px 25px 14px 25px;
+    padding: 25px 0 14px 25px;
     width: 80vw;
     height: 86.6vh;
 
@@ -91,25 +91,27 @@ export const Nav = styled.div`
     width: 250px;
     height: 100vh;
     .menu-list {
-      width: 250px;
+      width: 100%;
       display: flex;
 
       section {
-        width: 195px;
+        width: 100%; // alterado
         display: flex;
         align-items: center;
         ul {
           flex-direction: column;
-          width: 195px;
+          width: 100%; // alterado
           justify-content: center;
           li {
             display: flex;
             align-items: center;
             height: 50px;
             border: none;
-            width: 176px;
-            margin: 0px 0px 10px 15px;
+            width: auto;
+            /* margin: 0px 0px 10px 15px; */
+            padding: 30px 0 30px 30px;
             font-family: var(--font-fira);
+            border-radius: 30px 0 0 30px;
           }
 
           a {
@@ -139,7 +141,7 @@ export const Nav = styled.div`
     }
 
     .${Page} {
-      background-color: var(--lightGray);
+      background-color: var(--greyBackground);
       border-radius: 5px 0px 0px 5px;
       padding-left: 5px;
     }
@@ -149,8 +151,11 @@ export const Nav = styled.div`
     padding: 1rem 0;
   }
 
-  @media (max-width: 900px) {
+  /* @media (max-width: 900px) {
     width: 200px;
+  } */
+  @media (max-width: 767px) {
+    width: 100%;
   }
 `;
 
@@ -199,7 +204,7 @@ export const Header = styled.div`
 export const Footer = styled.div`
   section {
     display: ${(props) => (props.toggleNav ? "block" : "none")};
-    width: 70vw;
+    width: 80vw;
     align-items: center;
   }
   .username {
