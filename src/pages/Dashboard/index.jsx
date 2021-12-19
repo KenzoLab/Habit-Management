@@ -22,17 +22,21 @@ import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
-import ModalGoals from "../../components/GoalsModal";
-import ModalActivities from "../../components/ActivitiesModal";
+
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
-
   const [filteredList, setFilteredList] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
+  const [search, setSearch] = useState("");
+
+  const handleModalHabits = () => {
+    setOpenModalHabits(!openModalHabits);
+  };
+
   const filtering = (period) => {
     if (!isFiltered || filter !== period) {
       setIsFiltered(true);
@@ -42,13 +46,8 @@ function Dashboard() {
       setFilter("");
     }
   };
-  const handleModalHabits = () => {
-    setOpenModalHabits(!openModalHabits);
-  };
 
-  const [search, setSearch] = useState("");
-
-  function procurar() {
+  function searchFunction() {
     if (search !== "") {
       const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
       setFilter(search);
@@ -68,10 +67,12 @@ function Dashboard() {
       setFilteredList([...filteredHabits]);
     }
   }, [isFiltered, filter]);
+
   useEffect(() => {
     listHabitsFunction(token);
     defineCurrentPageFunction("dashboard");
   }, []);
+
   return (
     <App>
       <Container>
@@ -84,7 +85,7 @@ function Dashboard() {
             <div className="header-search">
               <ContSearch>
                 <div>
-                  <BtnSearch onClick={() => procurar()}>
+                  <BtnSearch onClick={() => searchFunction()}>
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
