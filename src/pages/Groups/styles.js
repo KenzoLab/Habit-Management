@@ -64,17 +64,17 @@ export const Header = styled.header`
   .header-bottom {
     display: flex;
     justify-content: center;
-    
+
     button {
+      padding: 8px 15px;
+    }
+
+    @media (min-width: 768px) {
+      margin-bottom: 15px;
+      margin-left: 35px;
+      button {
         padding: 8px 15px;
-      }
-      
-      @media (min-width: 768px) {
-        margin-bottom: 15px;
-        margin-left: 35px;
-        button {
-          padding: 8px 15px;
-          font-size: 30px;
+        font-size: 30px;
       }
     }
   }
@@ -117,7 +117,7 @@ export const InputSearch = styled.input`
   padding-right: 40px;
   color: #9398a2;
   @media (min-width: 768px) {
-    width: 50px;  
+    width: 50px;
   }
   &:focus {
     width: 290px;
@@ -154,19 +154,14 @@ export const BtnSearch = styled.button`
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 `;
 
-export const ButtonToday = styled.button`
+export const ButtonDiscovery = styled.button`
   background-color: ${(props) =>
-    props.filter === "Daily" ? "var(--extraLightBlue)" : "none"};
+    props.filter === "Discovery" ? "var(--extraLightBlue)" : "none"};
 `;
 
-export const ButtonWeek = styled.button`
+export const ButtonRegistered = styled.button`
   background-color: ${(props) =>
-    props.filter === "Weekly" ? "var(--extraLightBlue)" : "none"};
-`;
-
-export const ButtonMonth = styled.button`
-  background-color: ${(props) =>
-    props.filter === "Monthly" ? "var(--extraLightBlue)" : "none"};
+    props.filter === "Registered" ? "var(--extraLightBlue)" : "none"};
 `;
 
 export const Cards = styled.section`
@@ -184,5 +179,5 @@ export const Cards = styled.section`
 `;
 
 export const Footer = styled.footer`
-align-self: flex-end;
+  align-self: flex-end;
 `;
