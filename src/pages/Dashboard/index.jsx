@@ -22,17 +22,16 @@ import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
-import ModalGoals from "../../components/GoalsModal";
-import ModalActivities from "../../components/ActivitiesModal";
+
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
-
   const [filteredList, setFilteredList] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
+
   const filtering = (period) => {
     if (!isFiltered || filter !== period) {
       setIsFiltered(true);
@@ -68,10 +67,12 @@ function Dashboard() {
       setFilteredList([...filteredHabits]);
     }
   }, [isFiltered, filter]);
+
   useEffect(() => {
     listHabitsFunction(token);
     defineCurrentPageFunction("dashboard");
   }, []);
+
   return (
     <App>
       <Container>
