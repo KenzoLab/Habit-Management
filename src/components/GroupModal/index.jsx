@@ -29,7 +29,8 @@ import { InputSelect, InputTextArea } from "../../components/Input";
 const ModalGroups = ({ open, handle }) => {
   //PROPS PROVIDER
   const { createGroupFunction, searchSubscriptionsFunction } = useGroups();
-  const { subscriptions, unsubscribeFunction } = useGroups();
+  const { subscriptions, unsubscribeFunction, listGroupsFunction } =
+    useGroups();
 
   //ARRAYS SELECT OPTIONS
   const arrCategory = [
@@ -74,13 +75,13 @@ const ModalGroups = ({ open, handle }) => {
   });
 
   // ADD GROUP
-  const onAddGroup = data => {
+  const onAddGroup = (data) => {
     createGroupFunction(data);
     resetInputs();
   };
 
   // DELETE GROUP
-  const onDeleteGroup = idGroup => {
+  const onDeleteGroup = (idGroup) => {
     unsubscribeFunction(idGroup);
   };
 
@@ -102,6 +103,7 @@ const ModalGroups = ({ open, handle }) => {
   //USE EFFECT
   useEffect(() => {
     searchSubscriptionsFunction();
+    listGroupsFunction();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

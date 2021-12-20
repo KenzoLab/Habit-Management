@@ -17,7 +17,6 @@ import {
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
 import { useCurrentPage } from "../../providers/CurrentPage";
-import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
@@ -30,7 +29,6 @@ function Dashboard() {
   const [filteredList, setFilteredList] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
-  const { token } = useAuth();
   const [search, setSearch] = useState("");
 
   const handleModalHabits = () => {
@@ -77,7 +75,7 @@ function Dashboard() {
   }, [isFiltered, filter]);
 
   useEffect(() => {
-    listHabitsFunction(token);
+    listHabitsFunction();
     defineCurrentPageFunction("dashboard");
   }, []);
 
