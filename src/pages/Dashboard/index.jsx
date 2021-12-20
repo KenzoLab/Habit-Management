@@ -90,7 +90,7 @@ function Dashboard() {
                   </BtnSearch>
                   <InputSearch
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Type to Search..."
                     onChange={(evt) => setSearch(evt.target.value.toString())}
                   />
                 </div>
