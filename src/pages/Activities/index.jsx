@@ -1,6 +1,16 @@
 ﻿import HamburguerMenu from "../../components/HamburguerMenu";
-//import { FiSearch } from "react-icons/fi";
-import { App, Container, MainContainer, Footer, Header, Cards } from "./styles";
+import { FiSearch } from "react-icons/fi";
+import {
+  App,
+  Container,
+  MainContainer,
+  Footer,
+  Header,
+  Cards,
+  ContSearch,
+  BtnSearch,
+  InputSearch,
+} from "./styles";
 import ActivitiesCard from "../../components/ActivitiesCard";
 import { useCurrentPage } from "../../providers/CurrentPage";
 import { useEffect } from "react";
@@ -11,6 +21,9 @@ function Activities() {
   const { allGroupsList, listGroupsFunction } = useGroups();
   const [allActivities, setAllActivities] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
+  const [filteredList, setFilteredList] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [search, setSearch] = useState("");
 
   const getAllActivities = (allGroupsList) => {
     const activities = allGroupsList.flatMap((group) => group.activities);
@@ -22,6 +35,24 @@ function Activities() {
     const title = foundGroup.name;
     return title;
   };
+
+  function searchFunction() {
+    if (search !== "") {
+      const cardSearch = allActivities.filter((activity) => {
+        const activityTitle = activity.title.toLowerCase();
+        return activityTitle.includes(search.toLowerCase());
+      });
+      setIsFiltered(true);
+      setFilteredList(cardSearch);
+    } else {
+      setIsFiltered(false);
+      setFilteredList([]);
+    }
+  }
+
+  useEffect(() => {
+    searchFunction();
+  }, [search]);
 
   useEffect(() => {
     getAllActivities(allGroupsList);
@@ -40,59 +71,45 @@ function Activities() {
         </div>
         <Header>
           <section className="header-top">
-            <h2>Activites</h2>
+            <h2>Activities</h2>
             <div className="header-search">
-              {/*<ContSearch>
+              <ContSearch>
                 <div>
-                  <BtnSearch onClick={() => procurar()}>
+                  <BtnSearch
+                    onClick={(e) =>
+                      e.currentTarget.parentElement.lastChild.focus()
+                    }>
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Type to Search..."
                     onChange={(evt) => setSearch(evt.target.value.toString())}
                   />
                 </div>
-              </ContSearch>*/}
-            </div>
-          </section>
-
-          <section className="header-bottom">
-            <div id="blues">
-              {/*<ButtonToday
-                className="filter-buttons"
-                onClick={() => filtering("Daily")}
-                filter={filter}
-              >
-                Today
-              </ButtonToday>
-              <ButtonWeek
-                className="filter-buttons"
-                onClick={() => filtering("Weekly")}
-                filter={filter}
-              >
-                Week
-              </ButtonWeek>
-              <ButtonMonth
-                className="filter-buttons"
-                onClick={() => filtering("Monthly")}
-                filter={filter}
-              >
-                Month
-              </ButtonMonth>*/}
+              </ContSearch>
             </div>
           </section>
         </Header>
         <MainContainer>
           <Cards>
-            {allActivities.map((activities, index) => (
-              <ActivitiesCard
-                key={index}
-                title={activities.title}
-                date={activities.realization_time}
-                group={getGroupTitle(activities.group)}
-              />
-            ))}
+            {isFiltered
+              ? filteredList.map((activities, index) => (
+                  <ActivitiesCard
+                    key={index}
+                    title={activities.title}
+                    date={activities.realization_time}
+                    group={getGroupTitle(activities.group)}
+                  />
+                ))
+              : allActivities.map((activities, index) => (
+                  <ActivitiesCard
+                    key={index}
+                    title={activities.title}
+                    date={activities.realization_time}
+                    group={getGroupTitle(activities.group)}
+                  />
+                ))}
           </Cards>
           <Footer>
             {/*<BasicSpeedDial handleModalHabits={handleModalHabits} />*/}
