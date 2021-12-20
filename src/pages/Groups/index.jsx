@@ -29,7 +29,7 @@ function Groups() {
   const [filteredList, setFilteredList] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listGroupsFunction, allGroupsList } = useGroups();
-  const { token, userId } = useAuth();
+  const { userId } = useAuth();
   const [search, setSearch] = useState("");
 
   const handleModalGroups = () => {
@@ -83,7 +83,7 @@ function Groups() {
   }, [isFiltered, filter]);
 
   useEffect(() => {
-    listGroupsFunction(token);
+    listGroupsFunction();
     defineCurrentPageFunction("groups");
   }, []);
 
