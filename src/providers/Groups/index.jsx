@@ -3,8 +3,6 @@ import { toast } from "react-toastify";
 
 import api from "../../services/api";
 
-import { useAuth } from "../AuthProvider";
-
 const GroupsContext = createContext({});
 
 const GroupsProvider = ({ children }) => {
@@ -20,6 +18,16 @@ const GroupsProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
+  const arrCategory = [
+    "Financial",
+    "Health",
+    "Intellectual",
+    "Mindset",
+    "Productivity",
+    "Relationships",
+    "Sports",
+  ];
+
   const listGroupsFunction = async () => {
     let counter = 0;
     let array = [];
@@ -27,10 +35,23 @@ const GroupsProvider = ({ children }) => {
     try {
       do {
         counter++;
-        response = await api.get(`/groups/?page=${counter}`, AuthorizationObj);
-        const currentPage = response.data.results;
-        array = [...array, ...currentPage];
-      } while (counter < 2);
+        for (let i = 0; i < arrCategory.length; i++) {
+          response = await api.get(
+            `/groups/?page=${counter}&category=${arrCategory[i]}`,
+            AuthorizationObj,
+          );
+          const currentPage = response.data.results;
+          array = [...array, ...currentPage].sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+      } while (response.data.previous !== null);
       setAllGroupsList([...array]);
     } catch (error) {
       setErrorMessage(error);
