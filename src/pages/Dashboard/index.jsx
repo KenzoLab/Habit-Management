@@ -48,8 +48,12 @@ function Dashboard() {
   };
 
   function searchFunction() {
+    setFilter("");
     if (search !== "") {
-      const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
+      const cardSearch = listHabits.filter((habit) => {
+        const habitTitle = habit.title.toLowerCase();
+        return habitTitle.includes(search.toLowerCase());
+      });
       setFilter(search);
       setFilteredList(cardSearch);
       setIsFiltered(true);
@@ -58,6 +62,10 @@ function Dashboard() {
       setFilteredList([]);
     }
   }
+
+  useEffect(() => {
+    searchFunction();
+  }, [search]);
 
   useEffect(() => {
     if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
@@ -85,7 +93,10 @@ function Dashboard() {
             <div className="header-search">
               <ContSearch>
                 <div>
-                  <BtnSearch onClick={() => searchFunction()}>
+                  <BtnSearch
+                    onClick={(e) =>
+                      e.currentTarget.parentElement.lastChild.focus()
+                    }>
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
