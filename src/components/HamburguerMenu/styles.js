@@ -13,8 +13,7 @@ export const Nav = styled.div`
   align-items: center;
   flex-direction: column;
 
-  justify-content: center; /* era counter-incremencentert */
-  /* justify-content: counter-increment; */
+  justify-content: center;
   background-color: var(--whiteSmoke);
   z-index: 100;
   position: absolute;
@@ -43,7 +42,7 @@ export const Nav = styled.div`
     display: ${(props) => (props.toggleNav ? "flex" : "none")};
     flex-direction: column;
     justify-content: space-between;
-    padding: 25px 25px 14px 25px;
+    padding: 25px 0 14px 25px;
     width: 80vw;
     height: 86.6vh;
 
@@ -63,7 +62,7 @@ export const Nav = styled.div`
           display: flex;
           align-items: center;
           height: 50px;
-          border-bottom: 1px solid #9398A2;
+          border-bottom: 1px solid var(--gray);
           margin-bottom: 10px;
           width: 75vw;
 
@@ -88,30 +87,31 @@ export const Nav = styled.div`
     }
   }
 
-
   @media (min-width: 767px) {
     width: 250px;
     height: 100vh;
     .menu-list {
-      width: 250px;
+      width: 100%;
       display: flex;
 
       section {
-        width: 250px;
+        width: 100%; // alterado
         display: flex;
         align-items: center;
         ul {
           flex-direction: column;
-          width: 200px;
+          width: 100%; // alterado
           justify-content: center;
           li {
             display: flex;
             align-items: center;
             height: 50px;
             border: none;
-            width: 176px;
-            margin: 0px 0px 10px 15px;
-            font-family: var(--font-fira)
+            width: auto;
+            /* margin: 0px 0px 10px 15px; */
+            padding: 30px 0 30px 30px;
+            font-family: var(--font-fira);
+            border-radius: 30px 0 0 30px;
           }
 
           a {
@@ -119,13 +119,13 @@ export const Nav = styled.div`
             color: var(--darkBlue);
             margin-top: 6px;
             font-size: 18px;
-            font-family: var(--fira-font)
-          } 
+            font-family: var(--font-fira);
+          }
 
           button {
             color: var(--darkBlue);
             font-size: 18px;
-            font-family: var(--fira-font);
+            font-family: var(--font-fira);
           }
         }
       }
@@ -141,7 +141,7 @@ export const Nav = styled.div`
     }
 
     .${Page} {
-      background-color: var(--whiteSmoke);
+      background-color: var(--greyBackground);
       border-radius: 5px 0px 0px 5px;
       padding-left: 5px;
     }
@@ -151,13 +151,11 @@ export const Nav = styled.div`
     padding: 1rem 0;
   }
 
-  @media (max-width: 900px) {
+  /* @media (max-width: 900px) {
     width: 200px;
-    /* padding: 25px 5px 25px 25px; */
-  }
+  } */
   @media (max-width: 767px) {
     width: 100%;
-    /* padding: 1rem 0; */
   }
 `;
 
@@ -167,7 +165,6 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding-top: 20px; */
 
   img {
     width: 130px;

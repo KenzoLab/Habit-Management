@@ -9,11 +9,13 @@ import LogoutIcon from "@mui/icons-material/Logout";
 
 import logo from "../../assets/habitLogo.png";
 import { useAuth } from "../../providers/AuthProvider";
+import { useCurrentPage } from "../../providers/CurrentPage";
 import { Footer, Nav, Header } from "./styles";
 import EditIcon from "@mui/icons-material/Edit";
 
 function HamburguerMenu() {
   const { getUserInfo, userInfo, logoutFunction } = useAuth();
+  const { currentPage } = useCurrentPage();
 
   const [toggleNav, setToggleNav] = useState(false);
   const [userId, setUserId] = useState(() => {
@@ -30,8 +32,8 @@ function HamburguerMenu() {
   }, []);
 
   return (
-    <Nav currentPage toggleNav={toggleNav}>
-      <Header currentPage>
+    <Nav currentPage={currentPage} toggleNav={toggleNav}>
+      <Header currentPage={currentPage}>
         <div onClick={() => handleClick()}></div>
 
         <img src={logo} alt="Logo HabitTracker"></img>
@@ -45,7 +47,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/dashboard">Dashboard</Link>
@@ -56,7 +58,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/groups">Groups</Link>
@@ -67,7 +69,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/activities">Activities</Link>
@@ -78,7 +80,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <Link to="/goals">Goals</Link>
@@ -89,7 +91,7 @@ function HamburguerMenu() {
                   width: 35,
                   height: 35,
                   mr: 3,
-                  color: "#081140",
+                  color: "var(--darkBlue)",
                 }}
               />
               <button className="logout-button">Logout</button>
@@ -106,8 +108,12 @@ function HamburguerMenu() {
               }}
             />
             <div>
-              <p className="username">{userInfo.username}</p>
-              <p className="useremail">{userInfo.email}</p>
+              <p className="username">
+                {userInfo?.username?.substring(0, 9)}...
+              </p>
+              <p className="useremail">
+                {userInfo?.email?.substring(0, 12)}...{" "}
+              </p>
             </div>
           </section>
         </Footer>

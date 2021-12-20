@@ -9,50 +9,82 @@ import {
   InputSearch,
   BtnSearch,
   ContSearch,
-  MainContainer
+  MainContainer,
+  ButtonDiscovery,
+  ButtonRegistered,
 } from "./styles";
 import GroupCard from "../../components/GroupCard";
-import { useHabit } from "../../providers/Habits";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalGroups from "../../components/GroupModal";
 import { useGroups } from "../../providers/Groups";
+import { useCurrentPage } from "../../providers/CurrentPage";
 
 function Groups() {
-  const { listGroupsFunction, allGroupsList } = useGroups();
   const [openModalGroups, setOpenModalGroups] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
-
-  const { listHabitsFunction, listHabits } = useHabit();
-  const { token } = useAuth();
-
-  const filtering = period => {
-    if (!isFiltered || filter !== period) {
-      setIsFiltered(true);
-      setFilter(period);
-    } else if (filter === period) {
-      setIsFiltered(false);
-      setFilter("");
-    }
-  };
+  const { defineCurrentPageFunction } = useCurrentPage();
+  const { listGroupsFunction, allGroupsList } = useGroups();
+  const { token, userId } = useAuth();
+  const [search, setSearch] = useState("");
 
   const handleModalGroups = () => {
     setOpenModalGroups(!openModalGroups);
   };
 
+  const filtering = (registeredOrNotRegistered) => {
+    if (!isFiltered || filter !== registeredOrNotRegistered) {
+      setIsFiltered(true);
+      setFilter(registeredOrNotRegistered);
+    } else if (filter === registeredOrNotRegistered) {
+      setIsFiltered(false);
+      setFilter("");
+    }
+  };
+
+  function searchFunction() {
+    setFilter("");
+    if (search !== "") {
+      const cardSearch = allGroupsList.filter((group) => {
+        const groupName = group.name.toLowerCase();
+        return groupName.includes(search.toLowerCase());
+      });
+      setFilteredList(cardSearch);
+      setIsFiltered(true);
+    } else {
+      setIsFiltered(false);
+      setFilteredList([]);
+    }
+  }
+
+  const filterListFunction = (userId, filteredGroups) => {
+    if (filter === "Registered") {
+      filteredGroups = allGroupsList.filter((group) =>
+        group.users_on_group.some((user) => user.id === userId),
+      );
+    } else if (filter === "Discovery") {
+      filteredGroups = allGroupsList.filter(
+        (group) => !group.users_on_group.some((user) => user.id === userId),
+      );
+    }
+    setFilteredList([...filteredGroups]);
+  };
+
   useEffect(() => {
-    const filteredHabits = listHabits.filter(
-      habit => habit.frequency === filter
-    );
-    setFilteredList([...filteredHabits]);
+    searchFunction();
+  }, [search]);
+
+  useEffect(() => {
+    filterListFunction(parseInt(userId), filteredList);
   }, [isFiltered, filter]);
 
   useEffect(() => {
     listGroupsFunction(token);
+    defineCurrentPageFunction("groups");
   }, []);
 
   return (
@@ -65,10 +97,19 @@ function Groups() {
             <div className="header-search">
               <ContSearch>
                 <div>
-                  <BtnSearch>
+                  <BtnSearch
+                    onClick={(e) =>
+                      console.log(
+                        e.currentTarget.parentElement.lastChild.focus(),
+                      )
+                    }>
                     <FiSearch />
                   </BtnSearch>
-                  <InputSearch type="text" placeholder="Type to Search..." />
+                  <InputSearch
+                    type="text"
+                    placeholder="Type to Search..."
+                    onChange={(evt) => setSearch(evt.target.value.toString())}
+                  />
                 </div>
               </ContSearch>
             </div>
@@ -76,37 +117,35 @@ function Groups() {
 
           <section className="header-bottom">
             <div id="blues">
-              <button
+              <ButtonDiscovery
                 className="filter-buttons"
-                onClick={() => filtering("Daily")}
-                filter={filter}
-              >
+                onClick={() => filtering("Discovery")}
+                filter={filter}>
                 Discovery
-              </button>
-              <button
+              </ButtonDiscovery>
+              <ButtonRegistered
                 className="filter-buttons"
-                onClick={() => filtering("Weekly")}
-                filter={filter}
-              >
+                onClick={() => filtering("Registered")}
+                filter={filter}>
                 Registered
-              </button>
+              </ButtonRegistered>
             </div>
           </section>
         </Header>
         <MainContainer>
           <Cards>
-            {allGroupsList.map((group, index) => (
-              <GroupCard
-                cardType="group"
-                group={group}
-                key={index}
-              />
-            ))}
+            {isFiltered
+              ? filteredList.map((group, index) => (
+                  <GroupCard cardType="group" group={group} key={index} />
+                ))
+              : allGroupsList.map((group, index) => (
+                  <GroupCard cardType="group" group={group} key={index} />
+                ))}
           </Cards>
-        <Footer>
-          <BasicSpeedDial handleModal={handleModalGroups} />
-          <ModalGroups open={openModalGroups} handle={handleModalGroups} />
-        </Footer>
+          <Footer>
+            <BasicSpeedDial handleModal={handleModalGroups} />
+            <ModalGroups open={openModalGroups} handle={handleModalGroups} />
+          </Footer>
         </MainContainer>
       </Container>
     </App>

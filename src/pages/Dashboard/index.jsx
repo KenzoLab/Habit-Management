@@ -16,21 +16,27 @@ import {
 } from "./styles";
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
+import { useCurrentPage } from "../../providers/CurrentPage";
 import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
-import ModalGoals from "../../components/GoalsModal";
-import ModalActivities from "../../components/ActivitiesModal";
+
 function Dashboard() {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
-
   const [filteredList, setFilteredList] = useState([]);
+  const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
   const { token } = useAuth();
+  const [search, setSearch] = useState("");
+
+  const handleModalHabits = () => {
+    setOpenModalHabits(!openModalHabits);
+  };
+
   const filtering = (period) => {
     if (!isFiltered || filter !== period) {
       setIsFiltered(true);
@@ -40,15 +46,14 @@ function Dashboard() {
       setFilter("");
     }
   };
-  const handleModalHabits = () => {
-    setOpenModalHabits(!openModalHabits);
-  };
-  //////////////////////////////////
-  const [search, setSearch] = useState("");
 
-  function procurar() {
+  function searchFunction() {
+    setFilter("");
     if (search !== "") {
-      const cardSearch = listHabits.filter((elm) => elm.title.includes(search));
+      const cardSearch = listHabits.filter((habit) => {
+        const habitTitle = habit.title.toLowerCase();
+        return habitTitle.includes(search.toLowerCase());
+      });
       setFilter(search);
       setFilteredList(cardSearch);
       setIsFiltered(true);
@@ -57,10 +62,12 @@ function Dashboard() {
       setFilteredList([]);
     }
   }
-  console.log(filteredList, "filtrados");
-  //////////////////////////////////
+
   useEffect(() => {
-    console.log();
+    searchFunction();
+  }, [search]);
+
+  useEffect(() => {
     if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
       const filteredHabits = listHabits.filter(
         (habit) => habit.frequency === filter,
@@ -68,9 +75,12 @@ function Dashboard() {
       setFilteredList([...filteredHabits]);
     }
   }, [isFiltered, filter]);
+
   useEffect(() => {
     listHabitsFunction(token);
+    defineCurrentPageFunction("dashboard");
   }, []);
+
   return (
     <App>
       <Container>
@@ -83,12 +93,15 @@ function Dashboard() {
             <div className="header-search">
               <ContSearch>
                 <div>
-                  <BtnSearch onClick={() => procurar()}>
+                  <BtnSearch
+                    onClick={(e) =>
+                      e.currentTarget.parentElement.lastChild.focus()
+                    }>
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Type to Search..."
                     onChange={(evt) => setSearch(evt.target.value.toString())}
                   />
                 </div>
@@ -118,7 +131,6 @@ function Dashboard() {
             </div>
           </section>
         </Header>
-
         <MainContainer>
           <Cards>
             {isFiltered
@@ -144,10 +156,9 @@ function Dashboard() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModalHabits={handleModalHabits} />
+            <BasicSpeedDial handleModal={handleModalHabits} />
             <ModalHabits open={openModalHabits} handle={handleModalHabits} />
           </Footer>
-
         </MainContainer>
       </Container>
     </App>
