@@ -30,6 +30,7 @@ function Groups() {
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listGroupsFunction, allGroupsList } = useGroups();
   const { token, userId } = useAuth();
+  const [search, setSearch] = useState("");
 
   const handleModalGroups = () => {
     setOpenModalGroups(!openModalGroups);
@@ -45,8 +46,22 @@ function Groups() {
     }
   };
 
-  const filterListFunction = (userId) => {
-    let filteredGroups = [];
+  function searchFunction() {
+    setFilter("");
+    if (search !== "") {
+      const cardSearch = allGroupsList.filter((group) => {
+        const groupName = group.name.toLowerCase();
+        return groupName.includes(search.toLowerCase());
+      });
+      setFilteredList(cardSearch);
+      setIsFiltered(true);
+    } else {
+      setIsFiltered(false);
+      setFilteredList([]);
+    }
+  }
+
+  const filterListFunction = (userId, filteredGroups) => {
     if (filter === "Registered") {
       filteredGroups = allGroupsList.filter((group) =>
         group.users_on_group.some((user) => user.id === userId),
@@ -60,7 +75,11 @@ function Groups() {
   };
 
   useEffect(() => {
-    filterListFunction(parseInt(userId));
+    searchFunction();
+  }, [search]);
+
+  useEffect(() => {
+    filterListFunction(parseInt(userId), filteredList);
   }, [isFiltered, filter]);
 
   useEffect(() => {
@@ -78,10 +97,19 @@ function Groups() {
             <div className="header-search">
               <ContSearch>
                 <div>
-                  <BtnSearch>
+                  <BtnSearch
+                    onClick={(e) =>
+                      console.log(
+                        e.currentTarget.parentElement.lastChild.focus(),
+                      )
+                    }>
                     <FiSearch />
                   </BtnSearch>
-                  <InputSearch type="text" placeholder="Type to Search..." />
+                  <InputSearch
+                    type="text"
+                    placeholder="Type to Search..."
+                    onChange={(evt) => setSearch(evt.target.value.toString())}
+                  />
                 </div>
               </ContSearch>
             </div>
