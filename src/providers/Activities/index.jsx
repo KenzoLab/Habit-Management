@@ -15,12 +15,12 @@ export const ActivityProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const [currentGroup, setCurrentGroup] = useState("");
+  // const [currentGroup, setCurrentGroup] = useState("");
   const [activities, setActivities] = useState([]);
   const [message, setMessage] = useState([]);
 
   const loadActivities = async (idGroup) => {
-    setCurrentGroup(idGroup);
+    // setCurrentGroup(idGroup);
 
     let counter = 0;
     let array = [];
@@ -30,7 +30,7 @@ export const ActivityProvider = ({ children }) => {
         counter++;
         response = await api.get(
           `/activities/?group=${idGroup}&page=${counter}`,
-          AuthObj
+          AuthObj,
         );
         const currentPage = response.data.results;
         array = [...array, ...currentPage];
@@ -41,50 +41,50 @@ export const ActivityProvider = ({ children }) => {
     }
   };
 
-  const addActivity = (data) => {
+  const addActivity = (data, idGroup) => {
     const dataActivity = {
       title: data.title,
       realization_time: "2022-01-01T18:00:00Z",
-      group: parseInt(currentGroup),
+      group: parseInt(idGroup),
     };
 
     api
       .post("/activities/", dataActivity, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully added activity!"
+          "Successfully added activity!",
         ); /* toast register activity success */
-        loadActivities(currentGroup);
+        loadActivities(idGroup);
       })
       .catch((err) => setMessage(err));
   };
 
-  const updateActivity = (idActivity, dataUpdate) => {
+  const updateActivity = (idActivity, dataUpdate, idGroup) => {
     const dataActivity = {
       title: dataUpdate.title,
       realization_time: "2022-01-01T15:00:00Z",
-      group: parseInt(currentGroup),
+      group: parseInt(idGroup),
     };
 
     api
       .patch(`/activities/${idActivity}`, dataActivity, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully updated activity!"
+          "Successfully updated activity!",
         ); /* toast update activity success */
-        loadActivities(currentGroup);
+        loadActivities(idGroup);
       })
       .catch((err) => setMessage(err));
   };
 
-  const deleteActivity = (idActivity) => {
+  const deleteActivity = (idActivity, idGroup) => {
     api
       .delete(`/activities/${idActivity}/`, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully removed activity!"
+          "Successfully removed activity!",
         ); /* toast remove activity success */
-        loadActivities(currentGroup);
+        loadActivities(idGroup);
       })
       .catch((err) => setMessage(err));
   };
@@ -98,8 +98,7 @@ export const ActivityProvider = ({ children }) => {
         addActivity,
         updateActivity,
         deleteActivity,
-      }}
-    >
+      }}>
       {children}
     </ActivityContext.Provider>
   );
