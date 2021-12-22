@@ -64,13 +64,13 @@ const ModalGoals = ({ open, handle, idGroup }) => {
 
   //ADD GOAL
   const onAddGoal = (data) => {
-    addGoal(data);
+    addGoal(data, idGroup);
     resetInputs();
   };
 
   // REMOVE GOAL
   const onDeleteGoal = (idGoal) => {
-    deleteGoal(idGoal);
+    deleteGoal(idGoal, idGroup);
   };
 
   // RESET INPUTS
@@ -91,7 +91,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
   useEffect(() => {
     loadGoals(idGroup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [open]);
 
   return (
     <div>

@@ -15,12 +15,12 @@ export const GoalsProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const [currentGroup, setCurrentGroup] = useState("");
+  // const [currentGroup, setCurrentGroup] = useState("");
   const [goals, setGoals] = useState([]);
   const [message, setMessage] = useState([]);
 
   const loadGoals = async (idGroup) => {
-    setCurrentGroup(idGroup);
+    // setCurrentGroup(idGroup);
 
     let counter = 0;
     let array = [];
@@ -30,7 +30,7 @@ export const GoalsProvider = ({ children }) => {
         counter++;
         response = await api.get(
           `/goals/?group=${idGroup}&page=${counter}`,
-          AuthObj
+          AuthObj,
         );
         const currentPage = response.data.results;
         array = [...array, ...currentPage];
@@ -41,55 +41,55 @@ export const GoalsProvider = ({ children }) => {
     }
   };
 
-  const addGoal = (data) => {
+  const addGoal = (data, idGroup) => {
     const dataGoal = {
       title: data.title,
       difficulty: data.difficulty.value,
       how_much_achieved: 100,
       achieved: false,
-      group: parseInt(currentGroup),
+      group: parseInt(idGroup),
     };
 
     api
       .post("/goals/", dataGoal, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully added goal!"
+          "Successfully added goal!",
         ); /* toast register goal success */
-        loadGoals(currentGroup);
+        loadGoals(idGroup);
       })
       .catch((err) => setMessage(err));
   };
 
-  const updateGoal = (idGoal, dataUpdate) => {
+  const updateGoal = (idGoal, dataUpdate, idGroup) => {
     const dataGoal = {
       title: dataUpdate.title,
       difficulty: dataUpdate.difficulty.value,
       how_much_achieved: 100,
       achieved: false,
-      group: parseInt(currentGroup),
+      group: parseInt(idGroup),
     };
 
     api
       .patch(`/goals/${idGoal}`, AuthObj, dataGoal)
       .then((response) => {
         toast.success(
-          "Successfully updated goal!"
+          "Successfully updated goal!",
         ); /* toast update goal success */
         setMessage(response);
-        loadGoals(currentGroup);
+        loadGoals(idGroup);
       })
       .catch((err) => setMessage(err));
   };
 
-  const deleteGoal = (idGoal) => {
+  const deleteGoal = (idGoal, idGroup) => {
     api
       .delete(`/goals/${idGoal}/`, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully removed goal!"
+          "Successfully removed goal!",
         ); /* toast remove goal success */
-        loadGoals(currentGroup);
+        loadGoals(idGroup);
       })
       .catch((err) => setMessage(err));
   };
@@ -103,8 +103,7 @@ export const GoalsProvider = ({ children }) => {
         addGoal,
         updateGoal,
         deleteGoal,
-      }}
-    >
+      }}>
       {children}
     </GoalsContext.Provider>
   );
