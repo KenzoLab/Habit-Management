@@ -3,6 +3,7 @@ import home from "../../assets/home.png";
 import groups from "../../assets/groups.png";
 import activities from "../../assets/edit.png";
 import goals from "../../assets/goals.png";
+import { Link } from "react-router-dom";
 
 const Page = (props) => props.currentPage;
 
@@ -108,7 +109,6 @@ export const Nav = styled.div`
             height: 50px;
             border: none;
             width: auto;
-            /* margin: 0px 0px 10px 15px; */
             padding: 30px 0 30px 30px;
             font-family: var(--font-fira);
             border-radius: 30px 0 0 30px;
@@ -225,4 +225,19 @@ export const Footer = styled.div`
       margin-bottom: 10px;
     }
   }
+`;
+
+export const StyledLink = styled(Link)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+export const LogoutButton = styled.a`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
 `;

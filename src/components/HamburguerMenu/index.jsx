@@ -10,7 +10,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import logo from "../../assets/habitLogo.png";
 import { useAuth } from "../../providers/AuthProvider";
 import { useCurrentPage } from "../../providers/CurrentPage";
-import { Footer, Nav, Header } from "./styles";
+import { Footer, Nav, Header, StyledLink, LogoutButton } from "./styles";
 import EditIcon from "@mui/icons-material/Edit";
 
 function HamburguerMenu() {
@@ -42,59 +42,69 @@ function HamburguerMenu() {
         <section>
           <ul>
             <li className="dashboard">
-              <HomeOutlinedIcon
-                sx={{
-                  width: 35,
-                  height: 35,
-                  mr: 3,
-                  color: "var(--darkBlue)",
-                }}
-              />
-              <Link to="/dashboard">Dashboard</Link>
+              <StyledLink to="/dashboard">
+                <HomeOutlinedIcon
+                  sx={{
+                    width: 35,
+                    height: 35,
+                    mr: 3,
+                    color: "var(--darkBlue)",
+                  }}
+                />
+                Dashboard
+              </StyledLink>
             </li>
             <li className="groups">
-              <PeopleOutlineIcon
-                sx={{
-                  width: 35,
-                  height: 35,
-                  mr: 3,
-                  color: "var(--darkBlue)",
-                }}
-              />
-              <Link to="/groups">Groups</Link>
+              <StyledLink to="/groups">
+                <PeopleOutlineIcon
+                  sx={{
+                    width: 35,
+                    height: 35,
+                    mr: 3,
+                    color: "var(--darkBlue)",
+                  }}
+                />
+                Groups
+              </StyledLink>
             </li>
             <li className="activities">
-              <EditIcon
-                sx={{
-                  width: 35,
-                  height: 35,
-                  mr: 3,
-                  color: "var(--darkBlue)",
-                }}
-              />
-              <Link to="/activities">Activities</Link>
+              <StyledLink to="/activities">
+                <EditIcon
+                  sx={{
+                    width: 35,
+                    height: 35,
+                    mr: 3,
+                    color: "var(--darkBlue)",
+                  }}
+                />
+                Activities
+              </StyledLink>
             </li>
             <li className="goals">
-              <RadarOutlinedIcon
-                sx={{
-                  width: 35,
-                  height: 35,
-                  mr: 3,
-                  color: "var(--darkBlue)",
-                }}
-              />
-              <Link to="/goals">Goals</Link>
+              <StyledLink to="/goals">
+                <RadarOutlinedIcon
+                  sx={{
+                    width: 35,
+                    height: 35,
+                    mr: 3,
+                    color: "var(--darkBlue)",
+                  }}
+                />
+                Goals
+              </StyledLink>
             </li>
             <li onClick={() => logoutFunction()}>
-              <LogoutIcon
-                sx={{
-                  width: 35,
-                  height: 35,
-                  mr: 3,
-                  color: "var(--darkBlue)",
-                }}
-              />
-              <button className="logout-button">Logout</button>
+              <LogoutButton className="logout-button">
+                <LogoutIcon
+                  sx={{
+                    width: 35,
+                    height: 35,
+                    mr: 3,
+                    color: "var(--darkBlue)",
+                  }}
+                />
+                Logout
+              </LogoutButton>
             </li>
           </ul>
         </section>
