@@ -1,11 +1,12 @@
 ﻿import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import BasicSpeedDial from "../SpeedDialHabits";
+import { FaUserEdit, FaUserCog } from "react-icons/fa";
 
 import logo from "../../assets/habitLogo.png";
 import { useAuth } from "../../providers/AuthProvider";
@@ -13,7 +14,34 @@ import { useCurrentPage } from "../../providers/CurrentPage";
 import { Footer, Nav, Header, StyledLink, LogoutButton } from "./styles";
 import EditIcon from "@mui/icons-material/Edit";
 
+import ModalProfile from "../ProfileModal";
+
 function HamburguerMenu() {
+  const actions = [
+    { icon: <FaUserEdit />, name: "Edit Avatar" },
+    { icon: <FaUserCog />, name: "Edit Profile" },
+  ];
+  const speedIcon = (
+    <AccountCircleIcon
+      sx={{
+        width: 56,
+        height: 56,
+        mr: 0,
+      }}
+    />
+  );
+
+  const [openModalEditProfile, setOpenModalEditProfile] = useState(false);
+  const [openModalEditAvatar, setOpenModalEditAvatar] = useState(false);
+
+  const handleModalEditAvatar = () => {
+    setOpenModalEditAvatar(!openModalEditAvatar);
+  };
+
+  const handleModalEditProfile = () => {
+    setOpenModalEditProfile(!openModalEditProfile);
+  };
+
   const { getUserInfo, userInfo, logoutFunction } = useAuth();
   const { currentPage } = useCurrentPage();
 
@@ -110,12 +138,11 @@ function HamburguerMenu() {
         </section>
         <Footer>
           <section>
-            <AccountCircleIcon
-              sx={{
-                width: 50,
-                height: 50,
-                mr: 0.5,
-              }}
+            <BasicSpeedDial
+              handleModal={[handleModalEditAvatar, handleModalEditProfile]}
+              actions={actions}
+              speedIcon={speedIcon}
+              sx={{ position: "fixed", bottom: -20, right: 0 }}
             />
             <div>
               <p className="username">
@@ -128,6 +155,10 @@ function HamburguerMenu() {
           </section>
         </Footer>
       </div>
+      <ModalProfile
+        open={openModalEditProfile}
+        handle={handleModalEditProfile}
+      />
     </Nav>
   );
 }

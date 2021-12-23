@@ -68,7 +68,7 @@ function Dashboard() {
   useEffect(() => {
     if (filter === "Weekly" || filter === "Daily" || filter === "Monthly") {
       const filteredHabits = listHabits.filter(
-        (habit) => habit.frequency === filter,
+        (habit) => habit.frequency === filter
       );
       setFilteredList([...filteredHabits]);
     }
@@ -94,7 +94,8 @@ function Dashboard() {
                   <BtnSearch
                     onClick={(e) =>
                       e.currentTarget.parentElement.lastChild.focus()
-                    }>
+                    }
+                  >
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
@@ -111,19 +112,22 @@ function Dashboard() {
               <ButtonToday
                 className="filter-buttons"
                 onClick={() => filtering("Daily")}
-                filter={filter}>
+                filter={filter}
+              >
                 Today
               </ButtonToday>
               <ButtonWeek
                 className="filter-buttons"
                 onClick={() => filtering("Weekly")}
-                filter={filter}>
+                filter={filter}
+              >
                 Week
               </ButtonWeek>
               <ButtonMonth
                 className="filter-buttons"
                 onClick={() => filtering("Monthly")}
-                filter={filter}>
+                filter={filter}
+              >
                 Month
               </ButtonMonth>
             </div>
@@ -154,7 +158,7 @@ function Dashboard() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModal={handleModalHabits} />
+            <BasicSpeedDial handleModal={[handleModalHabits]} />
             <ModalHabits open={openModalHabits} handle={handleModalHabits} />
           </Footer>
         </MainContainer>
