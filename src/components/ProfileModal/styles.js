@@ -89,7 +89,7 @@ export const ContInput = styled.div`
     color: var(--red);
     font-size: 10px;
     height: 12px;
-    margin-top: 2px;
+    margin-top: 5px;
   }
 
   input {

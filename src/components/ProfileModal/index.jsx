@@ -5,7 +5,8 @@ import { useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 
-import { useGroups } from "../../providers/Groups";
+import { useAuth } from "../../providers/AuthProvider";
+import { useSignUp } from "../../providers/SignUp";
 
 import {
   ContainerModal,
@@ -19,6 +20,8 @@ import Input from "../../components/Input";
 
 const ModalProfile = ({ open, handle }) => {
   //PROPS PROVIDER
+  const { userId, userInfo, getUserInfo } = useAuth();
+  const { patchUpdateUser, message } = useSignUp();
 
   //SCHEMA YUP VALIDATION
   const schema = yup.object().shape({
@@ -30,34 +33,24 @@ const ModalProfile = ({ open, handle }) => {
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   // SAVE INFO
-  const onSaveInfo = (data) => {};
-
-  // RESET INPUTS
-  // const resetInputs = () => {
-  //   reset({
-  //     title: "",
-  //     category: { value: "", label: "Select an option" },
-  //     description: "",
-  //   });
-  // };
+  const onSaveInfo = (data) => {
+    patchUpdateUser(userId, data);
+  };
 
   //CLOSE MODAL AND RESET INPUTS
   const CloseModal = () => {
-    // resetInputs();
     handle();
   };
 
   //USE EFFECT
   useEffect(() => {
-    // searchSubscriptionsFunction();
-    // listGroupsFunction();
+    getUserInfo(userId);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -84,6 +77,7 @@ const ModalProfile = ({ open, handle }) => {
                 register={register}
                 data="username"
                 placeholder="Enter a new username"
+                defaultValue={userInfo.username}
               />
             </ContInput>
             <ContInput>
@@ -93,6 +87,7 @@ const ModalProfile = ({ open, handle }) => {
                 register={register}
                 data="email"
                 placeholder="Enter a new email"
+                defaultValue={userInfo.email}
               />
             </ContInput>
 
