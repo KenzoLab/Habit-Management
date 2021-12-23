@@ -13,7 +13,8 @@ export default function BasicSpeedDial({ handleModal }) {
       <SpeedDial
         ariaLabel="SpeedDial basic example"
         sx={{ position: "absolute", bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}>
+        icon={<SpeedDialIcon />}
+        FabProps={{ style: { backgroundColor: "var(--blue)" } }}>
         {actions.map((action) => (
           <SpeedDialAction
             // FabProps={{

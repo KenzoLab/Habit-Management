@@ -12,7 +12,7 @@ export const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
   }
 
   img {
@@ -65,6 +65,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   @media (min-width: 1024px) {
@@ -73,7 +74,6 @@ export const Container = styled.div`
     align-items: center;
     justify-content: center;
     height: 100vh;
-    /* gap: 100px; */
 
     .animation {
       animation-name: slide;
@@ -90,9 +90,9 @@ export const Container = styled.div`
 
     form {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 280px;
     }
 
     h1 {
