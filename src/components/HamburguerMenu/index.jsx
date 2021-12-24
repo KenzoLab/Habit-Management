@@ -15,6 +15,7 @@ import { Footer, Nav, Header, StyledLink, LogoutButton } from "./styles";
 import EditIcon from "@mui/icons-material/Edit";
 
 import ModalProfile from "../ProfileModal";
+import ModalAvatar from "../AvatarModal";
 
 function HamburguerMenu() {
   const actions = [
@@ -159,6 +160,7 @@ function HamburguerMenu() {
         open={openModalEditProfile}
         handle={handleModalEditProfile}
       />
+      <ModalAvatar open={openModalEditAvatar} handle={handleModalEditAvatar} />
     </Nav>
   );
 }

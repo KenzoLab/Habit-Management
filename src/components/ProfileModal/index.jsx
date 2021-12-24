@@ -33,6 +33,7 @@ const ModalProfile = ({ open, handle }) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
@@ -45,7 +46,16 @@ const ModalProfile = ({ open, handle }) => {
 
   //CLOSE MODAL AND RESET INPUTS
   const CloseModal = () => {
+    resetInputs();
     handle();
+  };
+
+  // RESET INPUTS
+  const resetInputs = () => {
+    reset({
+      username: userInfo.username,
+      email: userInfo.email,
+    });
   };
 
   //USE EFFECT
