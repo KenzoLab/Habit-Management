@@ -64,11 +64,11 @@ function Groups() {
   const filterListFunction = (userId, filteredGroups) => {
     if (filter === "Registered") {
       filteredGroups = allGroupsList.filter((group) =>
-        group.users_on_group.some((user) => user.id === userId),
+        group.users_on_group.some((user) => user.id === userId)
       );
     } else if (filter === "Discovery") {
       filteredGroups = allGroupsList.filter(
-        (group) => !group.users_on_group.some((user) => user.id === userId),
+        (group) => !group.users_on_group.some((user) => user.id === userId)
       );
     }
     setFilteredList([...filteredGroups]);
@@ -100,9 +100,10 @@ function Groups() {
                   <BtnSearch
                     onClick={(e) =>
                       console.log(
-                        e.currentTarget.parentElement.lastChild.focus(),
+                        e.currentTarget.parentElement.lastChild.focus()
                       )
-                    }>
+                    }
+                  >
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
@@ -120,13 +121,15 @@ function Groups() {
               <ButtonDiscovery
                 className="filter-buttons"
                 onClick={() => filtering("Discovery")}
-                filter={filter}>
+                filter={filter}
+              >
                 Discovery
               </ButtonDiscovery>
               <ButtonRegistered
                 className="filter-buttons"
                 onClick={() => filtering("Registered")}
-                filter={filter}>
+                filter={filter}
+              >
                 Registered
               </ButtonRegistered>
             </div>
@@ -143,7 +146,7 @@ function Groups() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModal={handleModalGroups} />
+            <BasicSpeedDial handleModal={[handleModalGroups]} />
             <ModalGroups open={openModalGroups} handle={handleModalGroups} />
           </Footer>
         </MainContainer>

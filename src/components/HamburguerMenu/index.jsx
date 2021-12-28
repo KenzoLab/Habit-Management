@@ -1,6 +1,4 @@
-﻿import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import { useEffect, useState } from "react";
-import MenuIcon from "@mui/icons-material/Menu";
+﻿import { useEffect, useState } from "react";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
@@ -11,25 +9,55 @@ import { FaUserEdit, FaUserCog } from "react-icons/fa";
 import logo from "../../assets/habitLogo.png";
 import { useAuth } from "../../providers/AuthProvider";
 import { useCurrentPage } from "../../providers/CurrentPage";
-import { Footer, Nav, Header, StyledLink, LogoutButton } from "./styles";
+import {
+  Footer,
+  Nav,
+  Header,
+  StyledLink,
+  LogoutButton,
+  NewAvatar,
+  ContainerAvatar,
+} from "./styles";
 import EditIcon from "@mui/icons-material/Edit";
+import { genConfig } from "react-nice-avatar";
 
 import ModalProfile from "../ProfileModal";
 import ModalAvatar from "../AvatarModal";
 
+const defaultConfig = {
+  sex: "man",
+  faceColor: "#F9C9B6",
+  earSize: "small",
+  eyeStyle: "smile",
+  noseStyle: "round",
+  mouthStyle: "laugh",
+  shirtStyle: "polo",
+  glassesStyle: "none",
+  hairColor: "#000",
+  hairStyle: "thick",
+  hatStyle: "none",
+  hatColor: "#fff",
+  eyeBrowStyle: "up",
+  shirtColor: "#F4D150",
+  bgColor: "linear-gradient(90deg, #36cd1c 0%, #68deff 100%)",
+};
+
 function HamburguerMenu() {
+  //CONFIG AVATAR
+  const [myConfig, setMyConfig] = useState(
+    JSON.parse(localStorage.getItem("@Habit:myAvatar")) || defaultConfig
+  );
+  const config = genConfig(myConfig);
+
   const actions = [
     { icon: <FaUserEdit />, name: "Edit Avatar" },
     { icon: <FaUserCog />, name: "Edit Profile" },
   ];
+
   const speedIcon = (
-    <AccountCircleIcon
-      sx={{
-        width: 56,
-        height: 56,
-        mr: 0,
-      }}
-    />
+    <ContainerAvatar>
+      <NewAvatar {...config} />
+    </ContainerAvatar>
   );
 
   const [openModalEditProfile, setOpenModalEditProfile] = useState(false);
@@ -143,7 +171,7 @@ function HamburguerMenu() {
               handleModal={[handleModalEditAvatar, handleModalEditProfile]}
               actions={actions}
               speedIcon={speedIcon}
-              sx={{ position: "fixed", bottom: -20, right: 0 }}
+              sx={{ position: "fixed", bottom: -20, right: 15 }}
             />
             <div>
               <p className="username">
@@ -160,7 +188,12 @@ function HamburguerMenu() {
         open={openModalEditProfile}
         handle={handleModalEditProfile}
       />
-      <ModalAvatar open={openModalEditAvatar} handle={handleModalEditAvatar} />
+      <ModalAvatar
+        open={openModalEditAvatar}
+        handle={handleModalEditAvatar}
+        myConfig={myConfig}
+        setMyConfig={setMyConfig}
+      />
     </Nav>
   );
 }

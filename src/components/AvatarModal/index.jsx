@@ -5,12 +5,13 @@ import { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { genConfig } from "react-nice-avatar";
+import { toast } from "react-toastify";
 
 import {
   ContainerModal,
   ContForm,
   ContRandom,
-  ContManConfig,
+  ContConfig,
   ContInputs,
   ContInput,
   Head,
@@ -22,27 +23,7 @@ import {
 
 import { InputSelect } from "../../components/Input";
 
-const ModalAvatar = ({ open, handle }) => {
-  const [gender, setGender] = useState();
-
-  //CONFIG AVATAR
-  const [myConfig, setMyConfig] = useState({
-    sex: "man",
-    faceColor: "#F9C9B6",
-    earSize: "small",
-    eyeStyle: "smile",
-    noseStyle: "round",
-    mouthStyle: "laugh",
-    shirtStyle: "polo",
-    glassesStyle: "none",
-    hairColor: "#000",
-    hairStyle: "thick",
-    hatStyle: "none",
-    hatColor: "#fff",
-    eyeBrowStyle: "up",
-    shirtColor: "#F4D150",
-    bgColor: "linear-gradient(90deg, #36cd1c 0%, #68deff 100%)",
-  });
+const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
   const config = genConfig(myConfig);
 
   //RANDOM ARR BY ONE IDX
@@ -144,6 +125,7 @@ const ModalAvatar = ({ open, handle }) => {
   // HOOK FORM
   const {
     register,
+    watch,
     handleSubmit,
     control,
     reset,
@@ -152,17 +134,29 @@ const ModalAvatar = ({ open, handle }) => {
     resolver: yupResolver(schema),
   });
 
+  const watchGender = watch("sex", "man");
+
   // SAVE CONFIG
-  const onSaveConfig = () => {};
+  const onSaveConfig = () => {
+    localStorage.setItem("@Habit:myAvatar", JSON.stringify(myConfig));
+    toast.success("Saved settings!");
+    CloseModal();
+  };
 
   //GENERATE MANUALLY
   const onGenerateMan = (data) => {
-    console.log(data);
-    // resetInputs();
+    const newConfig = {};
+    for (let key in data) {
+      newConfig[key] = data[key].value;
+    }
+    setMyConfig(newConfig);
   };
 
   // LOAD CONFIG
-  const onLoadConfig = () => {};
+  const onLoadConfig = () => {
+    const configLocal = JSON.parse(localStorage.getItem("@Habit:myAvatar"));
+    configLocal && setMyConfig(configLocal);
+  };
 
   // RESET INPUTS
   const resetInputs = () => {
@@ -194,7 +188,11 @@ const ModalAvatar = ({ open, handle }) => {
   //USE EFFECT
   useEffect(() => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [watch]);
+
+  useEffect(() => {
+    open === true && onLoadConfig();
+  }, [open]);
 
   return (
     <div>
@@ -211,8 +209,8 @@ const ModalAvatar = ({ open, handle }) => {
               <IoCloseOutline />
             </BtnCloseDelete>
           </Head>
-          <ContForm onSubmit={handleSubmit(onGenerateMan)}>
-            <ContManConfig>
+          <ContConfig>
+            <ContForm onSubmit={handleSubmit(onGenerateMan)}>
               <label>Manually select</label>
               <ContInputs>
                 <ContInput>
@@ -224,7 +222,6 @@ const ModalAvatar = ({ open, handle }) => {
                     data="sex"
                     errors={errors?.sex?.value ? errors.sex.value.message : " "}
                     options={defaultOptions.sex}
-                    // onChange={(e) => setGender(e.value)}
                   />
                 </ContInput>
                 <ContInput>
@@ -255,6 +252,21 @@ const ModalAvatar = ({ open, handle }) => {
                         : " "
                     }
                     options={defaultOptions.earSize}
+                  />
+                </ContInput>
+                <ContInput>
+                  <InputSelect
+                    label="Eye Style:"
+                    name="eyeStyle"
+                    control={control}
+                    register={register}
+                    data="eyeStyle"
+                    errors={
+                      errors?.eyeStyle?.value
+                        ? errors.eyeStyle.value.message
+                        : " "
+                    }
+                    options={defaultOptions.eyeStyle}
                   />
                 </ContInput>
                 <ContInput>
@@ -345,7 +357,7 @@ const ModalAvatar = ({ open, handle }) => {
                         : " "
                     }
                     options={
-                      gender === "man"
+                      watchGender?.value === "man"
                         ? defaultOptions.hairStyleMan
                         : defaultOptions.hairStyleWoman
                     }
@@ -428,15 +440,15 @@ const ModalAvatar = ({ open, handle }) => {
                 </ContInput>
               </ContInputs>
               <ButtonSub type="submit">Generate</ButtonSub>
-            </ContManConfig>
+            </ContForm>
             <ContRandom>
               <NewAvatar {...config} />
               <ButtonSub onClick={() => setNewRandomConfig(defaultOptions)}>
                 Generate Random
               </ButtonSub>
-              <ButtonSub>Save</ButtonSub>
+              <ButtonSub onClick={() => onSaveConfig()}>Save</ButtonSub>
             </ContRandom>
-          </ContForm>
+          </ContConfig>
         </ContainerModal>
       </Modal>
     </div>

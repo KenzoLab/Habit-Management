@@ -23,7 +23,7 @@ export const ContainerModal = styled.div`
   }
 `;
 
-export const Head = styled.div`
+export const Head = styled.header`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,7 +60,7 @@ export const Head = styled.div`
   }
 `;
 
-export const ContForm = styled.form`
+export const ContConfig = styled.main`
   width: 100%;
   height: 380px;
   display: flex;
@@ -70,7 +70,29 @@ export const ContForm = styled.form`
   box-sizing: border-box;
 
   @media (min-width: 768px) {
+    display: flex;
     flex-direction: row;
+  }
+`;
+
+export const ContForm = styled.form`
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 50%;
+  height: 100%;
+  padding: 5px 0px;
+
+  @media (min-width: 768px) {
+    display: flex;
+    border-right: solid 1px var(--gray);
+  }
+
+  label {
+    font-family: var(--font-inter);
+    font-size: 16px;
+    margin-bottom: 10px;
   }
 `;
 
@@ -118,27 +140,6 @@ export const ContInputs = styled.div`
   padding: 15px 5px;
   overflow-y: scroll;
   overflow-x: hidden;
-`;
-
-export const ContManConfig = styled.div`
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 50%;
-  height: 100%;
-  padding: 5px 0px;
-
-  label {
-    font-family: var(--font-inter);
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-
-  @media (min-width: 768px) {
-    display: flex;
-    border-right: solid 1px var(--gray);
-  }
 `;
 
 export const ContRandom = styled.div`
@@ -306,7 +307,7 @@ export const defaultOptions = {
     { value: "#D2EFF3", label: "Water" },
     { value: "#FFEDEF", label: "Salmon" },
     { value: "#FFEBA4", label: "M.Champagne" },
-    { value: "#506AF4", label: "M.Champagne" },
+    { value: "#506AF4", label: "Blue" },
     { value: "#F48150", label: "Orange" },
     { value: "#74D153", label: "Green" },
     {
