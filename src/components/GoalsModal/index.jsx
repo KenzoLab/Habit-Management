@@ -1,4 +1,4 @@
-﻿import Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
@@ -99,8 +99,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal onSubmit={handleSubmit(onAddGoal)}>
           <ContGoals>
             <Head>

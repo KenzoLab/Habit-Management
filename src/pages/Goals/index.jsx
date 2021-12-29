@@ -1,4 +1,4 @@
-﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import HamburguerMenu from "../../components/HamburguerMenu";
 import { FiSearch } from "react-icons/fi";
 import {
   App,
@@ -80,8 +80,7 @@ function Goals() {
                   <BtnSearch
                     onClick={(e) =>
                       e.currentTarget.parentElement.lastChild.focus()
-                    }
-                  >
+                    }>
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch

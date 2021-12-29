@@ -1,4 +1,4 @@
-﻿import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect, useState } from "react";
@@ -44,7 +44,7 @@ const defaultConfig = {
 const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
   //CONFIG AVATAR
   const [myConfigRandom, setMyConfigRandom] = useState(
-    JSON.parse(localStorage.getItem("@Habit:myAvatar")) || defaultConfig
+    JSON.parse(localStorage.getItem("@Habit:myAvatar")) || defaultConfig,
   );
   const configRandom = genConfig(myConfigRandom);
 
@@ -223,8 +223,7 @@ const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal>
           <Head>
             <h3>Edit Avatar</h3>

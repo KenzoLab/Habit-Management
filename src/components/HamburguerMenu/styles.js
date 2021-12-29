@@ -1,4 +1,4 @@
-﻿import styled from "styled-components";
+import styled from "styled-components";
 import home from "../../assets/home.png";
 import groups from "../../assets/groups.png";
 import activities from "../../assets/edit.png";
