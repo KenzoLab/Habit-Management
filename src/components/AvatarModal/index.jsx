@@ -23,8 +23,30 @@ import {
 
 import { InputSelect } from "../../components/Input";
 
+const defaultConfig = {
+  sex: "man",
+  faceColor: "#F9C9B6",
+  earSize: "small",
+  eyeStyle: "smile",
+  noseStyle: "round",
+  mouthStyle: "laugh",
+  shirtStyle: "polo",
+  glassesStyle: "none",
+  hairColor: "#000",
+  hairStyle: "thick",
+  hatStyle: "none",
+  hatColor: "#fff",
+  eyeBrowStyle: "up",
+  shirtColor: "#F4D150",
+  bgColor: "linear-gradient(90deg, #36cd1c 0%, #68deff 100%)",
+};
+
 const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
-  const config = genConfig(myConfig);
+  //CONFIG AVATAR
+  const [myConfigRandom, setMyConfigRandom] = useState(
+    JSON.parse(localStorage.getItem("@Habit:myAvatar")) || defaultConfig
+  );
+  const configRandom = genConfig(myConfigRandom);
 
   //RANDOM ARR BY ONE IDX
   const randomIdx = (arr) => {
@@ -50,11 +72,20 @@ const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
         newConfig[key] = res.value;
       }
     }
-    setMyConfig(newConfig);
+    setMyConfigRandom(newConfig);
+  };
+
+  //GENERATE MANUALLY
+  const onGenerateMan = (data) => {
+    const newConfig = {};
+    for (let key in data) {
+      newConfig[key] = data[key].value;
+    }
+    setMyConfigRandom(newConfig);
   };
 
   //ARRAYS SELECT OPTIONS
-  //VIDE IN STYLES FILE
+  //VIDE IN STYLE FILE
 
   //SCHEMA YUP VALIDATION
   const schema = yup
@@ -138,24 +169,15 @@ const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
 
   // SAVE CONFIG
   const onSaveConfig = () => {
-    localStorage.setItem("@Habit:myAvatar", JSON.stringify(myConfig));
+    localStorage.setItem("@Habit:myAvatar", JSON.stringify(myConfigRandom));
+    setMyConfig(myConfigRandom);
     toast.success("Saved settings!");
     CloseModal();
   };
 
-  //GENERATE MANUALLY
-  const onGenerateMan = (data) => {
-    const newConfig = {};
-    for (let key in data) {
-      newConfig[key] = data[key].value;
-    }
-    setMyConfig(newConfig);
-  };
-
   // LOAD CONFIG
   const onLoadConfig = () => {
-    const configLocal = JSON.parse(localStorage.getItem("@Habit:myAvatar"));
-    configLocal && setMyConfig(configLocal);
+    setMyConfigRandom(myConfig);
   };
 
   // RESET INPUTS
@@ -192,6 +214,7 @@ const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
 
   useEffect(() => {
     open === true && onLoadConfig();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   return (
@@ -442,7 +465,7 @@ const ModalAvatar = ({ open, handle, myConfig, setMyConfig }) => {
               <ButtonSub type="submit">Generate</ButtonSub>
             </ContForm>
             <ContRandom>
-              <NewAvatar {...config} />
+              <NewAvatar {...configRandom} />
               <ButtonSub onClick={() => setNewRandomConfig(defaultOptions)}>
                 Generate Random
               </ButtonSub>

@@ -52,6 +52,7 @@ function Goals() {
 
   useEffect(() => {
     searchFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
@@ -61,6 +62,7 @@ function Goals() {
   useEffect(() => {
     listGroupsFunction();
     defineCurrentPageFunction("goals");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -78,7 +80,8 @@ function Goals() {
                   <BtnSearch
                     onClick={(e) =>
                       e.currentTarget.parentElement.lastChild.focus()
-                    }>
+                    }
+                  >
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch

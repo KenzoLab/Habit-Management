@@ -1,4 +1,4 @@
-﻿import { AuthProvider } from "./AuthProvider";
+import { AuthProvider } from "./AuthProvider";
 import { SignUpProvider } from "./SignUp";
 import { HabitProvider } from "./Habits";
 import { GroupsProvider } from "./Groups";

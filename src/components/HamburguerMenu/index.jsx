@@ -75,6 +75,7 @@ function HamburguerMenu() {
   const { currentPage } = useCurrentPage();
 
   const [toggleNav, setToggleNav] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [userId, setUserId] = useState(() => {
     const id = localStorage.getItem("@Habit:userId");
     return id ? id : null;
@@ -86,6 +87,7 @@ function HamburguerMenu() {
 
   useEffect(() => {
     getUserInfo(userId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

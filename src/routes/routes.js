@@ -1,4 +1,4 @@
-﻿import { Redirect, Route as ReactDOMRoute } from "react-router-dom";
+import { Redirect, Route as ReactDOMRoute } from "react-router-dom";
 import { useAuth } from "../providers/AuthProvider";
 
 const Route = ({ isPrivate = false, component: Component, ...rest }) => {

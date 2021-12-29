@@ -1,4 +1,4 @@
-﻿import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
@@ -21,7 +21,7 @@ import Input from "../../components/Input";
 const ModalProfile = ({ open, handle }) => {
   //PROPS PROVIDER
   const { userId, userInfo, getUserInfo } = useAuth();
-  const { patchUpdateUser, message } = useSignUp();
+  const { patchUpdateUser } = useSignUp();
 
   //SCHEMA YUP VALIDATION
   const schema = yup.object().shape({
@@ -42,11 +42,13 @@ const ModalProfile = ({ open, handle }) => {
   // SAVE INFO
   const onSaveInfo = (data) => {
     patchUpdateUser(userId, data);
+    // CloseModal();
   };
 
   //CLOSE MODAL AND RESET INPUTS
   const CloseModal = () => {
-    resetInputs();
+    onLoadInfo();
+    // resetInputs();
     handle();
   };
 
@@ -58,11 +60,21 @@ const ModalProfile = ({ open, handle }) => {
     });
   };
 
+  //LOAD INFO USER
+  const onLoadInfo = () => {
+    getUserInfo(userId);
+  };
+
   //USE EFFECT
   useEffect(() => {
-    getUserInfo(userId);
+    onLoadInfo();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    resetInputs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [userInfo]);
 
   return (
     <div>

@@ -63,6 +63,7 @@ function Dashboard() {
 
   useEffect(() => {
     searchFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
@@ -72,11 +73,13 @@ function Dashboard() {
       );
       setFilteredList([...filteredHabits]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFiltered, filter]);
 
   useEffect(() => {
     listHabitsFunction();
     defineCurrentPageFunction("dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

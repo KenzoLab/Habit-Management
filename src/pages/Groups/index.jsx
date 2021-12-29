@@ -76,15 +76,18 @@ function Groups() {
 
   useEffect(() => {
     searchFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
     filterListFunction(parseInt(userId), filteredList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFiltered, filter]);
 
   useEffect(() => {
     listGroupsFunction();
     defineCurrentPageFunction("groups");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

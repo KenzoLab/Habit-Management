@@ -1,4 +1,4 @@
-﻿import { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
@@ -30,7 +30,7 @@ export const GoalsProvider = ({ children }) => {
         counter++;
         response = await api.get(
           `/goals/?group=${idGroup}&page=${counter}`,
-          AuthObj,
+          AuthObj
         );
         const currentPage = response.data.results;
         array = [...array, ...currentPage];
@@ -54,7 +54,7 @@ export const GoalsProvider = ({ children }) => {
       .post("/goals/", dataGoal, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully added goal!",
+          "Successfully added goal!"
         ); /* toast register goal success */
         loadGoals(idGroup);
       })
@@ -74,7 +74,7 @@ export const GoalsProvider = ({ children }) => {
       .patch(`/goals/${idGoal}`, AuthObj, dataGoal)
       .then((response) => {
         toast.success(
-          "Successfully updated goal!",
+          "Successfully updated goal!"
         ); /* toast update goal success */
         setMessage(response);
         loadGoals(idGroup);
@@ -87,7 +87,7 @@ export const GoalsProvider = ({ children }) => {
       .delete(`/goals/${idGoal}/`, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully removed goal!",
+          "Successfully removed goal!"
         ); /* toast remove goal success */
         loadGoals(idGroup);
       })
@@ -103,7 +103,8 @@ export const GoalsProvider = ({ children }) => {
         addGoal,
         updateGoal,
         deleteGoal,
-      }}>
+      }}
+    >
       {children}
     </GoalsContext.Provider>
   );

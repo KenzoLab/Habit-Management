@@ -1,4 +1,4 @@
-﻿import { Link, useHistory } from "react-router-dom";
+﻿import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -12,7 +12,6 @@ import { useSignUp } from "../../providers/SignUp";
 
 const SignUp = () => {
   const { postSignUp } = useSignUp();
-  //const history = useHistory();
 
   const schema = yup.object().shape({
     username: yup.string().required("Required field"),
@@ -37,7 +36,6 @@ const SignUp = () => {
 
   const handleRegisterSubmit = ({ username, email, password }) => {
     postSignUp({ username, email, password });
-    //history.push("/");
   };
 
   return (
