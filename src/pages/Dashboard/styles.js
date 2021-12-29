@@ -21,6 +21,7 @@ export const Container = styled.section`
 `;
 
 export const MainContainer = styled.section`
+  height: 63vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,6 +33,7 @@ export const MainContainer = styled.section`
 `;
 
 export const Header = styled.header`
+  height: 17vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -64,17 +66,17 @@ export const Header = styled.header`
   .header-bottom {
     display: flex;
     justify-content: center;
-    
+
     button {
+      padding: 8px 15px;
+    }
+
+    @media (min-width: 768px) {
+      margin-bottom: 15px;
+      margin-left: 35px;
+      button {
         padding: 8px 15px;
-      }
-      
-      @media (min-width: 768px) {
-        margin-bottom: 15px;
-        margin-left: 35px;
-        button {
-          padding: 8px 15px;
-          font-size: 30px;
+        font-size: 30px;
       }
     }
   }
@@ -117,7 +119,7 @@ export const InputSearch = styled.input`
   padding-right: 40px;
   color: #9398a2;
   @media (min-width: 768px) {
-    width: 50px;  
+    width: 50px;
   }
   &:focus {
     width: 290px;
@@ -184,5 +186,5 @@ export const Cards = styled.section`
 `;
 
 export const Footer = styled.footer`
-align-self: flex-end;
+  align-self: flex-end;
 `;

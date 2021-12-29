@@ -22,6 +22,7 @@ export const Container = styled.section`
 `;
 
 export const MainContainer = styled.section`
+  height: 68vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -33,6 +34,7 @@ export const MainContainer = styled.section`
 `;
 
 export const Header = styled.header`
+  height: 12vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
