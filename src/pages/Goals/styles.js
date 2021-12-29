@@ -12,7 +12,7 @@ export const Container = styled.section`
   flex-direction: column;
   align-items: center;
   background-color: var(--greyBackground);
-  margin-top: 15vh;
+  margin-top: 20vh;
 
   @media (min-width: 768px) {
     margin-top: 5vh;
@@ -99,6 +99,7 @@ export const Header = styled.header`
 export const ContSearch = styled.div`
   width: 100%;
   height: 50px;
+  margin-bottom: 20px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -160,20 +161,20 @@ export const BtnSearch = styled.button`
   }
 `;
 
-export const ButtonToday = styled.button`
-  background-color: ${(props) =>
-    props.filter === "Daily" ? "var(--extraLightBlue)" : "none"};
-`;
+// export const ButtonToday = styled.button`
+//   background-color: ${(props) =>
+//     props.filter === "Daily" ? "var(--extraLightBlue)" : "none"};
+// `;
 
-export const ButtonWeek = styled.button`
-  background-color: ${(props) =>
-    props.filter === "Weekly" ? "var(--extraLightBlue)" : "none"};
-`;
+// export const ButtonWeek = styled.button`
+//   background-color: ${(props) =>
+//     props.filter === "Weekly" ? "var(--extraLightBlue)" : "none"};
+// `;
 
-export const ButtonMonth = styled.button`
-  background-color: ${(props) =>
-    props.filter === "Monthly" ? "var(--extraLightBlue)" : "none"};
-`;
+// export const ButtonMonth = styled.button`
+//   background-color: ${(props) =>
+//     props.filter === "Monthly" ? "var(--extraLightBlue)" : "none"};
+// `;
 
 export const Cards = styled.section`
   height: 70vh;
