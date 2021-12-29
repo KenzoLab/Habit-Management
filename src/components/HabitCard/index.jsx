@@ -1,4 +1,4 @@
-﻿import { ButtonContainer, ContentContainer, Difficulty } from "./styles";
+import { ButtonContainer, ContentContainer, Difficulty } from "./styles";
 import { useHabit } from "../../providers/Habits";
 import CardFrame from "../CardFrame";
 

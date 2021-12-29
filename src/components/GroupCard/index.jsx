@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -64,8 +64,7 @@ const GroupCard = ({ group, cardType }) => {
         <div className="mobile__buttons">
           <button
             type="button"
-            onClick={isSubscribed ? unSubscribe : subscribe}
-          >
+            onClick={isSubscribed ? unSubscribe : subscribe}>
             {isSubscribed ? (
               <BookmarkRemoveIcon className="unsubscribe__icon" />
             ) : (
@@ -82,8 +81,7 @@ const GroupCard = ({ group, cardType }) => {
         <div className="desktop__buttons">
           <button
             type="button"
-            onClick={isSubscribed ? unSubscribe : subscribe}
-          >
+            onClick={isSubscribed ? unSubscribe : subscribe}>
             {isSubscribed ? (
               <>
                 <BookmarkRemoveIcon className="unsubscribe__icon" />

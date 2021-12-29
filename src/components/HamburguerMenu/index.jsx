@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import RadarOutlinedIcon from "@mui/icons-material/RadarOutlined";
@@ -45,7 +45,7 @@ const defaultConfig = {
 function HamburguerMenu() {
   //CONFIG AVATAR
   const [myConfig, setMyConfig] = useState(
-    JSON.parse(localStorage.getItem("@Habit:myAvatar")) || defaultConfig
+    JSON.parse(localStorage.getItem("@Habit:myAvatar")) || defaultConfig,
   );
   const config = genConfig(myConfig);
 

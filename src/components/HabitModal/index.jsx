@@ -1,4 +1,4 @@
-﻿import { useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";
@@ -123,8 +123,7 @@ const ModalHabits = ({ open, handle }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal>
           <ContHabits>
             <Head>

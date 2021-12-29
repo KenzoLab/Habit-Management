@@ -1,4 +1,4 @@
-﻿import styled from "styled-components";
+import styled from "styled-components";
 import Avatar from "react-nice-avatar";
 
 export const ContainerModal = styled.div`

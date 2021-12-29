@@ -1,4 +1,4 @@
-﻿import CardFrame from "../CardFrame";
+import CardFrame from "../CardFrame";
 import { ContentContainer, Status, Difficult } from "./styles";
 
 const GoalsCard = ({ title, group, difficult, status }) => {

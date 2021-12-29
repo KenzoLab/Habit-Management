@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CardFrame from "../CardFrame";
 import { ContentContainer } from "./styles";
 
@@ -11,7 +11,7 @@ const ActivitiesCard = ({ title, group, date }) => {
     setDay(date.slice(8, 10));
     setMonth(date.slice(5, 7));
     setYear(date.slice(0, 4));
-  }, []);
+  }, [date]);
   return (
     <CardFrame cardType="activities">
       <ContentContainer>

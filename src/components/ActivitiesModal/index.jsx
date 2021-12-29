@@ -1,4 +1,4 @@
-﻿import Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
