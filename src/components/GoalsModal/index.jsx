@@ -133,7 +133,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
               </Head>
               <p>
                 {goals.length} goals /{" "}
-                {goals.filter((item) => item.achieved === false).length}{" "}
+                {goals.filter((item) => item.achieved === true).length}{" "}
                 concluded
               </p>
             </ContCurrent>
