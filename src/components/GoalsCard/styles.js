@@ -10,28 +10,21 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  text-align: center;
 
-  // Card Content
-  > * {
-    align-self: center;
-    text-align: center;
-  }
-
-  > div {
+  /* > div {
     width: 100%;
     display: flex;
     justify-content: space-around;
-  }
+  } */
 
   .content__title {
-    font-size: 34px;
+    font-size: 25px;
     font-weight: 600;
     color: var(--black);
-    flex-shrink: 1;
   }
   .content__group {
-    font-size: 25px;
-    font-style: italic;
+    font-size: 23px;
     font-weight: 500;
   }
 `;
@@ -50,7 +43,7 @@ export const Status = styled.p`
   }};
 `;
 
-export const Difficult = styled.span`
+export const Difficult = styled.p`
   font-size: 23px;
   font-weight: 600;
 

@@ -7,8 +7,7 @@ export const Container = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 300px;
-  margin-bottom: 25px;
-  height: 95px;
+
 
   label {
     color: var(--darkBlue);
@@ -39,6 +38,10 @@ export const Container = styled.div`
   .error {
     margin: 7px;
     height: 12px;
+
+    @media (min-width: 1024px) {
+      margin-bottom: 25px;
+    }
   }
 `;
 
@@ -81,6 +84,7 @@ export const ContainerTextArea = styled.div`
   .error {
     margin: 7px;
     height: 12px;
+    }
   }
 `;
 

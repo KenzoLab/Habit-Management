@@ -1,4 +1,4 @@
-import * as React from "react";
+﻿import * as React from "react";
 import Box from "@mui/material/Box";
 import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialIcon from "@mui/material/SpeedDialIcon";
@@ -16,7 +16,11 @@ export default function BasicSpeedDial({
 }) {
   return (
     <Box sx={{ height: 0, transform: "translateZ(0px)", flexGrow: 1 }}>
-      <SpeedDial ariaLabel="SpeedDial" sx={sx} icon={speedIcon}>
+      <SpeedDial
+        ariaLabel="SpeedDial"
+        sx={sx}
+        icon={speedIcon}
+        FabProps={{ style: { backgroundColor: "var(--blue)" } }}>
         {actions.map((action, idx) => (
           <SpeedDialAction
             onClick={() => handleModal[idx]()}

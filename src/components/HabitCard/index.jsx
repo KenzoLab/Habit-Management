@@ -1,10 +1,6 @@
-﻿import {
-  ButtonContainer,
-  ContentContainer,
-  Difficulty,
-  CardFrame,
-} from "./styles";
+﻿import { ButtonContainer, ContentContainer, Difficulty } from "./styles";
 import { useHabit } from "../../providers/Habits";
+import CardFrame from "../CardFrame";
 
 const HabitCard = ({ title, category, frequency, difficulty, habitId }) => {
   const { deleteHabitFunction } = useHabit();

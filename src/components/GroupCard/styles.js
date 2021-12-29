@@ -79,6 +79,14 @@ export const ContentContainer = styled.div`
     display: none;
   }
 
+  @media (max-width: 766px) {
+    .content__name {
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+
   @media (min-width: 767px) {
     .content__text {
       grid-template-areas: "title title goals" "category category category" "description description description";
@@ -110,9 +118,10 @@ export const ContentContainer = styled.div`
     .desktop__buttons {
       border-left: 1px solid;
       border-color: var(--grey);
-      margin-left: 20px;
+      width: 150px;
+      /* margin-left: 20px; */
       height: 100%;
-      padding-left: 20px;
+      padding-left: 5px;
       display: flex;
       flex-direction: column;
       justify-content: space-around;
@@ -153,7 +162,7 @@ export const Difficult = styled.span`
   align-self: center;
   text-align: end;
 
-  color: ${props => {
+  color: ${(props) => {
     if (props.children.toLowerCase() === "easy") {
       return "var(--green)";
     } else if (props.children.toLowerCase() === "medium") {
