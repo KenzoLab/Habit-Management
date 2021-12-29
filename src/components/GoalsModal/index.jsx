@@ -99,7 +99,8 @@ const ModalGoals = ({ open, handle, idGroup }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description">
+        aria-describedby="parent-modal-description"
+      >
         <ContainerModal onSubmit={handleSubmit(onAddGoal)}>
           <ContGoals>
             <Head>
@@ -111,7 +112,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
                   <ContInfosItem>
                     <h4>{`${item.title.substring(0, 15)}...`}</h4>
                     <ContTitlesItem>
-                      <h5></h5>
+                      <h5> </h5>
                       <H6 diff={item.difficulty}>{item.difficulty}</H6>
                     </ContTitlesItem>
                     <p></p>

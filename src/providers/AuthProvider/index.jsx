@@ -1,4 +1,4 @@
-﻿import { useContext, createContext, useState } from "react";
+import { useContext, createContext, useState } from "react";
 import api from "../../services/api";
 import jwt_decode from "jwt-decode";
 
@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
   });
 
   const [userInfo, setUserInfo] = useState({});
+  const [message, setMessage] = useState([]);
 
   const signInFunction = (formData, toastError) => {
     api
@@ -37,7 +38,10 @@ const AuthProvider = ({ children }) => {
         setUserId(user_id);
         setIsAuth(true);
       })
-      .catch((error) => toastError("Invalid email or password"));
+      .catch((error) => {
+        toastError("Invalid email or password");
+        setMessage(error.message);
+      });
   };
 
   const getUserInfo = (userId) => {
@@ -46,7 +50,7 @@ const AuthProvider = ({ children }) => {
       .then((response) => {
         setUserInfo({ ...response.data });
       })
-      .catch((error) => console.log(error));
+      .catch((error) => setMessage(error.message));
   };
 
   const logoutFunction = () => {
@@ -66,7 +70,9 @@ const AuthProvider = ({ children }) => {
         getUserInfo,
         userInfo,
         logoutFunction,
-      }}>
+        message,
+      }}
+    >
       {children}
     </AuthContext.Provider>
   );

@@ -44,10 +44,12 @@ const GroupCard = ({ group, cardType }) => {
     const userId = localStorage.getItem("@Habit:userId");
     const check = users_on_group.some((user) => user.id === parseInt(userId));
     setSubscribed(check);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [group]);
 
   useEffect(() => {
     setFinishedGols(countFinishedGoals());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [goals]);
 
   return (
@@ -62,7 +64,8 @@ const GroupCard = ({ group, cardType }) => {
         <div className="mobile__buttons">
           <button
             type="button"
-            onClick={isSubscribed ? unSubscribe : subscribe}>
+            onClick={isSubscribed ? unSubscribe : subscribe}
+          >
             {isSubscribed ? (
               <BookmarkRemoveIcon className="unsubscribe__icon" />
             ) : (
@@ -79,7 +82,8 @@ const GroupCard = ({ group, cardType }) => {
         <div className="desktop__buttons">
           <button
             type="button"
-            onClick={isSubscribed ? unSubscribe : subscribe}>
+            onClick={isSubscribed ? unSubscribe : subscribe}
+          >
             {isSubscribed ? (
               <>
                 <BookmarkRemoveIcon className="unsubscribe__icon" />

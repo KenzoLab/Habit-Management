@@ -33,11 +33,14 @@ export const SignUpProvider = ({ children }) => {
 
   const patchUpdateUser = (idUser, dataUpdate) => {
     api
-      .patch(`/users/${idUser}`, AuthObj, dataUpdate)
-      .then((response) => {
-        setMessage(response);
+      .patch(`/users/${idUser}/`, dataUpdate, AuthObj)
+      .then(() => {
+        toast.success("Data updated successfully!");
       })
-      .catch((err) => setMessage(err));
+      .catch((err) => {
+        setMessage(err.message);
+        toast.error("A user with that username already exists.");
+      });
   };
 
   return (

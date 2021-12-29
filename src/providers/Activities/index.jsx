@@ -30,7 +30,7 @@ export const ActivityProvider = ({ children }) => {
         counter++;
         response = await api.get(
           `/activities/?group=${idGroup}&page=${counter}`,
-          AuthObj,
+          AuthObj
         );
         const currentPage = response.data.results;
         array = [...array, ...currentPage];
@@ -52,7 +52,7 @@ export const ActivityProvider = ({ children }) => {
       .post("/activities/", dataActivity, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully added activity!",
+          "Successfully added activity!"
         ); /* toast register activity success */
         loadActivities(idGroup);
       })
@@ -70,7 +70,7 @@ export const ActivityProvider = ({ children }) => {
       .patch(`/activities/${idActivity}`, dataActivity, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully updated activity!",
+          "Successfully updated activity!"
         ); /* toast update activity success */
         loadActivities(idGroup);
       })
@@ -82,7 +82,7 @@ export const ActivityProvider = ({ children }) => {
       .delete(`/activities/${idActivity}/`, AuthObj)
       .then(() => {
         toast.success(
-          "Successfully removed activity!",
+          "Successfully removed activity!"
         ); /* toast remove activity success */
         loadActivities(idGroup);
       })
@@ -98,7 +98,8 @@ export const ActivityProvider = ({ children }) => {
         addActivity,
         updateActivity,
         deleteActivity,
-      }}>
+      }}
+    >
       {children}
     </ActivityContext.Provider>
   );

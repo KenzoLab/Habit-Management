@@ -5,22 +5,22 @@ import SpeedDialIcon from "@mui/material/SpeedDialIcon";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 import CreateIcon from "@mui/icons-material/Create";
 
-const actions = [{ icon: <CreateIcon />, name: "Add" }];
+const defaultActions = [{ icon: <CreateIcon />, name: "Add" }];
+const defaultSpeedIcon = <SpeedDialIcon />;
 
-export default function BasicSpeedDial({ handleModal }) {
+export default function BasicSpeedDial({
+  handleModal,
+  actions = defaultActions,
+  speedIcon = defaultSpeedIcon,
+  sx = { position: "absolute", bottom: 16, right: 16, padding: 0 },
+}) {
   return (
     <Box sx={{ height: 0, transform: "translateZ(0px)", flexGrow: 1 }}>
-      <SpeedDial
-        ariaLabel="SpeedDial basic example"
-        sx={{ position: "absolute", bottom: 16, right: 16 }}
-        icon={<SpeedDialIcon />}>
-        {actions.map((action) => (
+      <SpeedDial ariaLabel="SpeedDial" sx={sx} icon={speedIcon}>
+        {actions.map((action, idx) => (
           <SpeedDialAction
-            // FabProps={{
-            //   onClick: () => handleModal(),
-            // }}
-            onClick={() => handleModal()}
-            key={action.name}
+            onClick={() => handleModal[idx]()}
+            key={idx}
             icon={action.icon}
             tooltipTitle={action.name}
           />

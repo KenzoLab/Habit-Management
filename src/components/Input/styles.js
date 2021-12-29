@@ -87,7 +87,7 @@ export const ContainerTextArea = styled.div`
 export const StyledSelect = styled(Select)`
   .Select__control {
     height: 40px;
-    width: 256px;
+    width: 250px;
     padding: 0 5px;
     border-radius: 5px;
     border: solid 1px var(--gray);
