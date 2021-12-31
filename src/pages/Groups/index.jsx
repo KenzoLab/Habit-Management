@@ -1,4 +1,4 @@
-﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import HamburguerMenu from "../../components/HamburguerMenu";
 import { FiSearch } from "react-icons/fi";
 import {
   App,
@@ -22,14 +22,14 @@ import ModalGroups from "../../components/GroupModal";
 import { useGroups } from "../../providers/Groups";
 import { useCurrentPage } from "../../providers/CurrentPage";
 
-function Groups() {
+const Groups = () => {
   const [openModalGroups, setOpenModalGroups] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listGroupsFunction, allGroupsList } = useGroups();
-  const { token, userId } = useAuth();
+  const { userId } = useAuth();
   const [search, setSearch] = useState("");
 
   const handleModalGroups = () => {
@@ -76,15 +76,18 @@ function Groups() {
 
   useEffect(() => {
     searchFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
     filterListFunction(parseInt(userId), filteredList);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFiltered, filter]);
 
   useEffect(() => {
-    listGroupsFunction(token);
+    listGroupsFunction();
     defineCurrentPageFunction("groups");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -143,13 +146,13 @@ function Groups() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModal={handleModalGroups} />
+            <BasicSpeedDial handleModal={[handleModalGroups]} />
             <ModalGroups open={openModalGroups} handle={handleModalGroups} />
           </Footer>
         </MainContainer>
       </Container>
     </App>
   );
-}
+};
 
 export default Groups;

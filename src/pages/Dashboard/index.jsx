@@ -1,4 +1,4 @@
-﻿import HamburguerMenu from "../../components/HamburguerMenu";
+import HamburguerMenu from "../../components/HamburguerMenu";
 import { FiSearch } from "react-icons/fi";
 import {
   App,
@@ -17,20 +17,18 @@ import {
 import HabitCard from "../../components/HabitCard";
 import { useHabit } from "../../providers/Habits";
 import { useCurrentPage } from "../../providers/CurrentPage";
-import { useAuth } from "../../providers/AuthProvider";
 import { useEffect } from "react";
 import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
 
-function Dashboard() {
+const Dashboard = () => {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
   const [filteredList, setFilteredList] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
   const { listHabitsFunction, listHabits } = useHabit();
-  const { token } = useAuth();
   const [search, setSearch] = useState("");
 
   const handleModalHabits = () => {
@@ -65,6 +63,7 @@ function Dashboard() {
 
   useEffect(() => {
     searchFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   useEffect(() => {
@@ -74,11 +73,13 @@ function Dashboard() {
       );
       setFilteredList([...filteredHabits]);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFiltered, filter]);
 
   useEffect(() => {
-    listHabitsFunction(token);
+    listHabitsFunction();
     defineCurrentPageFunction("dashboard");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -156,13 +157,13 @@ function Dashboard() {
                 ))}
           </Cards>
           <Footer>
-            <BasicSpeedDial handleModal={handleModalHabits} />
+            <BasicSpeedDial handleModal={[handleModalHabits]} />
             <ModalHabits open={openModalHabits} handle={handleModalHabits} />
           </Footer>
         </MainContainer>
       </Container>
     </App>
   );
-}
+};
 
 export default Dashboard;

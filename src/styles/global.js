@@ -1,4 +1,4 @@
-﻿import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
 export default createGlobalStyle`
   *{
@@ -24,6 +24,7 @@ export default createGlobalStyle`
     --yellow: #FABD59;
     --lightYellow: #FFCF81;
     --extraLightYellow: #f0d6ab;
+    --yellowInputSearch: #f9deb3;
     --black: #000000;
     --whiteSmoke: #FBFBF8;
     --white: #FFFFFF;

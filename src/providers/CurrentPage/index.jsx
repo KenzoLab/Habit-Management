@@ -1,4 +1,4 @@
-﻿import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 
 const CurrentPageContext = createContext();
 
@@ -11,7 +11,8 @@ const CurrentPageProvider = ({ children }) => {
 
   return (
     <CurrentPageContext.Provider
-      value={{ defineCurrentPageFunction, currentPage }}>
+      value={{ defineCurrentPageFunction, currentPage }}
+    >
       {children}
     </CurrentPageContext.Provider>
   );

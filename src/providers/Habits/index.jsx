@@ -1,4 +1,4 @@
-﻿import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 import api from "../../services/api";
@@ -23,9 +23,19 @@ const HabitProvider = ({ children }) => {
     api
       .get("/habits/personal/", AuthorizationObj)
       .then((response) => {
-        setListHabits([...response.data]);
+        setListHabits(
+          [...response.data].sort((a, b) => {
+            if (a.title < b.title) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          })
+        );
       })
-      .catch((error) => console.log(error.message));
+      .catch((error) => setErrorMessage(error.message));
   };
 
   const createHabitFunction = (formData) => {
@@ -43,7 +53,7 @@ const HabitProvider = ({ children }) => {
       .post("/habits/", dataHabit, AuthorizationObj)
       .then(() => {
         toast.success(
-          "Successfully added habit!",
+          "Successfully added habit!"
         ); /* toast register habit success */
         listHabitsFunction();
         setLastHabitCreated(dataHabit);
@@ -67,7 +77,7 @@ const HabitProvider = ({ children }) => {
       .patch(`/habits/${habitId}/`, obj, AuthorizationObj)
       .then(
         (response) =>
-          setUpdatedHabit(response.data) /* toast update habit success */,
+          setUpdatedHabit(response.data) /* toast update habit success */
       )
       .catch((error) => setErrorMessage(error.message));
   };
@@ -83,7 +93,8 @@ const HabitProvider = ({ children }) => {
         updateHabitFunction,
         updatedHabit,
         errorMessage,
-      }}>
+      }}
+    >
       {children}
     </HabitContext.Provider>
   );

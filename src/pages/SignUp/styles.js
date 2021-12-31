@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100vw;
-  height: 100vh;
   background-color: var(--whiteSmoke);
 
   .Image-box {
@@ -44,7 +43,7 @@ export const Container = styled.div`
 
   span {
     margin-top: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
     font-size: 14px;
   }
 
@@ -65,6 +64,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
   }
 
   @media (min-width: 1024px) {
@@ -90,9 +90,9 @@ export const Container = styled.div`
 
     form {
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 500px;
     }
 
     h1 {

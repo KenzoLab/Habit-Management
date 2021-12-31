@@ -1,4 +1,4 @@
-﻿import styled from "styled-components";
+import styled from "styled-components";
 
 export const ContentContainer = styled.div`
   width: 100%;
@@ -6,29 +6,21 @@ export const ContentContainer = styled.div`
 
   border-radius: 15px;
   height: 100%;
+  text-align: center;
 
-  // Card Content
-  > * {
-    align-self: center;
-    text-align: center;
-  }
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .content__title {
-    font-size: 34px;
+    font-size: 25px;
     font-weight: 600;
     color: var(--black);
-    margin-bottom: 12px;
   }
-  .content__group {
-    font-size: 25px;
-    font-style: italic;
-    font-weight: 400;
-    margin-bottom: 20px;
-  }
+  .content__group,
   .content__date {
-    font-size: 23px;
+    font-size: 20px;
     font-weight: 600;
-    margin-bottom: 30px;
     color: var(--grey);
     span {
       font-weight: 400;
@@ -39,18 +31,4 @@ export const ContentContainer = styled.div`
   @media (min-width: 600px) {
     border-radius: 34px;
   }
-`;
-
-export const Status = styled.p`
-  font-weight: 600;
-  font-size: 23px;
-  align-self: center;
-  text-align: center;
-  color: ${(props) => {
-    if (props.children === "Concluded") {
-      return "var(--green)";
-    } else if (props.children === "In Progress") {
-      return "var(--yellow)";
-    }
-  }};
 `;

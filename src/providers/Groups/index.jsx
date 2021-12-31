@@ -1,9 +1,7 @@
-﻿import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
 
 import api from "../../services/api";
-
-import { useAuth } from "../AuthProvider";
 
 const GroupsContext = createContext({});
 
@@ -20,6 +18,16 @@ const GroupsProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
+  const arrCategory = [
+    "Financial",
+    "Health",
+    "Intellectual",
+    "Mindset",
+    "Productivity",
+    "Relationships",
+    "Sports",
+  ];
+
   const listGroupsFunction = async () => {
     let counter = 0;
     let array = [];
@@ -27,10 +35,23 @@ const GroupsProvider = ({ children }) => {
     try {
       do {
         counter++;
-        response = await api.get(`/groups/?page=${counter}`, AuthorizationObj);
-        const currentPage = response.data.results;
-        array = [...array, ...currentPage];
-      } while (counter < 2);
+        for (let i = 0; i < arrCategory.length; i++) {
+          response = await api.get(
+            `/groups/?page=${counter}&category=${arrCategory[i]}`,
+            AuthorizationObj
+          );
+          const currentPage = response.data.results;
+          array = [...array, ...currentPage].sort((a, b) => {
+            if (a.name < b.name) {
+              return -1;
+            }
+            if (a.name > b.name) {
+              return 1;
+            }
+            return 0;
+          });
+        }
+      } while (response.data.previous !== null);
       setAllGroupsList([...array]);
     } catch (error) {
       setErrorMessage(error);
@@ -61,7 +82,7 @@ const GroupsProvider = ({ children }) => {
       const response = await api.patch(
         `/groups/${groupId}/`,
         formData,
-        AuthorizationObj,
+        AuthorizationObj
       );
       setUpdatedGroup(response.data);
     } catch (error) {
@@ -73,7 +94,7 @@ const GroupsProvider = ({ children }) => {
     try {
       const response = await api.get(
         "/groups/subscriptions/",
-        AuthorizationObj,
+        AuthorizationObj
       );
       setSubscriptions(response.data);
     } catch (error) {
@@ -83,13 +104,14 @@ const GroupsProvider = ({ children }) => {
 
   const subscribeFunction = async (groupId) => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await api.post(
         `/groups/${groupId}/subscribe/`,
         "",
-        AuthorizationObj,
+        AuthorizationObj
       );
       toast.success(
-        "Successfully subscribed!",
+        "Successfully subscribed!"
       ); /* toast subscribe group success */
       listGroupsFunction();
       searchSubscriptionsFunction();
@@ -100,13 +122,14 @@ const GroupsProvider = ({ children }) => {
 
   const unsubscribeFunction = async (groupId) => {
     try {
+      // eslint-disable-next-line no-unused-vars
       const response = await api.delete(
         `/groups/${groupId}/unsubscribe/`,
-        AuthorizationObj,
+        AuthorizationObj
       );
 
       toast.success(
-        "Successfully unsubscribed!",
+        "Successfully unsubscribed!"
       ); /* toast unsubscribe group success */
       listGroupsFunction();
       searchSubscriptionsFunction();
@@ -129,7 +152,8 @@ const GroupsProvider = ({ children }) => {
         subscriptions,
         subscribeFunction,
         unsubscribeFunction,
-      }}>
+      }}
+    >
       {children}
     </GroupsContext.Provider>
   );

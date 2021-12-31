@@ -1,4 +1,4 @@
-﻿import Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
@@ -64,13 +64,13 @@ const ModalGoals = ({ open, handle, idGroup }) => {
 
   //ADD GOAL
   const onAddGoal = (data) => {
-    addGoal(data);
+    addGoal(data, idGroup);
     resetInputs();
   };
 
   // REMOVE GOAL
   const onDeleteGoal = (idGoal) => {
-    deleteGoal(idGoal);
+    deleteGoal(idGoal, idGroup);
   };
 
   // RESET INPUTS
@@ -91,7 +91,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
   useEffect(() => {
     loadGoals(idGroup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [open]);
 
   return (
     <div>
@@ -111,7 +111,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
                   <ContInfosItem>
                     <h4>{`${item.title.substring(0, 15)}...`}</h4>
                     <ContTitlesItem>
-                      <h5></h5>
+                      <h5> </h5>
                       <H6 diff={item.difficulty}>{item.difficulty}</H6>
                     </ContTitlesItem>
                     <p></p>
@@ -133,7 +133,7 @@ const ModalGoals = ({ open, handle, idGroup }) => {
               </Head>
               <p>
                 {goals.length} goals /{" "}
-                {goals.filter((item) => item.achieved === false).length}{" "}
+                {goals.filter((item) => item.achieved === true).length}{" "}
                 concluded
               </p>
             </ContCurrent>

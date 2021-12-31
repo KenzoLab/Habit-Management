@@ -1,8 +1,10 @@
-﻿import styled from "styled-components";
+import styled from "styled-components";
 import home from "../../assets/home.png";
 import groups from "../../assets/groups.png";
 import activities from "../../assets/edit.png";
 import goals from "../../assets/goals.png";
+import { Link } from "react-router-dom";
+import Avatar from "react-nice-avatar";
 
 const Page = (props) => props.currentPage;
 
@@ -51,7 +53,6 @@ export const Nav = styled.div`
     }
 
     section {
-      width: 80vw;
       display: ${(props) => (props.toggleNav ? "flex" : "none")};
       ul {
         flex-direction: ${(props) => (props.toggleNav ? "column" : "")};
@@ -83,24 +84,23 @@ export const Nav = styled.div`
     }
 
     div {
-      width: 80vw;
     }
   }
 
   @media (min-width: 767px) {
     width: 250px;
     height: 100vh;
+
     .menu-list {
       width: 100%;
       display: flex;
 
       section {
-        width: 100%; // alterado
         display: flex;
         align-items: center;
         ul {
           flex-direction: column;
-          width: 100%; // alterado
+          width: 100%;
           justify-content: center;
           li {
             display: flex;
@@ -108,7 +108,6 @@ export const Nav = styled.div`
             height: 50px;
             border: none;
             width: auto;
-            /* margin: 0px 0px 10px 15px; */
             padding: 30px 0 30px 30px;
             font-family: var(--font-fira);
             border-radius: 30px 0 0 30px;
@@ -131,10 +130,10 @@ export const Nav = styled.div`
       }
 
       div {
-        width: 190px;
+        width: 100%;
 
         div {
-          width: 100px;
+          width: 100%;
           padding: 0px;
         }
       }
@@ -149,13 +148,6 @@ export const Nav = styled.div`
   @media (max-width: 767px) {
     width: 100%;
     padding: 1rem 0;
-  }
-
-  /* @media (max-width: 900px) {
-    width: 200px;
-  } */
-  @media (max-width: 767px) {
-    width: 100%;
   }
 `;
 
@@ -204,7 +196,7 @@ export const Header = styled.div`
 export const Footer = styled.div`
   section {
     display: ${(props) => (props.toggleNav ? "block" : "none")};
-    width: 80vw;
+    width: 70%;
     align-items: center;
   }
   .username {
@@ -212,7 +204,7 @@ export const Footer = styled.div`
     font-size: 15px;
     color: var(--darkBlue);
   }
-  .useremail {
+  .userEmail {
     font-family: var(--font-fira);
     font-size: 12px;
     font-style: italic;
@@ -225,4 +217,34 @@ export const Footer = styled.div`
       margin-bottom: 10px;
     }
   }
+`;
+
+export const StyledLink = styled(Link)`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+`;
+
+export const LogoutButton = styled.a`
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+`;
+
+export const NewAvatar = styled(Avatar)`
+  width: 100%;
+  height: 100%;
+
+  div {
+    display: flex;
+  }
+`;
+
+export const ContainerAvatar = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-right: 30px;
 `;

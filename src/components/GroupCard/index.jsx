@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import BookmarkAddIcon from "@mui/icons-material/BookmarkAdd";
 import BookmarkRemoveIcon from "@mui/icons-material/BookmarkRemove";
 import BorderColorIcon from "@mui/icons-material/BorderColor";
@@ -44,10 +44,12 @@ const GroupCard = ({ group, cardType }) => {
     const userId = localStorage.getItem("@Habit:userId");
     const check = users_on_group.some((user) => user.id === parseInt(userId));
     setSubscribed(check);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [group]);
 
   useEffect(() => {
     setFinishedGols(countFinishedGoals());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [goals]);
 
   return (

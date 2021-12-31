@@ -1,4 +1,4 @@
-﻿import styled from "styled-components";
+import styled from "styled-components";
 
 export const App = styled.section`
   display: flex;
@@ -21,6 +21,7 @@ export const Container = styled.section`
 `;
 
 export const MainContainer = styled.section`
+  height: 63vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -32,6 +33,7 @@ export const MainContainer = styled.section`
 `;
 
 export const Header = styled.header`
+  height: 17vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -64,17 +66,17 @@ export const Header = styled.header`
   .header-bottom {
     display: flex;
     justify-content: center;
-    
+
     button {
+      padding: 8px 15px;
+    }
+
+    @media (min-width: 768px) {
+      margin-bottom: 15px;
+      margin-left: 35px;
+      button {
         padding: 8px 15px;
-      }
-      
-      @media (min-width: 768px) {
-        margin-bottom: 15px;
-        margin-left: 35px;
-        button {
-          padding: 8px 15px;
-          font-size: 30px;
+        font-size: 30px;
       }
     }
   }
@@ -113,21 +115,21 @@ export const InputSearch = styled.input`
   outline: none;
   border-radius: 15px;
   transition: all 0.5s ease-in-out;
-  background-color: #f9deb3;
+  background-color: var(--yellowInputSearch);
   padding-right: 40px;
-  color: #9398a2;
+  color: var(--gray);
   @media (min-width: 768px) {
-    width: 50px;  
+    width: 50px;
   }
   &:focus {
     width: 290px;
     border-radius: 15px;
-    background-color: #f9deb3;
+    background-color: var(--yellowInputSearch);
     transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
     padding-left: 20px;
   }
   &::placeholder {
-    color: #9398a2;
+    color: var(--gray);
     font-size: 16px;
     letter-spacing: 2px;
     font-weight: 100;
@@ -144,13 +146,13 @@ export const BtnSearch = styled.button`
     border-radius: 50%;
     position: absolute;
     right: 0px;
-    color: #9398A2;
-    background-color:#f9deb3;
+    color: var(--gray);
+    background-color:var(--yellowInputSearch);
     pointer-events: painted;
     &:focus ~ input{
     width: 290px;
     border-radius: 15px;
-    background-color: #F9DEB3;
+    background-color: var(--yellowInputSearch);
     transition: all 500ms cubic-bezier(0, 0.110, 0.35, 2);
 `;
 
@@ -184,5 +186,5 @@ export const Cards = styled.section`
 `;
 
 export const Footer = styled.footer`
-align-self: flex-end;
+  align-self: flex-end;
 `;

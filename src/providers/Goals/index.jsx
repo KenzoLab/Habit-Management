@@ -1,4 +1,4 @@
-﻿import { createContext, useState } from "react";
+import { createContext, useState } from "react";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 
@@ -15,12 +15,12 @@ export const GoalsProvider = ({ children }) => {
     headers: { Authorization: `Bearer ${token}` },
   };
 
-  const [currentGroup, setCurrentGroup] = useState("");
+  // const [currentGroup, setCurrentGroup] = useState("");
   const [goals, setGoals] = useState([]);
   const [message, setMessage] = useState([]);
 
   const loadGoals = async (idGroup) => {
-    setCurrentGroup(idGroup);
+    // setCurrentGroup(idGroup);
 
     let counter = 0;
     let array = [];
@@ -41,13 +41,13 @@ export const GoalsProvider = ({ children }) => {
     }
   };
 
-  const addGoal = (data) => {
+  const addGoal = (data, idGroup) => {
     const dataGoal = {
       title: data.title,
       difficulty: data.difficulty.value,
       how_much_achieved: 100,
       achieved: false,
-      group: parseInt(currentGroup),
+      group: parseInt(idGroup),
     };
 
     api
@@ -56,18 +56,18 @@ export const GoalsProvider = ({ children }) => {
         toast.success(
           "Successfully added goal!"
         ); /* toast register goal success */
-        loadGoals(currentGroup);
+        loadGoals(idGroup);
       })
       .catch((err) => setMessage(err));
   };
 
-  const updateGoal = (idGoal, dataUpdate) => {
+  const updateGoal = (idGoal, dataUpdate, idGroup) => {
     const dataGoal = {
       title: dataUpdate.title,
       difficulty: dataUpdate.difficulty.value,
       how_much_achieved: 100,
       achieved: false,
-      group: parseInt(currentGroup),
+      group: parseInt(idGroup),
     };
 
     api
@@ -77,19 +77,19 @@ export const GoalsProvider = ({ children }) => {
           "Successfully updated goal!"
         ); /* toast update goal success */
         setMessage(response);
-        loadGoals(currentGroup);
+        loadGoals(idGroup);
       })
       .catch((err) => setMessage(err));
   };
 
-  const deleteGoal = (idGoal) => {
+  const deleteGoal = (idGoal, idGroup) => {
     api
       .delete(`/goals/${idGoal}/`, AuthObj)
       .then(() => {
         toast.success(
           "Successfully removed goal!"
         ); /* toast remove goal success */
-        loadGoals(currentGroup);
+        loadGoals(idGroup);
       })
       .catch((err) => setMessage(err));
   };

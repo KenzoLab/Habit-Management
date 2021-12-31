@@ -1,15 +1,29 @@
-﻿import HamburguerMenu from "../../components/HamburguerMenu";
-import { App, Container, MainContainer, Footer, Header, Cards } from "./styles";
+import HamburguerMenu from "../../components/HamburguerMenu";
+import { FiSearch } from "react-icons/fi";
+import {
+  App,
+  Container,
+  MainContainer,
+  Footer,
+  Header,
+  Cards,
+  ContSearch,
+  BtnSearch,
+  InputSearch,
+} from "./styles";
 import GoalsCard from "../../components/GoalsCard";
 import { useCurrentPage } from "../../providers/CurrentPage";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useGroups } from "../../providers/Groups";
 
-function Goals() {
+const Goals = () => {
   const { allGroupsList, listGroupsFunction } = useGroups();
   const [allGoals, setAllGoals] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
+  const [filteredList, setFilteredList] = useState([]);
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [search, setSearch] = useState("");
 
   const getAllGoals = (allGroupsList) => {
     const goals = allGroupsList.flatMap((group) => group.goals);
@@ -22,6 +36,25 @@ function Goals() {
     return title;
   };
 
+  function searchFunction() {
+    if (search !== "") {
+      const cardSearch = allGoals.filter((goal) => {
+        const goalTitle = goal.title.toLowerCase();
+        return goalTitle.includes(search.toLowerCase());
+      });
+      setIsFiltered(true);
+      setFilteredList(cardSearch);
+    } else {
+      setIsFiltered(false);
+      setFilteredList([]);
+    }
+  }
+
+  useEffect(() => {
+    searchFunction();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search]);
+
   useEffect(() => {
     getAllGoals(allGroupsList);
   }, [allGroupsList]);
@@ -29,6 +62,7 @@ function Goals() {
   useEffect(() => {
     listGroupsFunction();
     defineCurrentPageFunction("goals");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -41,64 +75,51 @@ function Goals() {
           <section className="header-top">
             <h2>Goals</h2>
             <div className="header-search">
-              {/*<ContSearch>
+              <ContSearch>
                 <div>
-                  <BtnSearch onClick={() => procurar()}>
+                  <BtnSearch
+                    onClick={(e) =>
+                      e.currentTarget.parentElement.lastChild.focus()
+                    }>
                     <FiSearch />
                   </BtnSearch>
                   <InputSearch
                     type="text"
-                    placeholder="Search..."
+                    placeholder="Type to Search..."
                     onChange={(evt) => setSearch(evt.target.value.toString())}
                   />
                 </div>
-              </ContSearch>*/}
-            </div>
-          </section>
-
-          <section className="header-bottom">
-            <div id="blues">
-              {/*<ButtonToday
-                className="filter-buttons"
-                onClick={() => filtering("Daily")}
-                filter={filter}
-              >
-                Today
-              </ButtonToday>
-              <ButtonWeek
-                className="filter-buttons"
-                onClick={() => filtering("Weekly")}
-                filter={filter}
-              >
-                Week
-              </ButtonWeek>
-              <ButtonMonth
-                className="filter-buttons"
-                onClick={() => filtering("Monthly")}
-                filter={filter}
-              >
-                Month
-              </ButtonMonth>*/}
+              </ContSearch>
             </div>
           </section>
         </Header>
         <MainContainer>
           <Cards>
-            {allGoals.map((goal, index) => (
-              <GoalsCard
-                key={index}
-                title={goal.title}
-                status={100 - goal.how_much_achieved}
-                group={getGroupTitle(goal.group)}
-                difficult={goal.difficulty}
-              />
-            ))}
+            {isFiltered
+              ? filteredList.map((goal, index) => (
+                  <GoalsCard
+                    key={index}
+                    title={goal.title}
+                    status={100 - goal.how_much_achieved}
+                    group={getGroupTitle(goal.group)}
+                    difficult={goal.difficulty}
+                  />
+                ))
+              : allGoals.map((goal, index) => (
+                  <GoalsCard
+                    key={index}
+                    title={goal.title}
+                    status={100 - goal.how_much_achieved}
+                    group={getGroupTitle(goal.group)}
+                    difficult={goal.difficulty}
+                  />
+                ))}
           </Cards>
           <Footer></Footer>
         </MainContainer>
       </Container>
     </App>
   );
-}
+};
 
 export default Goals;

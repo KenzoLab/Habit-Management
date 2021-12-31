@@ -1,4 +1,4 @@
-﻿import Modal from "@mui/material/Modal";
+import Modal from "@mui/material/Modal";
 import { IoCloseOutline } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
@@ -47,13 +47,13 @@ const ModalActivities = ({ open, handle, idGroup }) => {
 
   //ADD ACTIVITY
   const onAddActivity = (data) => {
-    addActivity(data);
+    addActivity(data, idGroup);
     resetInputs();
   };
 
   // REMOVE ACTIVITY
   const onDeleteActivity = (idGoal) => {
-    deleteActivity(idGoal);
+    deleteActivity(idGoal, idGroup);
   };
 
   // RESET INPUTS
@@ -73,7 +73,7 @@ const ModalActivities = ({ open, handle, idGroup }) => {
   useEffect(() => {
     loadActivities(idGroup);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [open]);
 
   return (
     <div>
@@ -81,8 +81,7 @@ const ModalActivities = ({ open, handle, idGroup }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal onSubmit={handleSubmit(onAddActivity)}>
           <ContActivities>
             <Head>
