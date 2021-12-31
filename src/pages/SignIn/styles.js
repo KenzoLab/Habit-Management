@@ -102,10 +102,6 @@ export const Container = styled.div`
       margin: 0;
     }
 
-    /* hr {
-      width: 50%;
-    } */
-
     img {
       width: 500px;
       height: 500px;

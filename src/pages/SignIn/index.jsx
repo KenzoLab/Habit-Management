@@ -11,7 +11,7 @@ import Input from "../../components/Input";
 import { Container, Button } from "./styles";
 import { useAuth } from "../../providers/AuthProvider";
 
-const Signin = () => {
+const SignIn = () => {
   const { signInFunction } = useAuth();
 
   const formSchema = yup.object().shape({
@@ -80,4 +80,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default SignIn;
