@@ -121,21 +121,21 @@ export const InputSearch = styled.input`
   outline: none;
   border-radius: 15px;
   transition: all 0.5s ease-in-out;
-  background-color: #f9deb3;
+  background-color: var(--yellowInputSearch);
   padding-right: 40px;
-  color: #9398a2;
+  color: var(--gray);
   @media (min-width: 768px) {
     width: 50px;
   }
   &:focus {
     width: 290px;
     border-radius: 15px;
-    background-color: #f9deb3;
+    background-color: var(--yellowInputSearch);
     transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
     padding-left: 20px;
   }
   &::placeholder {
-    color: #9398a2;
+    color: var(--gray);
     font-size: 16px;
     letter-spacing: 2px;
     font-weight: 100;
@@ -152,31 +152,16 @@ export const BtnSearch = styled.button`
   border-radius: 50%;
   position: absolute;
   right: 0px;
-  color: #9398a2;
-  background-color: #f9deb3;
+  color: var(--gray);
+  background-color: var(--yellowInputSearch);
   pointer-events: painted;
   &:focus ~ input {
     width: 290px;
     border-radius: 15px;
-    background-color: #f9deb3;
+    background-color: var(--yellowInputSearch);
     transition: all 500ms cubic-bezier(0, 0.11, 0.35, 2);
   }
 `;
-
-// export const ButtonToday = styled.button`
-//   background-color: ${(props) =>
-//     props.filter === "Daily" ? "var(--extraLightBlue)" : "none"};
-// `;
-
-// export const ButtonWeek = styled.button`
-//   background-color: ${(props) =>
-//     props.filter === "Weekly" ? "var(--extraLightBlue)" : "none"};
-// `;
-
-// export const ButtonMonth = styled.button`
-//   background-color: ${(props) =>
-//     props.filter === "Monthly" ? "var(--extraLightBlue)" : "none"};
-// `;
 
 export const Cards = styled.section`
   height: 70vh;

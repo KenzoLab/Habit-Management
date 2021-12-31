@@ -12,12 +12,6 @@ export const ContentContainer = styled.div`
   justify-content: space-between;
   text-align: center;
 
-  /* > div {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  } */
-
   .content__title {
     font-size: 25px;
     font-weight: 600;

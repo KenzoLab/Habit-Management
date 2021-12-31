@@ -8,12 +8,12 @@ import CreateIcon from "@mui/icons-material/Create";
 const defaultActions = [{ icon: <CreateIcon />, name: "Add" }];
 const defaultSpeedIcon = <SpeedDialIcon />;
 
-export default function BasicSpeedDial({
+const BasicSpeedDial = ({
   handleModal,
   actions = defaultActions,
   speedIcon = defaultSpeedIcon,
   sx = { position: "absolute", bottom: 16, right: 16, padding: 0 },
-}) {
+}) => {
   return (
     <Box sx={{ height: 0, transform: "translateZ(0px)", flexGrow: 1 }}>
       <SpeedDial
@@ -32,4 +32,6 @@ export default function BasicSpeedDial({
       </SpeedDial>
     </Box>
   );
-}
+};
+
+export default BasicSpeedDial;

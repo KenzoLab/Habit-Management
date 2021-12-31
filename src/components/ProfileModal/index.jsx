@@ -42,13 +42,11 @@ const ModalProfile = ({ open, handle }) => {
   // SAVE INFO
   const onSaveInfo = (data) => {
     patchUpdateUser(userId, data);
-    // CloseModal();
   };
 
   //CLOSE MODAL AND RESET INPUTS
   const CloseModal = () => {
     onLoadInfo();
-    // resetInputs();
     handle();
   };
 
@@ -82,8 +80,7 @@ const ModalProfile = ({ open, handle }) => {
         open={open}
         onClose={() => CloseModal()}
         aria-labelledby="parent-modal-title"
-        aria-describedby="parent-modal-description"
-      >
+        aria-describedby="parent-modal-description">
         <ContainerModal>
           <Head>
             <h3>Edit info User</h3>

@@ -179,7 +179,7 @@ function HamburguerMenu() {
               <p className="username">
                 {userInfo?.username?.substring(0, 9)}...
               </p>
-              <p className="useremail">
+              <p className="userEmail">
                 {userInfo?.email?.substring(0, 12)}...{" "}
               </p>
             </div>

@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { useGroups } from "../../providers/Groups";
 
-function Goals() {
+const Goals = () => {
   const { allGroupsList, listGroupsFunction } = useGroups();
   const [allGoals, setAllGoals] = useState([]);
   const { defineCurrentPageFunction } = useCurrentPage();
@@ -120,6 +120,6 @@ function Goals() {
       </Container>
     </App>
   );
-}
+};
 
 export default Goals;

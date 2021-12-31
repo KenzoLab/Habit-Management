@@ -4,7 +4,6 @@ import {
   App,
   Container,
   MainContainer,
-  Footer,
   Header,
   Cards,
   ContSearch,
@@ -113,10 +112,6 @@ function Activities() {
                   />
                 ))}
           </Cards>
-          <Footer>
-            {/*<BasicSpeedDial handleModalHabits={handleModalHabits} />*/}
-            {/*<ModalHabits open={openModalHabits} handle={handleModalHabits} />*/}
-          </Footer>
         </MainContainer>
       </Container>
     </App>

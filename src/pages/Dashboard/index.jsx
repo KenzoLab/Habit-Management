@@ -22,7 +22,7 @@ import BasicSpeedDial from "../../components/SpeedDialHabits";
 import { useState } from "react";
 import ModalHabits from "../../components/HabitModal";
 
-function Dashboard() {
+const Dashboard = () => {
   const [openModalHabits, setOpenModalHabits] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
@@ -164,6 +164,6 @@ function Dashboard() {
       </Container>
     </App>
   );
-}
+};
 
 export default Dashboard;

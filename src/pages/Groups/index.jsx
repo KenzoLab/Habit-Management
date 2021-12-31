@@ -22,7 +22,7 @@ import ModalGroups from "../../components/GroupModal";
 import { useGroups } from "../../providers/Groups";
 import { useCurrentPage } from "../../providers/CurrentPage";
 
-function Groups() {
+const Groups = () => {
   const [openModalGroups, setOpenModalGroups] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [filter, setFilter] = useState("");
@@ -153,6 +153,6 @@ function Groups() {
       </Container>
     </App>
   );
-}
+};
 
 export default Groups;

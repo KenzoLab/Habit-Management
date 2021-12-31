@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import CardFrame from "../CardFrame";
 import { ContentContainer } from "./styles";
 

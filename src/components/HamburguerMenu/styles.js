@@ -96,12 +96,11 @@ export const Nav = styled.div`
       display: flex;
 
       section {
-        /* width: 100%; // alterado */
         display: flex;
         align-items: center;
         ul {
           flex-direction: column;
-          width: 100%; // alterado
+          width: 100%;
           justify-content: center;
           li {
             display: flex;
@@ -205,7 +204,7 @@ export const Footer = styled.div`
     font-size: 15px;
     color: var(--darkBlue);
   }
-  .useremail {
+  .userEmail {
     font-family: var(--font-fira);
     font-size: 12px;
     font-style: italic;
