@@ -38,6 +38,11 @@ export const Header = styled.header`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media (min-width: 768px) {
+    height: 23vh;
+  }
+
   .header-top {
     display: flex;
     justify-content: center;

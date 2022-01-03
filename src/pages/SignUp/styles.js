@@ -93,6 +93,18 @@ export const Container = styled.div`
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
+      .contInputs {
+        @media (min-width: 1024px) {
+          height: 50vh;
+          overflow-y: scroll;
+
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+        }
+      }
     }
 
     h1 {
@@ -116,9 +128,10 @@ export const Container = styled.div`
     }
 
     .Welcome-box {
+      margin-top: 60px;
       width: 40vw;
       max-width: 500px;
-      height: 640px;
+      height: 80vh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -148,6 +161,6 @@ export const Button = styled.button`
   @media (min-width: 1024px) {
     width: 256px;
     height: 40px;
-    margin-top: 5px;
+    margin-top: 20px;
   }
 `;

@@ -56,47 +56,48 @@ const SignUp = () => {
         <h1>Sign Up</h1>
 
         <form onSubmit={handleSubmit(handleRegisterSubmit)}>
-          <Input
-            label="Username:"
-            errors={errors.username ? errors.username.message : " "}
-            register={register}
-            autoComplete="user"
-            data="username"
-            type="text"
-            placeholder="Enter your username"
-          />
+          <section className="contInputs">
+            <Input
+              label="Username:"
+              errors={errors.username ? errors.username.message : " "}
+              register={register}
+              autoComplete="user"
+              data="username"
+              type="text"
+              placeholder="Enter your username"
+            />
 
-          <Input
-            label="Email:"
-            errors={errors.email ? errors.email.message : " "}
-            register={register}
-            data="email"
-            type="text"
-            placeholder="Enter your email"
-          />
+            <Input
+              label="Email:"
+              errors={errors.email ? errors.email.message : " "}
+              register={register}
+              data="email"
+              type="text"
+              placeholder="Enter your email"
+            />
 
-          <Input
-            label="Password:"
-            errors={errors.password ? errors.password.message : " "}
-            register={register}
-            autoComplete="password"
-            data="password"
-            type="password"
-            placeholder="Enter your password"
-          />
+            <Input
+              label="Password:"
+              errors={errors.password ? errors.password.message : " "}
+              register={register}
+              autoComplete="password"
+              data="password"
+              type="password"
+              placeholder="Enter your password"
+            />
 
-          <Input
-            label="Confirm password:"
-            errors={
-              errors.confirm_password ? errors.confirm_password.message : " "
-            }
-            register={register}
-            autoComplete="confirm-password"
-            data="confirm_password"
-            type="password"
-            placeholder="Confirm your password"
-          />
-
+            <Input
+              label="Confirm password:"
+              errors={
+                errors.confirm_password ? errors.confirm_password.message : " "
+              }
+              register={register}
+              autoComplete="confirm-password"
+              data="confirm_password"
+              type="password"
+              placeholder="Confirm your password"
+            />
+          </section>
           <Button type="submit">Sign Up</Button>
         </form>
 
