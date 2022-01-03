@@ -38,15 +38,22 @@ export const Header = styled.header`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  @media (min-width: 768px) {
+    height: 23vh;
+  }
+
   .header-top {
     display: flex;
     justify-content: center;
     align-items: center;
+
     h2 {
       color: var(--darkBlue);
       font-size: 52px;
       display: none;
     }
+
     @media (min-width: 768px) {
       margin-bottom: 30px;
       margin-left: 55px;
